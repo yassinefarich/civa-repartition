@@ -17,6 +17,8 @@ import {ToastModule} from 'primeng/toast';
 import {TableModule} from 'primeng/table';
 import {GroupsTableComponent} from './components/groups-table/groups-table.component';
 import { CrowdersTableComponent } from './components/crowders-table/crowders-table.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {TooltipModule} from 'primeng/tooltip';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import { CrowdersTableComponent } from './components/crowders-table/crowders-tab
     FormsModule,
     InputNumberModule,
     ToastModule,
-    TableModule
+    TableModule,
+    FontAwesomeModule,
+    TooltipModule
   ],
   providers: [],
   bootstrap: [AppComponent]

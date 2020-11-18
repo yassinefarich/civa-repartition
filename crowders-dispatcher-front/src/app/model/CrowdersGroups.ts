@@ -12,6 +12,7 @@ export interface Pivot {
 export interface Groupe {
   name: string;
   crowders: Array<Crowder>;
+  pivots: Array<Pivot>;
 }
 
 export interface CalculParameters {
@@ -41,20 +42,31 @@ class CrowdersGroups {
     let crowdersRestants = this.parameters.crowders
       .slice(this.parameters.crowders.length - nombreDeCrowdersRestant, this.parameters.crowders.length);
 
-    return this.splitArray(crowders, crowdersRestants, nbrDeCrowderParGroupe);
+    return CrowdersGroups.dispatchCrowders(crowders, crowdersRestants, nbrDeCrowderParGroupe);
   }
 
-  private splitArray(array: Crowder[], arraySuppl: Crowder[], numberOfElements: number): Groupe[] {
+  public distribuerPivotsCrowders(groups: Groupe[]): Groupe[] {
+    let nombreDePivotParGroupe = this.parameters.pivots.length / groups.length;
+    let nombreDePivotRestant = this.parameters.pivots.length % groups.length;
+
+    let pivots = this.parameters.pivots
+      .slice(0, this.parameters.pivots.length - nombreDePivotRestant);
+
+    let pivotsRestants = this.parameters.pivots
+      .slice(this.parameters.pivots.length - nombreDePivotRestant, this.parameters.pivots.length);
+
+    return CrowdersGroups.dispatchPivots(pivots, pivotsRestants, nombreDePivotParGroupe, groups);
+  }
+
+  private static dispatchCrowders(array: Crowder[], arraySuppl: Crowder[], numberOfElements: number): Groupe[] {
     let resultAccumulator: Groupe[] = [];
     let accumulator: Crowder[] = [];
     let groupeOrder = 1;
 
+    //Fixme : Dirty !!
     for (let i = 0; i < array.length; i++) {
       if (i != 0 && i % numberOfElements == 0) {
-        let supplValue = arraySuppl.shift();
-        if (supplValue != undefined) {
-          accumulator.push(supplValue);
-        }
+        this.addSupplValueIfExists(arraySuppl, accumulator);
         resultAccumulator.push({name: 'Groupe ' + groupeOrder++, crowders: accumulator} as Groupe);
         accumulator = [];
       }
@@ -64,6 +76,26 @@ class CrowdersGroups {
     return resultAccumulator;
   }
 
+  private static dispatchPivots(pivots: Pivot[], pivotsSuppl: Pivot[], numberOfElements: number, groups: Groupe[]): Groupe[] {
+    for (let i = 0; i < groups.length; i++) {
+
+      let accumulator = [];
+      for (let j = 0; j < numberOfElements; j++) {
+        accumulator.push(pivots.shift());
+      }
+      this.addSupplValueIfExists(pivotsSuppl, accumulator);
+      groups[i].pivots = accumulator;
+
+    }
+    return groups;
+  }
+
+  private static addSupplValueIfExists(suppArray: any[], destArray: any[]) {
+    let value = suppArray.shift();
+    if (value != undefined) {
+      destArray.push(value);
+    }
+  }
 }
 
 export class EvaluationGroups extends CrowdersGroups {

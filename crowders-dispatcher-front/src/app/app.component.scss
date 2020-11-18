@@ -37,13 +37,13 @@ p {
   margin: 0 16px;
 }
 
-.home-grid {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
-}
+//.home-grid {
+//  display: grid;
+//  grid-template-columns: repeat(6, 1fr);
+//  grid-template-rows: repeat(2, 1fr);
+//  grid-column-gap: 0px;
+//  grid-row-gap: 0px;
+//}
 
 .card svg.material-icons path {
   fill: #888;

@@ -1,4 +1,10 @@
 .p-datatable {
-  font-size: 80%;
-
+  text-align: left;
+  padding: 1rem 1rem;
+  border: 1px solid #5696d6;
+  border-width: 0 0 1px 0;
+  font-weight: 600;
+  color: #495057;
+  background: #dbdcdc;
+  transition: box-shadow 0.2s;
 }

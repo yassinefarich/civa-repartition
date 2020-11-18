@@ -26,7 +26,6 @@ export class ParametresComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
   onGenerateSamples() {
     let dataSampleGen = new DataSampleGenerator();
     this.dispatcherService.setData(DATA_TYPE.CROWDER, dataSampleGen.generateCrowders(this.crowders));
@@ -34,10 +33,8 @@ export class ParametresComponent implements OnInit {
   }
 
   onGenerateGroups() {
-    if (this.pprpoParPivot !== undefined && this.notParPivot != undefined) {
+    if (this.isValid()) {
       this.dispatcherService.dispatchGroups(this.pprpoParPivot, this.notParPivot);
-    } else {
-      alert('Merci de saisir le nombre des pivots');
     }
   }
 
@@ -45,5 +42,17 @@ export class ParametresComponent implements OnInit {
     this.messageService.add({severity: 'Error', summary: 'Service Message', detail: 'Via MessageService'});
   }
 
+  isValid(): boolean {
+
+    if (this.pprpoParPivot === undefined) {
+
+    }
+
+    if (this.notParPivot != undefined) {
+
+    }
+
+    return true;
+  }
 
 }

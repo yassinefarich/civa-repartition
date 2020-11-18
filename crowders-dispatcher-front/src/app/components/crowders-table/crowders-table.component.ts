@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {DispatcherService} from '../../services/dispatcher.service';
+import {DATA_TYPE} from '../../model/enums';
+import {Groupe} from '../../model/CrowdersGroups';
 
 @Component({
   selector: 'app-crowders-table',
@@ -7,9 +10,38 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CrowdersTableComponent implements OnInit {
 
-  constructor() { }
+  @Input() type: DATA_TYPE;
+
+  tableHeaders = [];
+
+  tableData = [];
+
+  constructor(private dispatcherService: DispatcherService) {
+    this.dispatcherService.crowdersGroupsSubject.subscribe(
+      result => {
+        this.tableHeaders = result.map(g => g.name);
+        this.tableData = this.makeDataTable(result);
+      }
+    );
+  }
 
   ngOnInit(): void {
   }
+
+  makeDataTable(result: Groupe[]): any[] {
+
+    let resultAccumulator = [];
+    result
+      .forEach(groupe =>
+        groupe.crowders.forEach(
+          crowder => {
+            resultAccumulator.push({crowderName: crowder.name, groupeName: groupe.name, pivots: groupe.pivots});
+          }
+        ));
+
+    return resultAccumulator;
+  }
+
+
 
 }

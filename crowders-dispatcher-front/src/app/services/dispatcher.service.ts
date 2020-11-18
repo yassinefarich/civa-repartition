@@ -58,9 +58,10 @@ export class DispatcherService {
 
   dispatchGroups(propositionParQuest: number, notationsParProposition: number) {
 
-    let groups = new EvaluationGroups(this.makeParameters(propositionParQuest, notationsParProposition))
-      .distribuerGroupsCrowders();
-    this._crowdersGroupsSubject.next(groups)
+    let evaluationGroups = new EvaluationGroups(this.makeParameters(propositionParQuest, notationsParProposition))
+    let groups = evaluationGroups.distribuerGroupsCrowders();
+    let pivotsParGroupe = evaluationGroups.distribuerPivotsCrowders(groups)
+    this._crowdersGroupsSubject.next(pivotsParGroupe)
     console.log(groups);
   }
 

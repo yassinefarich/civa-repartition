@@ -1,74 +1,13 @@
-<style>
-
-
-  /*footer {*/
-  /*  margin-top: 8px;*/
-  /*  display: flex;*/
-  /*  align-items: center;*/
-  /*  line-height: 20px;*/
-  /*}*/
-
-  /*footer a {*/
-  /*  display: flex;*/
-  /*  align-items: center;*/
-  /*}*/
-
-
-  svg#clouds {
-    position: fixed;
-    bottom: -160px;
-    left: -230px;
-    z-index: -10;
-    width: 1920px;
-  }
-
-
-  /* Responsive Styles */
-  @media screen and (max-width: 767px) {
-
-    .card-container > *:not(.circle-link),
-    .terminal {
-      width: 100%;
-    }
-
-    .card:not(.highlight-card) {
-      height: 16px;
-      margin: 8px 0;
-    }
-
-    .card.highlight-card span {
-      margin-left: 72px;
-    }
-
-    svg#rocket-smoke {
-      right: 120px;
-      transform: rotate(-5deg);
-    }
-  }
-
-  @media screen and (max-width: 575px) {
-    svg#rocket-smoke {
-      display: none;
-      visibility: hidden;
-    }
-  }
-
-</style>
-
-<!-- Toolbar -->
+<link href=”https://fonts.googleapis.com/icon?family=Material+Icons” rel=”stylesheet”>
 <div class="toolbar" role="banner">
-  <!--  <img-->
-  <!--    width="40"-->
-  <!--    alt="Angular Logo"-->
-  <!--    src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg=="-->
-  <!--  />-->
   <i class="pi pi-users" style="font-size: 2rem;margin-left: 10px; margin-right: 5px"></i>
   <span>Crowders dispatcher</span>
 </div>
 
-<div class="home-grid">
-  <app-parametres style="grid-area: 1 / 1 / 1 / 1;"></app-parametres>
-  <app-working-sheet style="grid-area: 1 / 2 / 3 / 7;"></app-working-sheet>
+<div class="p-grid">
+
+  <app-parametres class="p-col-3" ></app-parametres>
+  <app-working-sheet class="p-col-9"></app-working-sheet>
 
   <svg id="clouds" alt="Gray Clouds Background" xmlns="http://www.w3.org/2000/svg" width="2611.084" height="485.677"
        viewBox="0 0 2611.084 485.677">
