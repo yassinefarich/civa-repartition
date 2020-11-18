@@ -1,0 +1,77 @@
+<div class="parameters-section" role="main">
+  <div class="card highlight-card card-small">
+    <h2>Paramètres</h2>
+  </div>
+
+  <div class="p-grid p-flex-column" style="text-align: center">
+    <div class="p-col">
+      <app-file-selector [name]="'Crowders'"
+                         icon="users" [datatype]="dataType.CROWDER"></app-file-selector>
+    </div>
+    <div class="p-col">
+      <app-file-selector [name]="'Pivots'"
+                         icon="list" [datatype]="dataType.PIVOTS"></app-file-selector>
+    </div>
+    <div class="p-col">
+      <app-file-selector [name]="'Propositions'"
+                         icon="th-large" [datatype]="dataType.PROPOSITIONS"></app-file-selector>
+    </div>
+    <div class="p-col" style="margin-top: 5%">
+       <span class="p-field">
+                <label for="propo-par-piv-input" style="text-align: center">Proposition par pivot</label>
+                <p-inputNumber min="0" id="propo-par-piv-input" [(ngModel)]="pprpoParPivot" ></p-inputNumber>
+              </span>
+    </div>
+
+    <div class="p-col" style="margin-top: 4%">
+               <span class="p-field">
+                <label for="not-par-prop-input">Notation par proposition</label>
+                <p-inputNumber min="0" id="not-par-prop-input" [(ngModel)]="notParPivot" ></p-inputNumber>
+              </span>
+    </div>
+
+  </div>
+  <div class="p-grid p-flex-column" style="margin-top: 30px">
+    <div style="text-align: center;">
+      <button pButton pRipple label="Créer des groupes" (click)="onGenerateGroups()" class="p-button-info" style="width: 70%"></button>
+    </div>
+    <div style="text-align: center;">
+      <button pButton pRipple label="Réinitialiser" class="p-button-info" (click)="onReinit()" style="width: 70%"></button>
+    </div>
+  </div>
+
+  <div style="margin-top: 30px;">
+
+    <div>
+
+      <p-panel header="Simulation">
+
+
+        <div class="p-grid p-formgrid">
+          <div class="p-col" style="margin-top: 4%">
+               <span class="p-float-label">
+                <p-inputNumber min="0" id="crowders-input" [(ngModel)]="crowders" ></p-inputNumber>
+                <label for="crowders-input">Crowders</label>
+              </span>
+          </div>
+
+          <div class="p-mt-4 p-col">
+               <span class="p-float-label">
+                 <p-inputNumber min="0" id="pivots-input" [(ngModel)]="pivots" ></p-inputNumber>
+                <label for="pivots-input">Pivots</label>
+              </span>
+          </div>
+
+          <div class="p-mt-4 p-col">
+
+          </div>
+
+          <div class="p-mt-4 p-col">
+            <button pButton pRipple label="Générer" class="p-button-info" (click)="onGenerateSamples()"></button>
+          </div>
+        </div>
+
+      </p-panel>
+    </div>
+  </div>
+</div>
