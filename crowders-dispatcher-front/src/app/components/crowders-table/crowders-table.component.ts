@@ -1,7 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {DispatcherService} from '../../services/dispatcher.service';
-import {DATA_TYPE} from '../../model/enums';
-import {Groupe} from '../../model/CrowdersGroups';
+import {Groupe} from '../../model/Models';
+
+export enum CrowderTableType {//FIXME : Replace with polymorphism
+  PROPOSITION,
+  NOTATION
+}
 
 @Component({
   selector: 'app-crowders-table',
@@ -10,26 +14,40 @@ import {Groupe} from '../../model/CrowdersGroups';
 })
 export class CrowdersTableComponent implements OnInit {
 
-  @Input() type: DATA_TYPE;
+  @Input() type: CrowderTableType;
 
   tableHeaders = [];
 
   tableData = [];
 
   constructor(private dispatcherService: DispatcherService) {
-    this.dispatcherService.crowdersGroupsSubject.subscribe(
-      result => {
-        this.tableHeaders = result.map(g => g.name);
-        this.tableData = this.makeDataTable(result);
-      }
-    );
   }
 
   ngOnInit(): void {
+    if (this.type == CrowderTableType.PROPOSITION) {
+      this.dispatcherService.crowdersGroupsSubject.subscribe(
+        result => {
+          this.tableHeaders = result.map(g => g.name);
+          this.tableData = this.makeDataTable(result);
+        }
+      );
+    }
+
+    if (this.type == CrowderTableType.NOTATION) {
+      this.dispatcherService.crowdersNotationGroupsSubject.subscribe(
+        result => {
+          this.tableHeaders = result.map(g => g.name);
+          this.tableData = this.makeDataTable(result);
+        }
+      );
+    }
+
+    if (this.tableData.length <= 0) {
+      this.dispatcherService.refreshDataFromStorage();
+    }
   }
 
   makeDataTable(result: Groupe[]): any[] {
-
     let resultAccumulator = [];
     result
       .forEach(groupe =>
@@ -41,7 +59,6 @@ export class CrowdersTableComponent implements OnInit {
 
     return resultAccumulator;
   }
-
 
 
 }

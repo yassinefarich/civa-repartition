@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ExcelFileToJsonService} from '../../services/excel-file-to-json.service';
-import {DATA_TYPE} from '../../model/enums';
+import {StorageDataTypeKeys} from '../../model/Models';
 
 
 @Component({
@@ -12,7 +12,7 @@ export class FileSelectorComponent implements OnInit {
 
   @Input() name: string;
   @Input() icon: string;
-  @Input() datatype: DATA_TYPE;
+  @Input() datatype: StorageDataTypeKeys;
 
   fileName: string = '';
   isSucess: boolean = false;
@@ -23,7 +23,7 @@ export class FileSelectorComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onFileChange(evt: any, dataType: DATA_TYPE) {
+  onFileChange(evt: any, dataType: StorageDataTypeKeys) {
     /* wire up file reader */
     const target: DataTransfer = <DataTransfer> (evt.target);
     if (target.files.length !== 1) {

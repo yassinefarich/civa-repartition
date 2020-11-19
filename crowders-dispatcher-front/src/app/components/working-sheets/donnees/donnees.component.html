@@ -1,0 +1,64 @@
+<p-tabView class="p-col tabview">
+  <p-tabPanel header="Crowders">
+
+
+    <div *ngIf="crowders.length > 0" style="height: 100%">
+      <p-table [value]="crowders" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+               [rowsPerPageOptions]="[10,25,50]" styleClass="p-datatable-sm p-datatable-gridlines">
+
+        <ng-template pTemplate="header">
+          <tr>
+            <th style="width: 3em">
+              Id
+            </th>
+            <th>
+              Crowder
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-groupe>
+          <tr>
+            <td *ngFor="let col of groupe">
+              {{col}}
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+
+
+  </p-tabPanel>
+  <p-tabPanel header="Pivots">
+
+    <div *ngIf="pivots.length > 0" style="height: 100%">
+      <p-table [value]="crowders" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+               [rowsPerPageOptions]="[10,25,50]" styleClass="p-datatable-sm p-datatable-gridlines">
+
+        <ng-template pTemplate="header">
+          <tr>
+            <th style="width: 3em">
+              Id
+            </th>
+            <th>
+              Question
+            </th>
+            <th>
+              Réponse
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-pivot>
+          <tr>
+            <td *ngFor="let col of groupe">
+              {{col}}
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+
+
+  </p-tabPanel>
+  <p-tabPanel header="Pivot/Propositions">
+  </p-tabPanel>
+</p-tabView>

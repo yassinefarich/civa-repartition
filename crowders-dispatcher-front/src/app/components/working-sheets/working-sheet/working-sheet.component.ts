@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {DispatcherService} from '../../services/dispatcher.service';
+import {DispatcherService} from '../../../services/dispatcher.service';
 
 @Component({
   selector: 'app-working-sheet',
@@ -7,6 +7,7 @@ import {DispatcherService} from '../../services/dispatcher.service';
   styleUrls: ['./working-sheet.component.scss']
 })
 export class WorkingSheetComponent implements OnInit {
+
 
   nbrDeCrowders: number = 0;
   nbrDePivots: number = 0;

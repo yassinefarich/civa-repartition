@@ -1,43 +1,44 @@
 import {Injectable} from '@angular/core';
-import {DATA_TYPE} from '../model/enums';
-import {DataTable} from '../model/types';
 import {Observable, Subject} from 'rxjs';
-import {CalculParameters, Crowder, EvaluationGroups, Groupe, Pivot} from '../model/CrowdersGroups';
+import {EvaluationGroups, NotationGroups,} from '../model/CrowdersGroups';
+import {CalculParameters, Crowder, StorageDataTypeKeys, DataTable, Groupe, Pivot} from '../model/Models';
+import {LocalStorageService} from './local-storage-service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DispatcherService {
 
-  private _data: Map<DATA_TYPE, DataTable> = new Map<DATA_TYPE, DataTable>();
   private readonly _crowdersSubject: Subject<DataTable>;
   private readonly _pivotsSubject: Subject<DataTable>;
   private readonly _propositionsSubject: Subject<DataTable>;
 
   private readonly _crowdersGroupsSubject: Subject<Groupe[]>;
+  private readonly _crowdersNotationGroupsSubject: Subject<Groupe[]>;
 
-  public setData(type: DATA_TYPE, values: DataTable) {
+  public setData(type: StorageDataTypeKeys, values: DataTable) {
     values.shift();
     let filtredData = values
       .filter(d => d.length > 1);
 
-    this._data.set(type, filtredData);
+    this.$storage.set(type, filtredData);
 
     switch (type) {
-      case DATA_TYPE.CROWDER:
+      case StorageDataTypeKeys.CROWDER:
         return this._crowdersSubject.next(filtredData);
-      case DATA_TYPE.PIVOTS:
+      case StorageDataTypeKeys.PIVOTS:
         return this._pivotsSubject.next(filtredData);
-      case DATA_TYPE.PROPOSITIONS:
+      case StorageDataTypeKeys.PROPOSITIONS:
         return this._propositionsSubject.next(filtredData);
     }
   }
 
-  constructor() {
+  constructor(private $storage: LocalStorageService) {
     this._crowdersSubject = new Subject();
     this._pivotsSubject = new Subject();
     this._propositionsSubject = new Subject();
-    this._crowdersGroupsSubject = new Subject();
+    this._crowdersGroupsSubject = new Subject<Groupe[]>();
+    this._crowdersNotationGroupsSubject = new Subject<Groupe[]>();
   }
 
   get crowders(): Observable<DataTable> {
@@ -56,23 +57,58 @@ export class DispatcherService {
     return this._crowdersGroupsSubject.asObservable();
   }
 
-  dispatchGroups(propositionParQuest: number, notationsParProposition: number) {
+  get crowdersNotationGroupsSubject(): Observable<Groupe[]> {
+    return this._crowdersNotationGroupsSubject.asObservable();
+  }
 
-    let evaluationGroups = new EvaluationGroups(this.makeParameters(propositionParQuest, notationsParProposition))
+  refreshDataFromStorage() {
+
+    let propositionGroups = this.$storage.get(StorageDataTypeKeys.CROWDERS_GROUPS);
+    if (propositionGroups !== undefined) {
+      this._crowdersGroupsSubject.next(propositionGroups);
+    }
+
+    let notationGroups = this.$storage.get(StorageDataTypeKeys.CROWDERS_NOTATIONS_GROUPS);
+    if (notationGroups !== undefined) {
+      this._crowdersNotationGroupsSubject.next(notationGroups);
+    }
+
+    let crowders = this.$storage.get(StorageDataTypeKeys.CROWDER);
+    if (crowders !== undefined) {
+      this._crowdersSubject.next(crowders);
+    }
+
+    let pivots = this.$storage.get(StorageDataTypeKeys.PIVOTS);
+    if (pivots !== undefined) {
+      this._pivotsSubject.next(pivots);
+    }
+
+  }
+
+  dispatchGroups(propositionParQuest: number, notationsParProposition: number) {
+    let evaluationGroups = new EvaluationGroups(this.makeParameters(propositionParQuest, notationsParProposition));
     let groups = evaluationGroups.distribuerGroupsCrowders();
-    let pivotsParGroupe = evaluationGroups.distribuerPivotsCrowders(groups)
-    this._crowdersGroupsSubject.next(pivotsParGroupe)
-    console.log(groups);
+    let pivotsParGroupe = evaluationGroups.distribuerPivotsCrowders(groups);
+    this.$storage.set(StorageDataTypeKeys.CROWDERS_GROUPS, groups);
+    this._crowdersGroupsSubject.next(pivotsParGroupe);
+  }
+
+  dispatchNotationGroups(propositionParQuest: number, notationsParProposition: number) {
+    let notationGroupes = new NotationGroups(this.makeParameters(propositionParQuest, notationsParProposition));
+    let groups = notationGroupes.distribuerGroupsCrowders();
+    let pivotsParGroupe = notationGroupes.distribuerPivotsCrowders(groups);
+    this.$storage.set(StorageDataTypeKeys.CROWDERS_NOTATIONS_GROUPS, groups);
+    this._crowdersNotationGroupsSubject.next(pivotsParGroupe);
   }
 
   makeParameters(propositionParQuest: number, notationsParProposition: number): CalculParameters {
 
-    let crowders = this._data.get(DATA_TYPE.CROWDER)
+    let crowders = this.$storage.get(StorageDataTypeKeys.CROWDER)
       .map(cr => {
         return {name: cr[1]} as Crowder;
       });
 
-    let pivots = this._data.get(DATA_TYPE.PIVOTS)
+    let pivots = this.$storage.get(StorageDataTypeKeys.PIVOTS)
       .map(pv => {
         return {id: pv[0], question: pv[1]} as Pivot;
       });

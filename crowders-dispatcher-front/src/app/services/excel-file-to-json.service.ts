@@ -1,9 +1,8 @@
 import {Injectable} from '@angular/core';
 import * as XLSX from 'xlsx';
 import {Observable, Subject} from 'rxjs';
-import {DataTable} from '../model/types';
-import {DATA_TYPE} from '../model/enums';
 import {DispatcherService} from './dispatcher.service';
+import {StorageDataTypeKeys, DataTable} from '../model/Models';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +15,7 @@ export class ExcelFileToJsonService {
   constructor(private dispatcherService: DispatcherService) {
   }
 
-  public async excelToJson(type: DATA_TYPE, file: any): Promise<DataTable> {
+  public async excelToJson(type: StorageDataTypeKeys, file: any): Promise<DataTable> {
     console.log(file);
     /* read workbook */
     const bstr: string = file.target.result;

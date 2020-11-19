@@ -1,59 +1,37 @@
-export interface Crowder {
-  name: string,
-  pivotsEvaluation: Array<Pivot>
-  pivotsNotation: Array<Pivot>
-}
-
-export interface Pivot {
-  id: string;
-  question: string;
-}
-
-export interface Groupe {
-  name: string;
-  crowders: Array<Crowder>;
-  pivots: Array<Pivot>;
-}
-
-export interface CalculParameters {
-  crowders: Array<Crowder>;
-  pivots: Array<Pivot>;
-  propositionParQuest: number;
-  notationsParProposition: number;
-}
+import {CalculParameters, Crowder, Groupe, Pivot} from './Models';
 
 class CrowdersGroups {
-  parameters: CalculParameters;
-  diviseur: number;
+  private readonly _parameters: CalculParameters;
+  private readonly _diviseur: number;
 
   constructor(parameters: CalculParameters, diviseur: number) {
-    this.parameters = parameters;
-    this.diviseur = diviseur;
+    this._parameters = parameters;
+    this._diviseur = diviseur;
   }
 
   public distribuerGroupsCrowders(): Groupe[] {
-    let nombreDeGroups = this.parameters.crowders.length / this.diviseur;
-    let nombreDeCrowdersRestant = this.parameters.crowders.length % nombreDeGroups;
-    let nbrDeCrowderParGroupe = (this.parameters.crowders.length - nombreDeCrowdersRestant) / nombreDeGroups;
+    let nombreDeGroups = Math.floor(this._parameters.crowders.length / this._diviseur);
+    let nombreDeCrowdersRestant = this._parameters.crowders.length % nombreDeGroups;
+    let nbrDeCrowderParGroupe = (this._parameters.crowders.length - nombreDeCrowdersRestant) / nombreDeGroups;
 
-    let crowders = this.parameters.crowders
-      .slice(0, this.parameters.crowders.length - nombreDeCrowdersRestant);
+    let crowders = this._parameters.crowders
+      .slice(0, this._parameters.crowders.length - nombreDeCrowdersRestant);
 
-    let crowdersRestants = this.parameters.crowders
-      .slice(this.parameters.crowders.length - nombreDeCrowdersRestant, this.parameters.crowders.length);
+    let crowdersRestants = this._parameters.crowders
+      .slice(this._parameters.crowders.length - nombreDeCrowdersRestant, this._parameters.crowders.length);
 
     return CrowdersGroups.dispatchCrowders(crowders, crowdersRestants, nbrDeCrowderParGroupe);
   }
 
   public distribuerPivotsCrowders(groups: Groupe[]): Groupe[] {
-    let nombreDePivotParGroupe = this.parameters.pivots.length / groups.length;
-    let nombreDePivotRestant = this.parameters.pivots.length % groups.length;
+    let nombreDePivotParGroupe = this._parameters.pivots.length / groups.length;
+    let nombreDePivotRestant = this._parameters.pivots.length % groups.length;
 
-    let pivots = this.parameters.pivots
-      .slice(0, this.parameters.pivots.length - nombreDePivotRestant);
+    let pivots = this._parameters.pivots
+      .slice(0, this._parameters.pivots.length - nombreDePivotRestant);
 
-    let pivotsRestants = this.parameters.pivots
-      .slice(this.parameters.pivots.length - nombreDePivotRestant, this.parameters.pivots.length);
+    let pivotsRestants = this._parameters.pivots
+      .slice(this._parameters.pivots.length - nombreDePivotRestant, this._parameters.pivots.length);
 
     return CrowdersGroups.dispatchPivots(pivots, pivotsRestants, nombreDePivotParGroupe, groups);
   }
@@ -78,7 +56,6 @@ class CrowdersGroups {
 
   private static dispatchPivots(pivots: Pivot[], pivotsSuppl: Pivot[], numberOfElements: number, groups: Groupe[]): Groupe[] {
     for (let i = 0; i < groups.length; i++) {
-
       let accumulator = [];
       for (let j = 0; j < numberOfElements; j++) {
         accumulator.push(pivots.shift());
@@ -101,5 +78,11 @@ class CrowdersGroups {
 export class EvaluationGroups extends CrowdersGroups {
   constructor(parameters: CalculParameters) {
     super(parameters, parameters.propositionParQuest);
+  }
+}
+
+export class NotationGroups extends CrowdersGroups {
+  constructor(parameters: CalculParameters) {
+    super(parameters, parameters.notationsParProposition);
   }
 }

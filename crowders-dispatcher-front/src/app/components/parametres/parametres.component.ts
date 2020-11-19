@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {DATA_TYPE} from '../../model/enums';
 import {DispatcherService} from '../../services/dispatcher.service';
 import {MessageService} from 'primeng/api';
 import {DataSampleGenerator} from '../../misc/DataSampleGenerator';
+import {StorageDataTypeKeys} from '../../model/Models';
 
 @Component({
   selector: 'app-parametres',
@@ -12,7 +12,7 @@ import {DataSampleGenerator} from '../../misc/DataSampleGenerator';
 })
 export class ParametresComponent implements OnInit {
 
-  public dataType: typeof DATA_TYPE = DATA_TYPE;
+  public dataType: typeof StorageDataTypeKeys = StorageDataTypeKeys;
 
   crowders: number = 120;
   pivots: number = 30;
@@ -28,13 +28,14 @@ export class ParametresComponent implements OnInit {
 
   onGenerateSamples() {
     let dataSampleGen = new DataSampleGenerator();
-    this.dispatcherService.setData(DATA_TYPE.CROWDER, dataSampleGen.generateCrowders(this.crowders));
-    this.dispatcherService.setData(DATA_TYPE.PIVOTS, dataSampleGen.generatePivots(this.pivots));
+    this.dispatcherService.setData(StorageDataTypeKeys.CROWDER, dataSampleGen.generateCrowders(this.crowders));
+    this.dispatcherService.setData(StorageDataTypeKeys.PIVOTS, dataSampleGen.generatePivots(this.pivots));
   }
 
   onGenerateGroups() {
     if (this.isValid()) {
       this.dispatcherService.dispatchGroups(this.pprpoParPivot, this.notParPivot);
+      this.dispatcherService.dispatchNotationGroups(this.pprpoParPivot, this.notParPivot);
     }
   }
 

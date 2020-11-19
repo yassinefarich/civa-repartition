@@ -1,7 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {DispatcherService} from '../../services/dispatcher.service';
-import {DATA_TYPE} from '../../model/enums';
-import {Groupe} from '../../model/CrowdersGroups';
+import {Groupe} from '../../model/Models';
+
+export enum GroupsTableType {//FIXME : Replace with polymorphism
+  PROPOSITION,
+  NOTATION
+}
 
 @Component({
   selector: 'app-groups-table',
@@ -10,7 +14,7 @@ import {Groupe} from '../../model/CrowdersGroups';
 })
 export class GroupsTableComponent implements OnInit {
 
-  @Input() type: DATA_TYPE;
+  @Input() type: GroupsTableType;
 
   tableHeaders = [];
 
@@ -21,13 +25,26 @@ export class GroupsTableComponent implements OnInit {
 
   ngOnInit(): void {
 
-    if (this.type == DATA_TYPE.CROWDER) {
+    if (this.type == GroupsTableType.PROPOSITION) {
       this.dispatcherService.crowdersGroupsSubject.subscribe(
+        result => {
+          this.tableHeaders = result.map(g => g.name + ' (' + g.crowders.length + ')');
+          this.tableData = GroupsTableComponent.makeDataTable(result);
+        }
+      );
+    }
+
+    if (this.type == GroupsTableType.NOTATION) {
+      this.dispatcherService.crowdersNotationGroupsSubject.subscribe(
         result => {
           this.tableHeaders = result.map(g => g.name);
           this.tableData = GroupsTableComponent.makeDataTable(result);
         }
       );
+    }
+
+    if (this.tableData.length <= 0) {
+      this.dispatcherService.refreshDataFromStorage();
     }
   }
 
