@@ -49,6 +49,10 @@ export class GroupsTableComponent implements OnInit {
   }
 
   private static makeDataTable(result: Groupe[]): any[][] {
+    if (result.length == 0) {
+      return [];
+    }
+
     let maxNumberOfCrowders = result.map(g => g.crowders.length).reduce((p, v) => p > v ? p : v);
     let resultAcc = [];
     for (let i = 0; i < maxNumberOfCrowders; i++) {

@@ -63,33 +63,15 @@ export class CrowdersDispatcherService {
   }
 
   refreshDataFromStorage() {
-
-    let propositionGroups = this.$storage.get(StorageDataTypeKeys.CROWDERS_GROUPS);
-    if (propositionGroups !== null) {
-      this._crowdersGroupsSubject.next(propositionGroups);
-    }
-
-    let notationGroups = this.$storage.get(StorageDataTypeKeys.CROWDERS_NOTATIONS_GROUPS);
-    if (notationGroups !== null) {
-      this._crowdersNotationGroupsSubject.next(notationGroups);
-    }
-
-    let crowders = this.$storage.get(StorageDataTypeKeys.CROWDER);
-    if (crowders !== null) {
-      this._crowdersSubject.next(crowders);
-    }
-
-    let pivots = this.$storage.get(StorageDataTypeKeys.PIVOTS);
-    if (pivots !== null) {
-      this._pivotsSubject.next(pivots);
-    }
-
+    this.notifyDataConsumers(StorageDataTypeKeys.CROWDERS_GROUPS, this._crowdersGroupsSubject);
+    this.notifyDataConsumers(StorageDataTypeKeys.CROWDERS_NOTATIONS_GROUPS, this._crowdersNotationGroupsSubject);
+    this.notifyDataConsumers(StorageDataTypeKeys.CROWDER, this._crowdersSubject);
+    this.notifyDataConsumers(StorageDataTypeKeys.PIVOTS, this._pivotsSubject);
   }
 
-  private notifyDataConsumers(){
-
-
-
+  private notifyDataConsumers(dataKey: StorageDataTypeKeys, dataSubject: Subject<any[]>) {
+    let data = this.$storage.get(dataKey);
+    dataSubject.next(data !== null ? data : []);
   }
 
   dispatchGroups(propositionParQuest: number, notationsParProposition: number) {
@@ -110,12 +92,24 @@ export class CrowdersDispatcherService {
 
   makeParameters(propositionParQuest: number, notationsParProposition: number): CalculParameters {
 
-    let crowders: Crowder[] = this.$storage.get(StorageDataTypeKeys.CROWDER)
+    let crowdersBrute = this.$storage.get(StorageDataTypeKeys.CROWDER);
+    let pivotsBrute = this.$storage.get(StorageDataTypeKeys.PIVOTS);
+    if (crowdersBrute == null || pivotsBrute == null) {
+      alert('Erreur de données..');//Fixme
+      return {
+        crowders: [],
+        pivots: [],
+        propositionParQuest: propositionParQuest,
+        notationsParProposition: notationsParProposition
+      };
+    }
+
+    let crowders: Crowder[] = crowdersBrute
       .map(cr => {
         return {name: cr[1]};
       });
 
-    let pivots: Pivot[] = this.$storage.get(StorageDataTypeKeys.PIVOTS)
+    let pivots: Pivot[] = pivotsBrute
       .map(pv => {
         return {id: pv[0], question: pv[1], reponse: pv[2]};
       });
