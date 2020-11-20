@@ -1,5 +1,5 @@
 <div class="card">
-  <h2>Working sheet</h2>
+  <h2>Espace de travail</h2>
 </div>
 
 <div class="working-sheet p-grid p-flex-column">
@@ -8,9 +8,11 @@
     <div class="p-col">Pivots : {{nbrDePivots}}</div>
     <div class="p-col">
       <button pButton type="button" label="Groups" icon="pi pi-users" iconPos="left"
-              style="margin-right: 10px;width: 150px" routerLink="/groups"></button>
+              style="margin-right: 10px;width: 150px" [ngClass]="isData ?  'p-button-outlined' : ''"
+              routerLink="/groups"></button>
       <button pButton type="button" label="Données" icon="pi pi-chart-bar" iconPos="left"
-              style="margin-right: 10px;width: 150px" routerLink="/donnees" ></button>
+              style="margin-right: 10px;width: 150px" [ngClass]="!isData ?  'p-button-outlined' : ''"
+              routerLink="/donnees"></button>
     </div>
   </div>
 

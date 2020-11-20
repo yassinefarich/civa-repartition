@@ -5,15 +5,15 @@
 
   <div class="p-grid p-flex-column" style="text-align: center">
     <div class="p-col">
-      <app-file-selector [name]="'Crowders'"
+      <app-file-selector [name]="'Importer crowders'"
                          icon="users" [datatype]="dataType.CROWDER"></app-file-selector>
     </div>
     <div class="p-col">
-      <app-file-selector [name]="'Pivots'"
+      <app-file-selector [name]="'Importer pivots'"
                          icon="list" [datatype]="dataType.PIVOTS"></app-file-selector>
     </div>
     <div class="p-col">
-      <app-file-selector [name]="'Propositions'"
+      <app-file-selector [name]="'Importer propositions'"
                          icon="th-large" [datatype]="dataType.PROPOSITIONS"></app-file-selector>
     </div>
     <div class="p-col">
@@ -45,14 +45,14 @@
         <div class="p-col" style="margin-top: 4%">
                <span class="p-float-label">
                 <p-inputNumber min="0" id="crowders-input" [(ngModel)]="crowders"></p-inputNumber>
-                <label for="crowders-input">Crowders</label>
+                <label for="crowders-input">Nombre de crowders</label>
               </span>
         </div>
 
         <div class="p-mt-4 p-col">
                <span class="p-float-label">
                  <p-inputNumber min="0" id="pivots-input" [(ngModel)]="pivots"></p-inputNumber>
-                <label for="pivots-input">Pivots</label>
+                <label for="pivots-input">Nombre de pivots</label>
               </span>
         </div>
         <div class="p-col">

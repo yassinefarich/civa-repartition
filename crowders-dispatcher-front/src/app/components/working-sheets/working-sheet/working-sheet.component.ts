@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CrowdersDispatcherService} from '../../../services/crowders-dispatcher.service';
+import {NavigationEnd, Router} from '@angular/router';
 
 @Component({
   selector: 'app-working-sheet',
@@ -11,7 +12,10 @@ export class WorkingSheetComponent implements OnInit {
   nbrDeCrowders: number = 0;
   nbrDePivots: number = 0;
 
-  constructor(private dispatcherService: CrowdersDispatcherService) {
+  isData = false;
+
+  constructor(private dispatcherService: CrowdersDispatcherService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -20,6 +24,14 @@ export class WorkingSheetComponent implements OnInit {
 
     this.dispatcherService.pivots
       .subscribe(data => this.nbrDePivots = data.length);
+    this.router.events.subscribe(
+      e => {
+        if (e instanceof NavigationEnd) {
+          this.isData = e.url.includes('donnees');
+        }
+
+      }
+    );
   }
 
 }
