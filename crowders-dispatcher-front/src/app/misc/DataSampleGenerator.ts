@@ -7,7 +7,7 @@ export class DataSampleGenerator {
 
   generatePivots(num: number): any[] {
     return DataSampleGenerator.range(num)
-      .map(i => [i, 'Pivot_' + i]);
+      .map(i => [i, 'Pivot_' + i, 'Reponse_' + i]);
   }
 
   generatePropositions(num: number): any[] {

@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {DispatcherService} from '../../services/dispatcher.service';
+import {CrowdersDispatcherService} from '../../services/crowders-dispatcher.service';
 import {Groupe} from '../../model/Models';
 
 export enum GroupsTableType {//FIXME : Replace with polymorphism
@@ -20,7 +20,7 @@ export class GroupsTableComponent implements OnInit {
 
   tableData = [];
 
-  constructor(private dispatcherService: DispatcherService) {
+  constructor(private dispatcherService: CrowdersDispatcherService) {
   }
 
   ngOnInit(): void {
@@ -65,20 +65,8 @@ export class GroupsTableComponent implements OnInit {
     import('xlsx').then(xlsx => {
       const worksheet = xlsx.utils.json_to_sheet(this.tableData);
       const workbook = {Sheets: {'data': worksheet}, SheetNames: ['data']};
-      const excelBuffer: any = xlsx.write(workbook, {bookType: 'xlsx', type: 'array'});
-      this.saveAsExcelFile(excelBuffer, 'crowders');
-    });
-  }
-
-  saveAsExcelFile(buffer: any, fileName: string): void {
-    import('file-saver').then(FileSaver => {
-      let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
       let EXCEL_EXTENSION = '.xlsx';
-      const data: Blob = new Blob([buffer], {
-        type: EXCEL_TYPE
-      });
-      FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
+      xlsx.writeFile(workbook, 'crowders' + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
     });
   }
-
 }

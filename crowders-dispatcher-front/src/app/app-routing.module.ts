@@ -23,7 +23,7 @@ export const appRouteList: Routes = [
     RouterModule
   ],
   imports: [
-    RouterModule.forRoot(appRouteList)
+    RouterModule.forRoot(appRouteList, { useHash: true })
   ]
 })
 export class AppRoutingModule {

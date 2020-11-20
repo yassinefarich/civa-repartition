@@ -3,11 +3,12 @@ import {Observable, Subject} from 'rxjs';
 import {EvaluationGroups, NotationGroups,} from '../model/CrowdersGroups';
 import {CalculParameters, Crowder, StorageDataTypeKeys, DataTable, Groupe, Pivot} from '../model/Models';
 import {LocalStorageService} from './local-storage-service';
+import {enumKeys} from '../misc/Commons';
 
 @Injectable({
   providedIn: 'root'
 })
-export class DispatcherService {
+export class CrowdersDispatcherService {
 
   private readonly _crowdersSubject: Subject<DataTable>;
   private readonly _pivotsSubject: Subject<DataTable>;
@@ -64,24 +65,30 @@ export class DispatcherService {
   refreshDataFromStorage() {
 
     let propositionGroups = this.$storage.get(StorageDataTypeKeys.CROWDERS_GROUPS);
-    if (propositionGroups !== undefined) {
+    if (propositionGroups !== null) {
       this._crowdersGroupsSubject.next(propositionGroups);
     }
 
     let notationGroups = this.$storage.get(StorageDataTypeKeys.CROWDERS_NOTATIONS_GROUPS);
-    if (notationGroups !== undefined) {
+    if (notationGroups !== null) {
       this._crowdersNotationGroupsSubject.next(notationGroups);
     }
 
     let crowders = this.$storage.get(StorageDataTypeKeys.CROWDER);
-    if (crowders !== undefined) {
+    if (crowders !== null) {
       this._crowdersSubject.next(crowders);
     }
 
     let pivots = this.$storage.get(StorageDataTypeKeys.PIVOTS);
-    if (pivots !== undefined) {
+    if (pivots !== null) {
       this._pivotsSubject.next(pivots);
     }
+
+  }
+
+  private notifyDataConsumers(){
+
+
 
   }
 
@@ -103,14 +110,14 @@ export class DispatcherService {
 
   makeParameters(propositionParQuest: number, notationsParProposition: number): CalculParameters {
 
-    let crowders = this.$storage.get(StorageDataTypeKeys.CROWDER)
+    let crowders: Crowder[] = this.$storage.get(StorageDataTypeKeys.CROWDER)
       .map(cr => {
-        return {name: cr[1]} as Crowder;
+        return {name: cr[1]};
       });
 
-    let pivots = this.$storage.get(StorageDataTypeKeys.PIVOTS)
+    let pivots: Pivot[] = this.$storage.get(StorageDataTypeKeys.PIVOTS)
       .map(pv => {
-        return {id: pv[0], question: pv[1]} as Pivot;
+        return {id: pv[0], question: pv[1], reponse: pv[2]};
       });
 
     return {
@@ -121,4 +128,12 @@ export class DispatcherService {
     };
 
   }
+
+  clearAll() {
+    for (const key of enumKeys(StorageDataTypeKeys)) {
+      this.$storage.remove(key);
+    }
+    this.refreshDataFromStorage();
+  }
+
 }

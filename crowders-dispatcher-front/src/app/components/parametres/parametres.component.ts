@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {DispatcherService} from '../../services/dispatcher.service';
+import {CrowdersDispatcherService} from '../../services/crowders-dispatcher.service';
 import {MessageService} from 'primeng/api';
 import {DataSampleGenerator} from '../../misc/DataSampleGenerator';
 import {StorageDataTypeKeys} from '../../model/Models';
@@ -19,7 +19,7 @@ export class ParametresComponent implements OnInit {
   pprpoParPivot: number = 20;
   notParPivot: number = 30;
 
-  constructor(private dispatcherService: DispatcherService,
+  constructor(private dispatcherService: CrowdersDispatcherService,
               private messageService: MessageService) {
   }
 
@@ -40,6 +40,7 @@ export class ParametresComponent implements OnInit {
   }
 
   onReinit() {
+    this.dispatcherService.clearAll()
     this.messageService.add({severity: 'Error', summary: 'Service Message', detail: 'Via MessageService'});
   }
 

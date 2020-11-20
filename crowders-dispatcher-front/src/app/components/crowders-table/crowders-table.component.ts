@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {DispatcherService} from '../../services/dispatcher.service';
+import {CrowdersDispatcherService} from '../../services/crowders-dispatcher.service';
 import {Groupe} from '../../model/Models';
 
 export enum CrowderTableType {//FIXME : Replace with polymorphism
@@ -20,7 +20,7 @@ export class CrowdersTableComponent implements OnInit {
 
   tableData = [];
 
-  constructor(private dispatcherService: DispatcherService) {
+  constructor(private dispatcherService: CrowdersDispatcherService) {
   }
 
   ngOnInit(): void {

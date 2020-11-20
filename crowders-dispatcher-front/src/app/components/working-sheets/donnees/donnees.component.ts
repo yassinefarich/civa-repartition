@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {DispatcherService} from '../../../services/dispatcher.service';
+import {CrowdersDispatcherService} from '../../../services/crowders-dispatcher.service';
 
 @Component({
   selector: 'app-donnees',
@@ -13,7 +13,7 @@ export class DonneesComponent implements OnInit {
   pivots: any[] = [];
   propositions: any[] = [];
 
-  constructor(private dispatcherService: DispatcherService) {
+  constructor(private dispatcherService: CrowdersDispatcherService) {
   }
 
   ngOnInit(): void {
