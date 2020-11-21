@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { WorkingSheetComponent } from './groups-working-sheet.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { WorkingSheetComponent } from './working-sheet.component';
 
 describe('WorkingSheetComponent', () => {
   let component: WorkingSheetComponent;
@@ -8,6 +8,7 @@ describe('WorkingSheetComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [RouterTestingModule],
       declarations: [ WorkingSheetComponent ]
     })
     .compileComponents();
