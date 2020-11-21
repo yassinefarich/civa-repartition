@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {CrowdersDispatcherService} from '../../../services/crowders-dispatcher.service';
 import {Groupe} from '../../../model/Models';
+import {ExcelFileToJsonService} from '../../../services/excel-file-to-json.service';
 
 export enum GroupsTableType {//FIXME : Replace with polymorphism
   PROPOSITION,
@@ -20,7 +21,8 @@ export class GroupsTableComponent implements OnInit {
 
   tableData = [];
 
-  constructor(private dispatcherService: CrowdersDispatcherService) {
+  constructor(private dispatcherService: CrowdersDispatcherService,
+              private excelFileToJsonService: ExcelFileToJsonService) {
   }
 
   ngOnInit(): void {
@@ -54,7 +56,7 @@ export class GroupsTableComponent implements OnInit {
     }
 
     let maxNumberOfCrowders = result.map(g => g.crowders.length).reduce((p, v) => p > v ? p : v);
-    let resultAcc = [];
+    let resultAcc = [];//Fixme : Make it more readable
     for (let i = 0; i < maxNumberOfCrowders; i++) {
       let accumulator = [];
       for (let j = 0; j < result.length && result[j].crowders.length > i;
@@ -66,11 +68,6 @@ export class GroupsTableComponent implements OnInit {
   }
 
   exportExcel() {
-    import('xlsx').then(xlsx => {
-      const worksheet = xlsx.utils.json_to_sheet(this.tableData);
-      const workbook = {Sheets: {'data': worksheet}, SheetNames: ['data']};
-      let EXCEL_EXTENSION = '.xlsx';
-      xlsx.writeFile(workbook, 'crowders' + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
-    });
+    this.excelFileToJsonService.jsonToExcel(this.tableData);
   }
 }
