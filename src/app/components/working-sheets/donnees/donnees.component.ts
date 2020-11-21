@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CrowdersDispatcherService} from '../../../services/crowders-dispatcher.service';
+import {Crowder, Pivot} from '../../../model/Models';
 
 @Component({
   selector: 'app-donnees',
@@ -9,8 +10,8 @@ import {CrowdersDispatcherService} from '../../../services/crowders-dispatcher.s
 export class DonneesComponent implements OnInit {
 
 
-  crowders: any[] = [];
-  pivots: any[] = [];
+  crowders: Crowder[] = [];
+  pivots: Pivot[] = [];
   propositions: any[] = [];
 
   constructor(private dispatcherService: CrowdersDispatcherService) {

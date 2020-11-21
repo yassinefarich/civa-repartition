@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {CrowderTableType} from '../../crowders-table/crowders-table.component';
-import {GroupsTableType} from '../../groups-table/groups-table.component';
+import {CrowderTableType} from '../crowders-table/crowders-table.component';
+import {GroupsTableType} from '../groups-table/groups-table.component';
 import {CrowdersDispatcherService} from '../../../services/crowders-dispatcher.service';
 
 @Component({

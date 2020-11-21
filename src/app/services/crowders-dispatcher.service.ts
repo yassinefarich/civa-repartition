@@ -11,12 +11,9 @@ export class CrowdersDispatcherService {
 
   private readonly _dataObservers: Map<StorageDataTypeKeys, Subject<any>>;
 
-  public setData(type: StorageDataTypeKeys, values: DataTable) {
-    values.shift();
-    let filtredData = values.filter(d => d.length > 1);
-
-    this.$storage.set(type, filtredData);
-    this._dataObservers.get(type).next(filtredData);
+  public setData(type: StorageDataTypeKeys, values: any[]): void {
+    this.$storage.set(type, values);
+    this._dataObservers.get(type).next(values);
   }
 
   constructor(private $storage: LocalStorageService) {
@@ -29,15 +26,15 @@ export class CrowdersDispatcherService {
     console.log(this._dataObservers);
   }
 
-  get crowders(): Observable<DataTable> {
+  get crowders(): Observable<Crowder[]> {
     return this._dataObservers.get(StorageDataTypeKeys.CROWDER).asObservable();
   }
 
-  get pivots(): Observable<DataTable> {
+  get pivots(): Observable<Pivot[]> {
     return this._dataObservers.get(StorageDataTypeKeys.PIVOTS).asObservable();
   }
 
-  get propositions(): Observable<DataTable> {
+  get propositions(): Observable<any> {
     return this._dataObservers.get(StorageDataTypeKeys.PROPOSITIONS).asObservable();
   }
 
@@ -49,14 +46,14 @@ export class CrowdersDispatcherService {
     return this._dataObservers.get(StorageDataTypeKeys.CROWDERS_NOTATIONS_GROUPS).asObservable();
   }
 
-  refreshDataFromStorage() {
+  refreshDataFromStorage(): void {
     ALL_TYPES.forEach(
       type => this.notifyDataConsumers(type, this._dataObservers.get(type))
     );
   }
 
-  private notifyDataConsumers(dataKey: StorageDataTypeKeys, dataSubject: Subject<any[]>) {
-    let data = this.$storage.get(dataKey);
+  private notifyDataConsumers(dataKey: StorageDataTypeKeys, dataSubject: Subject<any[]>): void {
+    const data = this.$storage.get(dataKey);
     dataSubject.next(data !== null ? data : []);
   }
 
@@ -78,38 +75,27 @@ export class CrowdersDispatcherService {
 
   makeParameters(propositionParQuest: number, notationsParProposition: number): CalculParameters {
 
-    let crowdersBrute = this.$storage.get(StorageDataTypeKeys.CROWDER);
-    let pivotsBrute = this.$storage.get(StorageDataTypeKeys.PIVOTS);
+    const crowdersBrute = this.$storage.get(StorageDataTypeKeys.CROWDER);
+    const pivotsBrute = this.$storage.get(StorageDataTypeKeys.PIVOTS);
     if (crowdersBrute == null || pivotsBrute == null) {
       alert('Erreur de données..');//Fixme
       return {
         crowders: [],
         pivots: [],
-        propositionParQuest: propositionParQuest,
-        notationsParProposition: notationsParProposition
+        propositionParQuest,
+        notationsParProposition
       };
     }
-
-    let crowders: Crowder[] = crowdersBrute
-      .map(cr => {
-        return {name: cr[1]};
-      });
-
-    let pivots: Pivot[] = pivotsBrute
-      .map(pv => {
-        return {id: pv[0], question: pv[1], reponse: pv[2]};
-      });
-
     return {
-      crowders: crowders,
-      pivots: pivots,
-      propositionParQuest: propositionParQuest,
-      notationsParProposition: notationsParProposition
+      crowders: crowdersBrute,
+      pivots: pivotsBrute,
+      propositionParQuest,
+      notationsParProposition
     };
 
   }
 
-  clearAll() {
+  clearAll(): void {
     ALL_TYPES.forEach(
       type => this.$storage.remove(type)
     );

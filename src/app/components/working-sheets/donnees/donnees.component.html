@@ -13,10 +13,13 @@
             </th>
           </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-groupe>
+        <ng-template pTemplate="body" let-crowder>
           <tr>
-            <td *ngFor="let col of groupe">
-              {{col}}
+            <td>
+              {{crowder.id}}
+            </td>
+            <td>
+              {{crowder.name}}
             </td>
           </tr>
         </ng-template>
@@ -37,7 +40,7 @@
               Id
             </th>
             <th>
-              Question
+              Pivot
             </th>
             <th>
               Réponse
@@ -47,13 +50,13 @@
         <ng-template pTemplate="body" let-pivot>
           <tr>
             <td>
-              {{pivot[0]}}
+              {{pivot.id}}
             </td>
             <td>
-              {{pivot[1]}}
+              {{pivot.question}}
             </td>
             <td>
-              {{pivot[2]}}
+              {{pivot.reponse}}
             </td>
           </tr>
         </ng-template>

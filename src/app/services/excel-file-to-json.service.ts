@@ -1,21 +1,16 @@
 import {Injectable} from '@angular/core';
 import * as XLSX from 'xlsx';
-import {Observable, Subject} from 'rxjs';
-import {CrowdersDispatcherService} from './crowders-dispatcher.service';
-import {StorageDataTypeKeys, DataTable} from '../model/Models';
+import {DataTable} from '../model/Models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ExcelFileToJsonService {
 
-  private wopts: XLSX.WritingOptions = {bookType: 'xlsx', type: 'array'};
-  private fileName: string = 'SheetJS.xlsx';
-
-  constructor(private dispatcherService: CrowdersDispatcherService) {
+  constructor() {
   }
 
-  public async excelToJson(type: StorageDataTypeKeys, file: any): Promise<DataTable> {
+  public async excelToJson(file: any): Promise<DataTable> {
     console.log(file);
     /* read workbook */
     const bstr: string = file.target.result;
@@ -26,12 +21,7 @@ export class ExcelFileToJsonService {
     const ws: XLSX.WorkSheet = wb.Sheets[wsname];
 
     /* save data */
-    let data = <DataTable> (XLSX.utils.sheet_to_json(ws, {header: 1}));
-
-    this.dispatcherService.setData(type, data);
-    console.log(data);
-
-    return data;
+    return (XLSX.utils.sheet_to_json(ws, {header: 1})) as DataTable;
   }
 
 }

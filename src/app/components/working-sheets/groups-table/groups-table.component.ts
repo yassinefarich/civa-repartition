@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {CrowdersDispatcherService} from '../../services/crowders-dispatcher.service';
-import {Groupe} from '../../model/Models';
+import {CrowdersDispatcherService} from '../../../services/crowders-dispatcher.service';
+import {Groupe} from '../../../model/Models';
 
 export enum GroupsTableType {//FIXME : Replace with polymorphism
   PROPOSITION,

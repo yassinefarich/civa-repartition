@@ -1,26 +1,36 @@
+import {Crowder, Pivot} from '../model/Models';
+
 export class DataSampleGenerator {
 
-  generateCrowders(num: number): any[] {
-    return DataSampleGenerator.range(num)
-      .map(i => [i, 'Crowder_' + i]);
-  }
-
-  generatePivots(num: number): any[] {
-    return DataSampleGenerator.range(num)
-      .map(i => [i, 'Pivot_' + i, 'Reponse_' + i]);
-  }
-
-  generatePropositions(num: number): any[] {
-    return DataSampleGenerator.range(num)
-      .map(i => [i, 'Pivot_' + i]);
-  }
-
   private static range(n: number): any[] {
-    let result = Array();
+    const result = Array();
     for (let i = 0; i <= n; i++) {
       result.push(i);
     }
     return result;
+  }
+
+  generateCrowders(num: number): Crowder[] {
+    return DataSampleGenerator.range(num)
+      .map(i => {
+          return {id: i, name: 'Cowder ' + i} as Crowder;
+        }
+      );
+  }
+
+  generatePivots(num: number): Pivot[] {
+    return DataSampleGenerator.range(num)
+      .map(i => {
+          return {id: i, question: 'Question ' + i, reponse: 'Reponse ' + i,} as Pivot;
+        }
+      );
+  }
+
+  generateQuestionAlternatives(pivots: Pivot[], num: number): Pivot[] {
+    pivots.forEach(
+      pivot => pivot.questionAlternative = DataSampleGenerator.range(num).map(i => pivot.id + '_question_alternative_' + i)
+    );
+    return pivots;
   }
 
 }

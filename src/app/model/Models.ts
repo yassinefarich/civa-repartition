@@ -17,15 +17,17 @@ export const ALL_TYPES = [
 ];
 
 export interface Crowder {
-  name: string,
-  pivotsEvaluation: Array<Pivot>
-  pivotsNotation: Array<Pivot>
+  name: string;
+  pivotsEvaluation?: Pivot[];
+  pivotsNotation?: Pivot[];
 }
 
 export interface Pivot {
   id: string;
   question: string;
-  reponse?: string;
+  reponse: string;
+  questionAlternative: string[];
+  reponseAlternatives: string[];
 }
 
 export interface Groupe {
