@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
-import {EvaluationGroups, NotationGroups,} from '../model/CrowdersGroups';
-import {ALL_TYPES, CalculParameters, Crowder, DataTable, Groupe, Pivot, StorageDataTypeKeys} from '../model/Models';
+import {ALL_TYPES, CalculParameters, Crowder, Groupe, Pivot, StorageDataTypeKeys} from '../model/Models';
 import {LocalStorageService} from './local-storage-service';
+import {EvaluationGroups} from '../model/EvaluationGroups';
+import {NotationGroups} from '../model/NotationGroups';
 
 @Injectable({
   providedIn: 'root'
@@ -58,19 +59,21 @@ export class CrowdersDispatcherService {
   }
 
   dispatchGroups(propositionParQuest: number, notationsParProposition: number) {
-    let evaluationGroups = new EvaluationGroups(this.makeParameters(propositionParQuest, notationsParProposition));
-    let groups = evaluationGroups.distribuerGroupsCrowders();
-    let pivotsParGroupe = evaluationGroups.distribuerPivotsCrowders(groups);
-    this.$storage.set(StorageDataTypeKeys.CROWDERS_GROUPS, pivotsParGroupe);
-    this._dataObservers.get(StorageDataTypeKeys.CROWDERS_GROUPS).next(pivotsParGroupe);
+    let evaluationGroups = new EvaluationGroups(this.makeParameters(propositionParQuest, notationsParProposition))
+      .dispatch()
+      .groupes;
+
+    this.$storage.set(StorageDataTypeKeys.CROWDERS_GROUPS, evaluationGroups);
+    this._dataObservers.get(StorageDataTypeKeys.CROWDERS_GROUPS).next(evaluationGroups);
   }
 
   dispatchNotationGroups(propositionParQuest: number, notationsParProposition: number) {
-    let notationGroupes = new NotationGroups(this.makeParameters(propositionParQuest, notationsParProposition));
-    let groups = notationGroupes.distribuerGroupsCrowders();
-    let pivotsParGroupe = notationGroupes.distribuerPivotsCrowders(groups);
-    this.$storage.set(StorageDataTypeKeys.CROWDERS_NOTATIONS_GROUPS, pivotsParGroupe);
-    this._dataObservers.get(StorageDataTypeKeys.CROWDERS_NOTATIONS_GROUPS).next(pivotsParGroupe);
+    let notationGroupes = new NotationGroups(this.makeParameters(propositionParQuest, notationsParProposition))
+      .dispatch()
+      .groupes;
+
+    this.$storage.set(StorageDataTypeKeys.CROWDERS_NOTATIONS_GROUPS, notationGroupes);
+    this._dataObservers.get(StorageDataTypeKeys.CROWDERS_NOTATIONS_GROUPS).next(notationGroupes);
   }
 
   makeParameters(propositionParQuest: number, notationsParProposition: number): CalculParameters {

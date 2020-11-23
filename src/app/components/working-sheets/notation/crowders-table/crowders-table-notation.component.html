@@ -1,0 +1,69 @@
+<div *ngIf="tableData.length > 0" style="height: 100%">
+    <p-table [value]="tableData" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+             currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+             [rowsPerPageOptions]="[10,25,50]" styleClass="p-datatable-sm p-datatable-gridlines" dataKey="crowderName"
+             class="dataTable">
+
+              <ng-template pTemplate="header">
+                <tr style="background-color: #5696d6">
+                  <th>
+                    Crowder
+                  </th>
+                  <th>
+                    Groupe
+                  </th>
+                  <th>
+                    Nombre de pivots
+                  </th>
+                </tr>
+              </ng-template>
+
+              <ng-template pTemplate="body" let-crowder let-expanded="expanded">
+                <tr>
+                  <td>
+                    <button type="button" pButton pRipple [pRowToggler]="crowder" label="{{crowder.crowderName}}"
+                            class="p-button-text  p-button-rounded p-button-plain"
+                            [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'" style="height: 12px"></button>
+                  </td>
+                  <td>
+                    {{crowder.groupeName}}
+                  </td>
+                  <td>
+                    {{crowder.pivots.length}}
+                  </td>
+                </tr>
+              </ng-template>
+
+      <!-- Start-->
+      <ng-template pTemplate="rowexpansion" let-crowder>
+        <tr>
+          <td colspan="4">
+
+            <p-table [value]="crowder.altQuesRepANoter" dataKey="id">
+              <ng-template pTemplate="header">
+                <tr>
+                  <th style="width: 5rem" pSortableColumn="id">Id pivot</th>
+                  <th style="width: 4rem">Type</th>
+                  <th>Questions/réponse alternatives à noter</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-questionRep >
+              <tr>
+                <td>{{questionRep.alt.idPivot}}</td>
+                <td>{{questionRep.type}}</td>
+                <td>{{questionRep.alt.alternative}}</td>
+              </tr>
+            </ng-template>
+          </p-table>
+
+        </td>
+      </tr>
+    </ng-template>
+
+  </p-table>
+
+</div>
+<div *ngIf="tableData.length == 0" style="height: 100%">
+  Merci de cliquer sur génerer des groupes, ou choisir le nombre
+  de <b>{{type == 1 ? 'notation' : 'propositon' }}</b> par pivot
+</div>

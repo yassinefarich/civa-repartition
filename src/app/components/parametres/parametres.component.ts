@@ -28,8 +28,12 @@ export class ParametresComponent implements OnInit {
 
   onGenerateSamples() {
     let dataSampleGen = new DataSampleGenerator();
-    this.dispatcherService.setData(StorageDataTypeKeys.CROWDER, dataSampleGen.generateCrowders(this.crowders));
-    this.dispatcherService.setData(StorageDataTypeKeys.PIVOTS, dataSampleGen.generatePivots(this.pivots));
+
+    const crowders = dataSampleGen.generateCrowders(this.crowders);
+    const pivots = dataSampleGen.generatePivots(this.pivots, this.notParPivot);
+
+    this.dispatcherService.setData(StorageDataTypeKeys.CROWDER, crowders);
+    this.dispatcherService.setData(StorageDataTypeKeys.PIVOTS, pivots);
   }
 
   onGenerateGroups() {
@@ -40,7 +44,7 @@ export class ParametresComponent implements OnInit {
   }
 
   onReinit() {
-    this.dispatcherService.clearAll()
+    this.dispatcherService.clearAll();
     this.messageService.add({severity: 'Error', summary: 'Service Message', detail: 'Via MessageService'});
   }
 

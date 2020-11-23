@@ -3,12 +3,12 @@
     <app-groups-table [type]="groupsTableType.PROPOSITION"></app-groups-table>
   </p-tabPanel>
   <p-tabPanel header="Pivots par crowder">
-    <app-crowders-table [type]="crowderTableType.PROPOSITION"></app-crowders-table>
+    <app-crowders-table></app-crowders-table>
   </p-tabPanel>
   <p-tabPanel header="Groupes de notation">
     <app-groups-table [type]="groupsTableType.NOTATION"></app-groups-table>
   </p-tabPanel>
   <p-tabPanel header="Notation par crowder">
-    <app-crowders-table [type]="crowderTableType.NOTATION"></app-crowders-table>
+    <app-crowders-table-notation></app-crowders-table-notation>
   </p-tabPanel>
 </p-tabView>

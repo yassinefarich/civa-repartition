@@ -67,6 +67,37 @@
     </div>
   </p-tabPanel>
   <p-tabPanel header="Pivot/Propositions">
-    Merci de charger une liste de propositions
+
+
+    <div *ngIf="propositions.length > 0" style="height: 100%">
+      <p-table [value]="propositions" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+               [rowsPerPageOptions]="[10,25,50]" styleClass="p-datatable-sm p-datatable-gridlines">
+
+        <ng-template pTemplate="header">
+          <tr>
+            <th style="width: 5em">
+              Id Pivot
+            </th>
+            <th>
+              Question / Réponse alternative
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-proposition>
+          <tr>
+            <td>
+              {{proposition.idPivot}}
+            </td>
+            <td>
+              {{proposition.alternative}}
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+    <div *ngIf="propositions.length == 0" style="height: 100%">
+      Merci de charger une liste de propositions
+    </div>
+
   </p-tabPanel>
 </p-tabView>

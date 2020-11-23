@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CrowdersDispatcherService} from '../../../services/crowders-dispatcher.service';
-import {Crowder, Pivot} from '../../../model/Models';
+import {Crowder, Pivot, PivotAlternative} from '../../../model/Models';
 
 @Component({
   selector: 'app-donnees',
@@ -12,7 +12,7 @@ export class DonneesComponent implements OnInit {
 
   crowders: Crowder[] = [];
   pivots: Pivot[] = [];
-  propositions: any[] = [];
+  propositions: PivotAlternative[] = [];
 
   constructor(private dispatcherService: CrowdersDispatcherService) {
   }
@@ -24,7 +24,10 @@ export class DonneesComponent implements OnInit {
     );
     this.dispatcherService
       .pivots.subscribe(
-      data => this.pivots = data
+      data => {
+        this.pivots = data;
+        this.propositions = DonneesComponent.getPropositionFromPivots(this.pivots);
+      }
     );
     this.dispatcherService
       .propositions.subscribe(
@@ -37,4 +40,10 @@ export class DonneesComponent implements OnInit {
 
   }
 
+  private static getPropositionFromPivots(pivots: Pivot[]): any[] {
+    return pivots.flatMap(
+      pivot =>
+        pivot.questionAlternative.concat(pivot.reponseAlternatives)
+    );
+  }
 }

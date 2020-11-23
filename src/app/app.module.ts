@@ -15,12 +15,13 @@ import {InputNumberModule} from 'primeng/inputnumber';
 import {ToastModule} from 'primeng/toast';
 import {TableModule} from 'primeng/table';
 import {GroupsTableComponent} from './components/working-sheets/groups-table/groups-table.component';
-import {CrowdersTableComponent} from './components/working-sheets/crowders-table/crowders-table.component';
+import {CrowdersTableComponent} from './components/working-sheets/propositions/crowders-table/crowders-table.component';
 import {TooltipModule} from 'primeng/tooltip';
 import {DonneesComponent} from './components/working-sheets/donnees/donnees.component';
 import {GroupsComponent} from './components/working-sheets/groups/groups.component';
 import {WorkingSheetComponent} from './components/working-sheets/working-sheet/working-sheet.component';
 import {AppRoutingModule} from './app-routing.module';
+import {CrowdersTableNotationComponent} from './components/working-sheets/notation/crowders-table/crowders-table-notation.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import {AppRoutingModule} from './app-routing.module';
     CrowdersTableComponent,
     DonneesComponent,
     GroupsComponent,
-    WorkingSheetComponent
+    WorkingSheetComponent,
+    CrowdersTableNotationComponent
   ],
   imports: [
     BrowserModule,

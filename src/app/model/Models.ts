@@ -16,18 +16,31 @@ export const ALL_TYPES = [
   StorageDataTypeKeys.CROWDER,
 ];
 
+
+export interface PivotAlternative{
+  idPivot: string;
+  alternative: string;
+}
+
+export interface QuestionAlternative extends PivotAlternative{
+}
+
+export interface ReponseAlternative extends PivotAlternative{
+}
+
 export interface Crowder {
   name: string;
   pivotsEvaluation?: Pivot[];
-  pivotsNotation?: Pivot[];
+  altQuestionsANoter?: QuestionAlternative[];
+  altReponsesANoter?: ReponseAlternative[];
 }
 
 export interface Pivot {
   id: string;
   question: string;
   reponse: string;
-  questionAlternative: string[];
-  reponseAlternatives: string[];
+  questionAlternative: QuestionAlternative[];
+  reponseAlternatives: ReponseAlternative[];
 }
 
 export interface Groupe {
