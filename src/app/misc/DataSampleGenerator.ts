@@ -4,7 +4,7 @@ export class DataSampleGenerator {
 
   private static range(n: number): any[] {
     const result = Array();
-    for (let i = 0; i <= n; i++) {
+    for (let i = 0; i < n; i++) {
       result.push(i);
     }
     return result;
