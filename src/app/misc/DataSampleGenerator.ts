@@ -1,4 +1,4 @@
-import {Crowder, Pivot} from '../model/Models';
+import {Crowder, Pivot, PivotAlternativeType} from '../model/Models';
 
 export class DataSampleGenerator {
 
@@ -13,7 +13,7 @@ export class DataSampleGenerator {
   generateCrowders(num: number): Crowder[] {
     return DataSampleGenerator.range(num)
       .map(i => {
-          return {id: i, name: 'Cowder ' + i} as Crowder;
+          return {id: i, name: 'Cowder ' + i, alternatives: [], pivotsEvaluation: []} as Crowder;
         }
       );
   }
@@ -21,38 +21,40 @@ export class DataSampleGenerator {
   generatePivots(num: number, notationParPivot: number): Pivot[] {
     let pivots = DataSampleGenerator.range(num)
       .map(i => {
-          return {id: i, question: 'Question ' + i, reponse: 'Reponse ' + i,} as Pivot;
+          return {
+            id: i, question: 'Question ' + i, reponse: 'Reponse ' + i,
+            alternatives: Array()
+          } as Pivot;
         }
       );
 
     if (notationParPivot !== 0) {
       this.generateQuestionAlternatives(pivots, notationParPivot);
-      this.generateReponsesAlternatives(pivots, notationParPivot);
     }
 
     return pivots;
   }
 
   private generateQuestionAlternatives(pivots: Pivot[], num: number): void {
-    pivots.forEach(
-      pivot => pivot.questionAlternative = DataSampleGenerator.range(num).map(i => {
-          return {
-            idPivot: pivot.id,
-            alternative: pivot.id + '_question_alternative_' + i
-          };
-        }
-      ));
-  }
 
-  private generateReponsesAlternatives(pivots: Pivot[], num: number): void {
     pivots.forEach(
-      pivot => pivot.reponseAlternatives = DataSampleGenerator.range(num).map(i => {
-          return {
-            idPivot: pivot.id,
-            alternative: pivot.id + '_reponse_alternative_' + i
-          };
+      pivot => {
+        for (let i = 0; i < num; i++) {
+          pivot.alternatives.push(
+            {
+              idPivot: pivot.id,
+              alternative: pivot.id + '_question_alternative_' + i,
+              type: PivotAlternativeType.QUESTION
+            },
+            {
+              idPivot: pivot.id,
+              alternative: pivot.id + '_reponse_alternative_' + i,
+              type: PivotAlternativeType.REPONSE
+            },
+          );
         }
-      ));
+      }
+    );
   }
 
 }

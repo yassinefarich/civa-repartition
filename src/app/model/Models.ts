@@ -17,30 +17,32 @@ export const ALL_TYPES = [
 ];
 
 
-export interface PivotAlternative{
+export enum PivotAlternativeType {
+  QUESTION,
+  REPONSE
+}
+
+export interface PivotAlternative {
   idPivot: string;
   alternative: string;
+  type?: PivotAlternativeType;
 }
 
-export interface QuestionAlternative extends PivotAlternative{
-}
-
-export interface ReponseAlternative extends PivotAlternative{
+export interface ReponseAlternative extends PivotAlternative {
 }
 
 export interface Crowder {
+  id: string
   name: string;
-  pivotsEvaluation?: Pivot[];
-  altQuestionsANoter?: QuestionAlternative[];
-  altReponsesANoter?: ReponseAlternative[];
+  pivotsEvaluation: Pivot[];
+  alternatives: PivotAlternative[];
 }
 
 export interface Pivot {
   id: string;
   question: string;
   reponse: string;
-  questionAlternative: QuestionAlternative[];
-  reponseAlternatives: ReponseAlternative[];
+  alternatives: PivotAlternative[];
 }
 
 export interface Groupe {

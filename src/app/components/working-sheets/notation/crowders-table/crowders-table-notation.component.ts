@@ -45,14 +45,11 @@ export class CrowdersTableNotationComponent implements OnInit {
 
   private static creatQuestResp(crowder: Crowder): any[] {
 
-    let reponses: any[] = crowder.altReponsesANoter.map(alt => {
+    let reponses: any[] = crowder.alternatives.map(alt => {
       return {alt: alt, type: 'R'};
     });
-    let questions: any[] = crowder.altQuestionsANoter.map(alt => {
-      return {alt: alt, type: 'Q'};
-    });
 
-    return reponses.concat(questions);
+    return reponses;
 
   }
 }

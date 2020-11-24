@@ -29,10 +29,6 @@ export class DonneesComponent implements OnInit {
         this.propositions = DonneesComponent.getPropositionFromPivots(this.pivots);
       }
     );
-    this.dispatcherService
-      .propositions.subscribe(
-      data => this.propositions = data
-    );
 
     if (this.crowders.length <= 0) {
       this.dispatcherService.refreshDataFromStorage();
@@ -43,7 +39,7 @@ export class DonneesComponent implements OnInit {
   private static getPropositionFromPivots(pivots: Pivot[]): any[] {
     return pivots.flatMap(
       pivot =>
-        pivot.questionAlternative.concat(pivot.reponseAlternatives)
+        pivot.alternatives
     );
   }
 }

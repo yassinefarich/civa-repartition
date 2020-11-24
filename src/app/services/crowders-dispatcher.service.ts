@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
-import {ALL_TYPES, CalculParameters, Crowder, Groupe, Pivot, StorageDataTypeKeys} from '../model/Models';
+import {ALL_TYPES, CalculParameters, Crowder, Groupe, Pivot, PivotAlternative, StorageDataTypeKeys} from '../model/Models';
 import {LocalStorageService} from './local-storage-service';
 import {EvaluationGroups} from '../model/EvaluationGroups';
 import {NotationGroups} from '../model/NotationGroups';
@@ -74,6 +74,26 @@ export class CrowdersDispatcherService {
 
     this.$storage.set(StorageDataTypeKeys.CROWDERS_NOTATIONS_GROUPS, notationGroupes);
     this._dataObservers.get(StorageDataTypeKeys.CROWDERS_NOTATIONS_GROUPS).next(notationGroupes);
+  }
+
+  updateAlternative(pivotAlternative: PivotAlternative[]): void {
+    let pivots: Pivot[] = this.$storage.get(StorageDataTypeKeys.PIVOTS);
+    if (pivots === null) {
+      alert('Merci de charger des Pivots');
+      return;
+    }
+
+    let pivotsMap = new Map(pivots.map(p => [p.id, p]));
+    pivotAlternative
+      .forEach(
+        alt => {// Fixme : Dirty !!
+          let pivot = pivotsMap.get(alt.idPivot);
+          pivot.alternatives.push(alt);
+        }
+      );
+
+    this.$storage.set(StorageDataTypeKeys.PIVOTS, pivots);
+    this.refreshDataFromStorage();
   }
 
   makeParameters(propositionParQuest: number, notationsParProposition: number): CalculParameters {

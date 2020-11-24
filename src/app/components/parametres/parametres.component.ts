@@ -30,7 +30,7 @@ export class ParametresComponent implements OnInit {
     let dataSampleGen = new DataSampleGenerator();
 
     const crowders = dataSampleGen.generateCrowders(this.crowders);
-    const pivots = dataSampleGen.generatePivots(this.pivots, this.notParPivot);
+    const pivots = dataSampleGen.generatePivots(this.pivots, this.pprpoParPivot);
 
     this.dispatcherService.setData(StorageDataTypeKeys.CROWDER, crowders);
     this.dispatcherService.setData(StorageDataTypeKeys.PIVOTS, pivots);
