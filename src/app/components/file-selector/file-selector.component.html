@@ -1,6 +1,3 @@
-<!--<label pButton pRipple for="myFile_{{name}}" label="{{name}}" icon="pi pi-{{icon}}" style="width: 80%">-->
-<!--</label>-->
-
 <button (click)="openFile(name)" pButton pRipple style="width: 80%" type="button" label="{{name}}" icon="pi pi-{{icon}}">
   <input id="{{name}}_id" class="file-selector" (change)="onFileChange($event,datatype)" type="file" />
 </button>

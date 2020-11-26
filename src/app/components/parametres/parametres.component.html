@@ -2,63 +2,101 @@
   <div class="card">
     <h2>Paramètres</h2>
   </div>
+  <div class="parameters-tab">
+    <p-tabView style="width: 100%; height: 100%">
+      <p-tabPanel header="Répartitions">
 
-  <div class="p-grid p-flex-column" style="text-align: center">
-    <div class="p-col">
-      <app-file-selector [name]="'Importer crowders'"
-                         icon="users" [datatype]="dataType.CROWDER"></app-file-selector>
-    </div>
-    <div class="p-col">
-      <app-file-selector [name]="'Importer pivots'"
-                         icon="list" [datatype]="dataType.PIVOTS"></app-file-selector>
-    </div>
-    <div class="p-col">
-      <app-file-selector [name]="'Importer propositions'"
-                         icon="th-large" [datatype]="dataType.PROPOSITIONS"></app-file-selector>
-    </div>
-    <div class="p-col">
-      <div style="margin-bottom: 5px"><label style="text-align: center">Proposition par pivot</label></div>
-      <p-inputNumber min="0" id="propo-par-piv-input" [(ngModel)]="pprpoParPivot"></p-inputNumber>
-    </div>
+        <div class="p-grid p-flex-column" style="text-align: center">
+          <div class="p-col">
+            <app-file-selector [name]="'Importer crowders'"
+                               icon="users" [datatype]="dataType.CROWDER"></app-file-selector>
+          </div>
+          <div class="p-col">
+            <app-file-selector [name]="'Importer pivots'"
+                               icon="list" [datatype]="dataType.PIVOTS"></app-file-selector>
+          </div>
+          <div class="p-col">
+            <app-file-selector [name]="'Importer propositions'"
+                               icon="th-large" [datatype]="dataType.PROPOSITIONS"></app-file-selector>
+          </div>
+          <div class="p-col">
+            <div style="margin-bottom: 5px"><label style="text-align: center">Proposition par pivot</label></div>
+            <p-inputNumber min="0" id="propo-par-piv-input" [(ngModel)]="pprpoParPivot"></p-inputNumber>
+          </div>
 
-    <div class="p-col">
-      <div style="margin-bottom: 5px"><label for="not-par-prop-input">Notation par proposition</label></div>
-      <p-inputNumber min="0" id="not-par-prop-input" [(ngModel)]="notParPivot"></p-inputNumber>
-    </div>
-  </div>
+          <div class="p-col">
+            <div style="margin-bottom: 5px"><label for="not-par-prop-input">Notation par proposition</label></div>
+            <p-inputNumber min="0" id="not-par-prop-input" [(ngModel)]="notParPivot"></p-inputNumber>
+          </div>
+        </div>
 
 
-  <div class="p-grid p-flex-column" style="text-align: center">
-    <div class="p-col">
-      <button pButton pRipple label="Créer des groupes" (click)="onGenerateGroups()" class="p-button-info"
-              style="width: 70%"></button>
-    </div>
-    <div class="p-col">
-      <button pButton pRipple label="Réinitialiser" class="p-button-info" (click)="onReinit()"
-              style="width: 70%"></button>
-    </div>
-  </div>
+        <div class="p-grid p-flex-column" style="text-align: center">
+          <div class="p-col">
+            <button pButton pRipple label="Créer des groupes" (click)="onGenerateGroups()" class="p-button-info"
+                    style="width: 70%"></button>
+          </div>
+          <div class="p-col">
+            <button pButton pRipple label="Réinitialiser" class="p-button-info" (click)="onReinit()"
+                    style="width: 70%"></button>
+          </div>
+        </div>
 
-  <div style="margin-top: 10px;">
-    <p-panel header="Simulation">
-      <div class="p-grid  p-flex-column">
-        <div class="p-col" style="margin-top: 4%">
+        <div style="margin-top: 10px;">
+          <p-panel header="Simulation">
+            <div class="p-grid  p-flex-column">
+              <div class="p-col" style="margin-top: 4%">
                <span class="p-float-label">
                 <p-inputNumber min="0" id="crowders-input" [(ngModel)]="crowders"></p-inputNumber>
                 <label for="crowders-input">Nombre de crowders</label>
               </span>
-        </div>
+              </div>
 
-        <div class="p-mt-4 p-col">
+              <div class="p-mt-4 p-col">
                <span class="p-float-label">
                  <p-inputNumber min="0" id="pivots-input" [(ngModel)]="pivots"></p-inputNumber>
                 <label for="pivots-input">Nombre de pivots</label>
               </span>
+              </div>
+              <div class="p-col">
+                <button pButton pRipple label="Générer" class="p-button-info" (click)="onGenerateSamples()"></button>
+              </div>
+            </div>
+          </p-panel>
         </div>
-        <div class="p-col">
-          <button pButton pRipple label="Générer" class="p-button-info" (click)="onGenerateSamples()"></button>
+
+
+      </p-tabPanel>
+
+      <p-tabPanel header="Gestion de temps">
+
+        <div class="p-grid">
+
+          <div class="p-col-12">Temps nécessaire en heurs pour :</div>
+          <div class="p-col-8"><label style="width: 100%" for="toto">Proposition de question</label></div>
+          <div class="p-col-4">: <input type="number" id="toto" style="width: 80%"/></div>
+
+          <div class="p-col-8"><label style="width: 100%" for="toto">Proposition de réponse</label></div>
+          <div class="p-col-4">: <input type="number" id="toto" style="width: 80%"/></div>
+
+          <div class="p-col-8"><label style="width: 100%" for="toto">Notation de question</label></div>
+          <div class="p-col-4">: <input type="number" id="toto" style="width: 80%"/></div>
+
+          <div class="p-col-8"><label style="width: 100%" for="toto">Notation de réponse</label></div>
+          <div class="p-col-4">: <input type="number" id="toto" style="width: 80%"/></div>
+
+          <div class="p-col-12"></div>
+
+          <div class="p-col-8"><label style="width: 100%" for="toto">Nombre de sessions/semaine</label></div>
+          <div class="p-col-4">: <input type="number" id="toto" style="width: 80%"/></div>
+          <div class="p-col-8"><label style="width: 100%" for="toto">Durée d'une session</label></div>
+          <div class="p-col-4">: <input type="number" id="toto" style="width: 80%"/></div>
+
+
         </div>
-      </div>
-    </p-panel>
+
+
+      </p-tabPanel>
+    </p-tabView>
   </div>
 </div>
