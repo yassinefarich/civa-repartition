@@ -69,8 +69,8 @@
   <p-tabPanel header="Pivot/Propositions">
 
 
-    <div *ngIf="propositions.length > 0" style="height: 100%">
-      <p-table [value]="propositions" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+    <div *ngIf="pivotsAlternatives.length > 0" style="height: 100%">
+      <p-table [value]="pivotsAlternatives" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
                [rowsPerPageOptions]="[10,25,50]" styleClass="p-datatable-sm p-datatable-gridlines">
 
         <ng-template pTemplate="header">
@@ -95,7 +95,7 @@
         </ng-template>
       </p-table>
     </div>
-    <div *ngIf="propositions.length == 0" style="height: 100%">
+    <div *ngIf="pivotsAlternatives.length == 0" style="height: 100%">
       Merci de charger une liste de propositions
     </div>
 

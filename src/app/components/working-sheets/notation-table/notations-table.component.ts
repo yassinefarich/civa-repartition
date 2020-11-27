@@ -1,28 +1,29 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {CrowdersDispatcherService} from '../../../../services/crowders-dispatcher.service';
-import {Crowder, Groupe} from '../../../../model/Models';
+import {Component, OnInit} from '@angular/core';
+import {RepartitionService} from '../../../services/algo/repartition.service';
+import {Crowder, Groupe} from '../../../model/Models';
+import {Store} from '../../../services/data/store.service';
 
 @Component({
-  selector: 'app-crowders-table-notation',
-  templateUrl: './crowders-table-notation.component.html',
-  styleUrls: ['./crowders-table-notation.component.scss']
+  selector: 'notations-table',
+  templateUrl: './notations-table.component.html',
+  styleUrls: ['./notations-table.component.scss']
 })
-export class CrowdersTableNotationComponent implements OnInit {
+export class NotationsTableComponent implements OnInit {
 
   tableData = [];
 
-  constructor(private dispatcherService: CrowdersDispatcherService) {
+  constructor(private store: Store) {
   }
 
   ngOnInit(): void {
-    this.dispatcherService.crowdersNotationGroupsSubject.subscribe(
+    this.store.crowdersNotationGroupsSubject.subscribe(
       result => {
         this.tableData = this.makeDataTable(result);
       }
     );
 
     if (this.tableData.length <= 0) {
-      this.dispatcherService.refreshDataFromStorage();
+      this.store.refreshDataFromStorage();
     }
   }
 
@@ -34,7 +35,7 @@ export class CrowdersTableNotationComponent implements OnInit {
           crowder => {
             resultAccumulator.push({
               crowderName: crowder.name, groupeName: groupe.name, pivots: groupe.pivots,
-              altQuesRepANoter: CrowdersTableNotationComponent.creatQuestResp(crowder)
+              altQuesRepANoter: NotationsTableComponent.creatQuestResp(crowder)
             });
           }
         ));

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GroupsComponent } from './groups.component';
+import { PropositionsTableComponent } from './propositions-table.component';
 
-describe('GroupsComponent', () => {
-  let component: GroupsComponent;
-  let fixture: ComponentFixture<GroupsComponent>;
+describe('CrowdersTableComponent', () => {
+  let component: PropositionsTableComponent;
+  let fixture: ComponentFixture<PropositionsTableComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GroupsComponent ]
+      declarations: [ PropositionsTableComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GroupsComponent);
+    fixture = TestBed.createComponent(PropositionsTableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

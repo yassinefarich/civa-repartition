@@ -15,13 +15,14 @@ import {InputNumberModule} from 'primeng/inputnumber';
 import {ToastModule} from 'primeng/toast';
 import {TableModule} from 'primeng/table';
 import {GroupsTableComponent} from './components/working-sheets/groups-table/groups-table.component';
-import {CrowdersTableComponent} from './components/working-sheets/propositions/crowders-table/crowders-table.component';
+import {PropositionsTableComponent} from './components/working-sheets/propositions-table/propositions-table.component';
 import {TooltipModule} from 'primeng/tooltip';
 import {DonneesComponent} from './components/working-sheets/donnees/donnees.component';
-import {GroupsComponent} from './components/working-sheets/groups/groups.component';
+import {RepartitionsComponent} from './components/working-sheets/repartitions/repartitions.component';
 import {WorkingSheetComponent} from './components/working-sheets/working-sheet/working-sheet.component';
 import {AppRoutingModule} from './app-routing.module';
-import {CrowdersTableNotationComponent} from './components/working-sheets/notation/crowders-table/crowders-table-notation.component';
+import {NotationsTableComponent} from './components/working-sheets/notation-table/notations-table.component';
+import {InputTextareaModule} from 'primeng/inputtextarea';
 
 @NgModule({
   declarations: [
@@ -29,11 +30,11 @@ import {CrowdersTableNotationComponent} from './components/working-sheets/notati
     FileSelectorComponent,
     ParametresComponent,
     GroupsTableComponent,
-    CrowdersTableComponent,
+    PropositionsTableComponent,
     DonneesComponent,
-    GroupsComponent,
+    RepartitionsComponent,
     WorkingSheetComponent,
-    CrowdersTableNotationComponent
+    NotationsTableComponent
   ],
   imports: [
     BrowserModule,
@@ -48,6 +49,7 @@ import {CrowdersTableNotationComponent} from './components/working-sheets/notati
     ToastModule,
     TableModule,
     TooltipModule,
+    InputTextareaModule,
     AppRoutingModule
   ],
   providers: [],

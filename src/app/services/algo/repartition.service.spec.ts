@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { CrowdersDispatcherService } from './crowders-dispatcher.service';
+import { RepartitionService } from './repartition.service';
 
 describe('DispatcherService', () => {
-  let service: CrowdersDispatcherService;
+  let service: RepartitionService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(CrowdersDispatcherService);
+    service = TestBed.inject(RepartitionService);
   });
 
   it('should be created', () => {

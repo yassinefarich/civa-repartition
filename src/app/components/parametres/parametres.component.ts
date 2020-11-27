@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {CrowdersDispatcherService} from '../../services/crowders-dispatcher.service';
+import {RepartitionService} from '../../services/algo/repartition.service';
 import {MessageService} from 'primeng/api';
-import {DataSampleGenerator} from '../../misc/DataSampleGenerator';
 import {StorageDataTypeKeys} from '../../model/Models';
+import {SimulationsService} from '../../services/data/simulations.service';
+import {Store} from '../../services/data/store.service';
 
 @Component({
   selector: 'app-parametres',
@@ -14,47 +15,43 @@ export class ParametresComponent implements OnInit {
 
   public dataType: typeof StorageDataTypeKeys = StorageDataTypeKeys;
 
-  crowders: number = 120;
-  pivots: number = 30;
-  pprpoParPivot: number = 20;
-  notParPivot: number = 30;
+  nombreDeCrowders: number = 120;
+  nombreDePivots: number = 30;
+  nombreDePropositionsParPivot: number = 20;
+  nombreDeNotationsParProposition: number = 30;
 
-  constructor(private dispatcherService: CrowdersDispatcherService,
-              private messageService: MessageService) {
+  constructor(private dispatcherService: RepartitionService,
+              private messageService: MessageService,
+              private simulations: SimulationsService,
+              private store: Store) {
   }
 
   ngOnInit(): void {
   }
 
-  onGenerateSamples() {
-    let dataSampleGen = new DataSampleGenerator();
-
-    const crowders = dataSampleGen.generateCrowders(this.crowders);
-    const pivots = dataSampleGen.generatePivots(this.pivots, this.pprpoParPivot);
-
-    this.dispatcherService.setData(StorageDataTypeKeys.CROWDER, crowders);
-    this.dispatcherService.setData(StorageDataTypeKeys.PIVOTS, pivots);
+  onGenerateSamples(): void {
+    this.store.setData(StorageDataTypeKeys.CROWDER, this.simulations.crowders(this.nombreDeCrowders));
+    this.store.setData(StorageDataTypeKeys.PIVOTS, this.simulations.pivots(this.nombreDePivots, this.nombreDePropositionsParPivot));
   }
 
-  onGenerateGroups() {
+  onGenerateGroups(): void {
     if (this.isValid()) {
-      this.dispatcherService.dispatchGroups(this.pprpoParPivot, this.notParPivot);
-      this.dispatcherService.dispatchNotationGroups(this.pprpoParPivot, this.notParPivot);
+      this.dispatcherService.dispatchGroups(this.nombreDePropositionsParPivot, this.nombreDeNotationsParProposition);
+      this.dispatcherService.dispatchNotationGroups(this.nombreDePropositionsParPivot, this.nombreDeNotationsParProposition);
     }
   }
 
-  onReinit() {
-    this.dispatcherService.clearAll();
-    this.messageService.add({severity: 'Error', summary: 'Service Message', detail: 'Via MessageService'});
+  onReinit(): void {
+    this.store.clearAll();
   }
 
   isValid(): boolean {
 
-    if (this.pprpoParPivot === undefined) {
+    if (this.nombreDePropositionsParPivot === undefined) {
 
     }
 
-    if (this.notParPivot != undefined) {
+    if (this.nombreDeNotationsParProposition != undefined) {
 
     }
 

@@ -8,25 +8,25 @@
 
         <div class="p-grid p-flex-column" style="text-align: center">
           <div class="p-col">
-            <app-file-selector [name]="'Importer crowders'"
-                               icon="users" [datatype]="dataType.CROWDER"></app-file-selector>
+            <app-file-selector [nom]="'Importer crowders'"
+                               icone="users" [typeDeDonnees]="dataType.CROWDER"></app-file-selector>
           </div>
           <div class="p-col">
-            <app-file-selector [name]="'Importer pivots'"
-                               icon="list" [datatype]="dataType.PIVOTS"></app-file-selector>
+            <app-file-selector [nom]="'Importer pivots'"
+                               icone="list" [typeDeDonnees]="dataType.PIVOTS"></app-file-selector>
           </div>
           <div class="p-col">
-            <app-file-selector [name]="'Importer propositions'"
-                               icon="th-large" [datatype]="dataType.PROPOSITIONS"></app-file-selector>
+            <app-file-selector [nom]="'Importer propositions'"
+                               icone="th-large" [typeDeDonnees]="dataType.PROPOSITIONS"></app-file-selector>
           </div>
           <div class="p-col">
             <div style="margin-bottom: 5px"><label style="text-align: center">Proposition par pivot</label></div>
-            <p-inputNumber min="0" id="propo-par-piv-input" [(ngModel)]="pprpoParPivot"></p-inputNumber>
+            <p-inputNumber min="0" id="propo-par-piv-input" [(ngModel)]="nombreDePropositionsParPivot"></p-inputNumber>
           </div>
 
           <div class="p-col">
             <div style="margin-bottom: 5px"><label for="not-par-prop-input">Notation par proposition</label></div>
-            <p-inputNumber min="0" id="not-par-prop-input" [(ngModel)]="notParPivot"></p-inputNumber>
+            <p-inputNumber min="0" id="not-par-prop-input" [(ngModel)]="nombreDeNotationsParProposition"></p-inputNumber>
           </div>
         </div>
 
@@ -47,14 +47,14 @@
             <div class="p-grid  p-flex-column">
               <div class="p-col" style="margin-top: 4%">
                <span class="p-float-label">
-                <p-inputNumber min="0" id="crowders-input" [(ngModel)]="crowders"></p-inputNumber>
+                <p-inputNumber min="0" id="crowders-input" [(ngModel)]="nombreDeCrowders"></p-inputNumber>
                 <label for="crowders-input">Nombre de crowders</label>
               </span>
               </div>
 
               <div class="p-mt-4 p-col">
                <span class="p-float-label">
-                 <p-inputNumber min="0" id="pivots-input" [(ngModel)]="pivots"></p-inputNumber>
+                 <p-inputNumber min="0" id="pivots-input" [(ngModel)]="nombreDePivots"></p-inputNumber>
                 <label for="pivots-input">Nombre de pivots</label>
               </span>
               </div>

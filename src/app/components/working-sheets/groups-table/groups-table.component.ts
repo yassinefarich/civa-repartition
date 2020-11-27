@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {CrowdersDispatcherService} from '../../../services/crowders-dispatcher.service';
 import {Groupe} from '../../../model/Models';
-import {ExcelFileToJsonService} from '../../../services/excel-file-to-json.service';
+import {ExcelFileToJsonService} from '../../../services/io/excel-file-to-json.service';
+import {Store} from '../../../services/data/store.service';
 
 export enum GroupsTableType {//FIXME : Replace with polymorphism
   PROPOSITION,
@@ -21,14 +21,14 @@ export class GroupsTableComponent implements OnInit {
 
   tableData = [];
 
-  constructor(private dispatcherService: CrowdersDispatcherService,
+  constructor(private store: Store,
               private excelFileToJsonService: ExcelFileToJsonService) {
   }
 
   ngOnInit(): void {
 
     if (this.type == GroupsTableType.PROPOSITION) {
-      this.dispatcherService.crowdersGroupsSubject.subscribe(
+      this.store.crowdersGroups.subscribe(
         result => {
           this.tableHeaders = result.map(g => g.name + ' (' + g.crowders.length + ')');
           this.tableData = GroupsTableComponent.makeDataTable(result);
@@ -37,7 +37,7 @@ export class GroupsTableComponent implements OnInit {
     }
 
     if (this.type == GroupsTableType.NOTATION) {
-      this.dispatcherService.crowdersNotationGroupsSubject.subscribe(
+      this.store.crowdersNotationGroupsSubject.subscribe(
         result => {
           this.tableHeaders = result.map(g => g.name);
           this.tableData = GroupsTableComponent.makeDataTable(result);
@@ -46,7 +46,7 @@ export class GroupsTableComponent implements OnInit {
     }
 
     if (this.tableData.length <= 0) {
-      this.dispatcherService.refreshDataFromStorage();
+      this.store.refreshDataFromStorage();
     }
   }
 

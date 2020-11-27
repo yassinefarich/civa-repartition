@@ -23,7 +23,7 @@ export enum PivotAlternativeType {
 }
 
 export interface PivotAlternative {
-  idPivot: string;
+  idPivot: number;
   alternative: string;
   type?: PivotAlternativeType;
 }
@@ -32,14 +32,14 @@ export interface ReponseAlternative extends PivotAlternative {
 }
 
 export interface Crowder {
-  id: string
+  id: number
   name: string;
   pivotsEvaluation: Pivot[];
   alternatives: PivotAlternative[];
 }
 
 export interface Pivot {
-  id: string;
+  id: number;
   question: string;
   reponse: string;
   alternatives: PivotAlternative[];

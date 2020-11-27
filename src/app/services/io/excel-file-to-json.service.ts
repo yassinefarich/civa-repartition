@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import * as XLSX from 'xlsx';
-import {DataTable} from '../model/Models';
+import {DataTable} from '../../model/Models';
 
 @Injectable({
   providedIn: 'root'

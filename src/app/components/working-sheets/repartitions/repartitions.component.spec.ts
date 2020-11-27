@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CrowdersTableComponent } from './crowders-table.component';
+import { RepartitionsComponent } from './repartitions.component';
 
-describe('CrowdersTableComponent', () => {
-  let component: CrowdersTableComponent;
-  let fixture: ComponentFixture<CrowdersTableComponent>;
+describe('GroupsComponent', () => {
+  let component: RepartitionsComponent;
+  let fixture: ComponentFixture<RepartitionsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CrowdersTableComponent ]
+      declarations: [ RepartitionsComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CrowdersTableComponent);
+    fixture = TestBed.createComponent(RepartitionsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

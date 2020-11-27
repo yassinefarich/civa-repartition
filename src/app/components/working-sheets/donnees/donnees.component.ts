@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {CrowdersDispatcherService} from '../../../services/crowders-dispatcher.service';
 import {Crowder, Pivot, PivotAlternative} from '../../../model/Models';
+import {Store} from '../../../services/data/store.service';
 
 @Component({
   selector: 'app-donnees',
@@ -12,34 +12,26 @@ export class DonneesComponent implements OnInit {
 
   crowders: Crowder[] = [];
   pivots: Pivot[] = [];
-  propositions: PivotAlternative[] = [];
+  pivotsAlternatives: PivotAlternative[] = [];
 
-  constructor(private dispatcherService: CrowdersDispatcherService) {
+  constructor(private store: Store) {
   }
 
   ngOnInit(): void {
-    this.dispatcherService
-      .crowders.subscribe(
-      data => this.crowders = data
+    this.store.crowders.subscribe(
+      crowders => this.crowders = crowders
     );
-    this.dispatcherService
-      .pivots.subscribe(
-      data => {
-        this.pivots = data;
-        this.propositions = DonneesComponent.getPropositionFromPivots(this.pivots);
+
+    this.store.pivots.subscribe(
+      pivots => {
+        this.pivots = pivots;
+        this.pivotsAlternatives = pivots.flatMap(pivot => pivot.alternatives);
       }
     );
 
     if (this.crowders.length <= 0) {
-      this.dispatcherService.refreshDataFromStorage();
+      this.store.refreshDataFromStorage();
     }
-
   }
 
-  private static getPropositionFromPivots(pivots: Pivot[]): any[] {
-    return pivots.flatMap(
-      pivot =>
-        pivot.alternatives
-    );
-  }
 }

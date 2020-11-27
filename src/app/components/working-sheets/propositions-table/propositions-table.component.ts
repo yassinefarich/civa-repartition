@@ -1,22 +1,23 @@
 import {Component, OnInit} from '@angular/core';
-import {CrowdersDispatcherService} from '../../../../services/crowders-dispatcher.service';
-import {Groupe} from '../../../../model/Models';
+import {RepartitionService} from '../../../services/algo/repartition.service';
+import {Groupe} from '../../../model/Models';
+import {Store} from '../../../services/data/store.service';
 
 @Component({
-  selector: 'app-crowders-table',
-  templateUrl: './crowders-table.component.html',
-  styleUrls: ['./crowders-table.component.scss']
+  selector: 'propositions-table',
+  templateUrl: './propositions-table.component.html',
+  styleUrls: ['./propositions-table.component.scss']
 })
-export class CrowdersTableComponent implements OnInit {
+export class PropositionsTableComponent implements OnInit {
 
   tableHeaders = [];
   tableData = [];
 
-  constructor(private dispatcherService: CrowdersDispatcherService) {
+  constructor(private store: Store) {
   }
 
   ngOnInit(): void {
-    this.dispatcherService.crowdersGroupsSubject.subscribe(
+    this.store.crowdersGroups.subscribe(
       result => {
         this.tableHeaders = result.map(g => g.name);
         this.tableData = this.makeDataTable(result);
@@ -24,7 +25,7 @@ export class CrowdersTableComponent implements OnInit {
     );
 
     if (this.tableData.length <= 0) {
-      this.dispatcherService.refreshDataFromStorage();
+      this.store.refreshDataFromStorage();
     }
   }
 

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {CrowdersDispatcherService} from '../../../services/crowders-dispatcher.service';
 import {NavigationEnd, Router} from '@angular/router';
+import {Store} from '../../../services/data/store.service';
 
 @Component({
   selector: 'app-working-sheet',
@@ -14,22 +14,17 @@ export class WorkingSheetComponent implements OnInit {
 
   isData = false;
 
-  constructor(private dispatcherService: CrowdersDispatcherService,
-              private router: Router) {
-  }
+  constructor(private store: Store, private router: Router) {}
 
   ngOnInit(): void {
-    this.dispatcherService.crowders
-      .subscribe(data => this.nbrDeCrowders = data.length);
+    this.store.crowders.subscribe(data => this.nbrDeCrowders = data.length);
+    this.store.pivots.subscribe(data => this.nbrDePivots = data.length);
 
-    this.dispatcherService.pivots
-      .subscribe(data => this.nbrDePivots = data.length);
     this.router.events.subscribe(
       e => {
         if (e instanceof NavigationEnd) {
           this.isData = e.url.includes('donnees');
         }
-
       }
     );
   }
