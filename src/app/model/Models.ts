@@ -34,8 +34,8 @@ export interface ReponseAlternative extends PivotAlternative {
 export interface Crowder {
   id: number
   name: string;
-  pivotsEvaluation: Pivot[];
-  alternatives: PivotAlternative[];
+  pivotsDeProposition: Pivot[];
+  notationsDePropositions: PivotAlternative[]
 }
 
 export interface Pivot {
@@ -49,11 +49,4 @@ export interface Groupe {
   name: string;
   crowders: Array<Crowder>;
   pivots: Array<Pivot>;
-}
-
-export interface CalculParameters {
-  crowders: Array<Crowder>;
-  pivots: Array<Pivot>;
-  propositionParQuest: number;
-  notationsParProposition: number;
 }

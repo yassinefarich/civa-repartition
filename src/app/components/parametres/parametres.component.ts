@@ -36,8 +36,8 @@ export class ParametresComponent implements OnInit {
 
   onGenerateGroups(): void {
     if (this.isValid()) {
-      this.dispatcherService.dispatchGroups(this.nombreDePropositionsParPivot, this.nombreDeNotationsParProposition);
-      this.dispatcherService.dispatchNotationGroups(this.nombreDePropositionsParPivot, this.nombreDeNotationsParProposition);
+      this.dispatcherService.repartitionerPivotsParCrowders(this.nombreDePropositionsParPivot);
+      this.dispatcherService.repartitionerNotationsParCrowders(this.nombreDeNotationsParProposition);
     }
   }
 

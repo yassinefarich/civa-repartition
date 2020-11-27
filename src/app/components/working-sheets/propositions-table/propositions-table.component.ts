@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {RepartitionService} from '../../../services/algo/repartition.service';
-import {Groupe} from '../../../model/Models';
+import {Crowder} from '../../../model/Models';
 import {Store} from '../../../services/data/store.service';
 
 @Component({
@@ -10,36 +9,17 @@ import {Store} from '../../../services/data/store.service';
 })
 export class PropositionsTableComponent implements OnInit {
 
-  tableHeaders = [];
-  tableData = [];
+  crowdersPresentation: Crowder[] = [];
 
   constructor(private store: Store) {
   }
 
   ngOnInit(): void {
-    this.store.crowdersGroups.subscribe(
-      result => {
-        this.tableHeaders = result.map(g => g.name);
-        this.tableData = this.makeDataTable(result);
-      }
-    );
+    this.store.crowders.subscribe(crowders => this.crowdersPresentation = crowders);
 
-    if (this.tableData.length <= 0) {
+    if (this.crowdersPresentation.length <= 0) {
       this.store.refreshDataFromStorage();
     }
-  }
-
-  makeDataTable(result: Groupe[]): any[] {
-    let resultAccumulator = [];
-    result
-      .forEach(groupe =>
-        groupe.crowders.forEach(
-          crowder => {
-            resultAccumulator.push({crowderName: crowder.name, groupeName: groupe.name, pivots: groupe.pivots});
-          }
-        ));
-
-    return resultAccumulator;
   }
 
 }

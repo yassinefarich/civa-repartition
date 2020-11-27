@@ -1,9 +1,9 @@
-import {CalculParameters, Groupe, ReponseAlternative} from './Models';
+import {ParametresDeRepartitionnement, Groupe, ReponseAlternative} from './Models';
 import {CrowdersGroups} from './CrowdersGroups';
 
 export class NotationGroups extends CrowdersGroups {
 
-  constructor(parameters: CalculParameters) {
+  constructor(parameters: ParametresDeRepartitionnement) {
     super(parameters, parameters.notationsParProposition);
   }
 

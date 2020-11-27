@@ -54,7 +54,7 @@ export class FileSelectorComponent implements OnInit {
     if (typeDeDonnes === StorageDataTypeKeys.CROWDER) {
       return dataTable
         .map(crowder => {
-          return {id: crowder[0], name: crowder[1], pivotsEvaluation: [], alternatives: []} as Crowder;
+          return {id: crowder[0], name: crowder[1], pivotsDeProposition: [], notationsDePropositions: []} as Crowder;
         });
     }
 
@@ -82,7 +82,7 @@ export class FileSelectorComponent implements OnInit {
     if (dataType == StorageDataTypeKeys.CROWDER || dataType == StorageDataTypeKeys.PIVOTS) {
       this.store.setData(dataType, this.transformData(data, dataType));
     } else {
-      this.dispatcherService.updateAlternative(this.transformData(data, dataType));
+      this.dispatcherService.majAlternative(this.transformData(data, dataType));
     }
     this.isSucess = true;
   }

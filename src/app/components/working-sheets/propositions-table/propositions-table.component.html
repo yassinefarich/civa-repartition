@@ -1,48 +1,44 @@
-<div *ngIf="tableData.length > 0" style="height: 100%">
-  <p-table [value]="tableData" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+<div *ngIf="crowdersPresentation.length > 0" style="height: 100%">
+  <p-table [value]="crowdersPresentation" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-           [rowsPerPageOptions]="[10,25,50]" styleClass="p-datatable-sm p-datatable-gridlines" dataKey="crowderName"
+           [rowsPerPageOptions]="[10,25,50]" styleClass="p-datatable-sm p-datatable-gridlines" dataKey="id"
            class="dataTable">
+
     <ng-template pTemplate="header">
-      <tr style="background-color: #5696d6">
+      <tr>
         <th>
           Crowder
-        </th>
-        <th>
-          Groupe
         </th>
         <th>
           Nombre de pivots
         </th>
       </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-groupe let-expanded="expanded">
+
+    <ng-template pTemplate="body" let-crowder let-expanded="expanded">
       <tr>
         <td>
-          <button type="button" pButton pRipple [pRowToggler]="groupe" label="{{groupe.crowderName}}"
+          <button type="button" pButton pRipple [pRowToggler]="crowder" label="{{crowder.name}}"
                   class="p-button-text  p-button-rounded p-button-plain"
                   [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'" style="height: 12px"></button>
-
         </td>
         <td>
-          {{groupe.groupeName}}
-        </td>
-        <td>
-          {{groupe.pivots.length}}
+          {{crowder.pivotsDeProposition.length}}
         </td>
       </tr>
     </ng-template>
 
     <!-- Start-->
-    <ng-template pTemplate="rowexpansion" let-groupe>
+    <ng-template pTemplate="rowexpansion" let-crowder>
       <tr>
         <td colspan="4">
-          <p-table [value]="groupe.pivots" dataKey="id">
+
+          <p-table [value]="crowder.pivotsDeProposition" dataKey="id">
             <ng-template pTemplate="header">
       <tr>
-        <th style="width: 3rem" pSortableColumn="id">Id</th>
-        <th pSortableColumn="customer">Pivot</th>
-        <th pSortableColumn="date">Reponse</th>
+        <th style="width: 5rem" pSortableColumn="id">Id pivot</th>
+        <th >Question</th>
+        <th>Réponse</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-pivot>
@@ -53,13 +49,15 @@
       </tr>
     </ng-template>
   </p-table>
+
   </td>
   </tr>
   </ng-template>
+
   </p-table>
 
 </div>
-<div *ngIf="tableData.length == 0" style="height: 100%">
+<div *ngIf="crowdersPresentation.length == 0" style="height: 100%">
   Merci de cliquer sur génerer des groupes, ou choisir le nombre
   de <b>{{type == 1 ? 'notation' : 'propositon' }}</b> par pivot
 </div>

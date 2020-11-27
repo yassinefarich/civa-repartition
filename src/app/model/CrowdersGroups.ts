@@ -1,11 +1,11 @@
-import {CalculParameters, Crowder, Groupe, Pivot} from './Models';
+import {ParametresDeRepartitionnement, Crowder, Groupe, Pivot} from './Models';
 
 export class CrowdersGroups {
-  private readonly _parameters: CalculParameters;
+  private readonly _parameters: ParametresDeRepartitionnement;
   private readonly _diviseur: number;
   private _groupes: Groupe[];
 
-  constructor(parameters: CalculParameters, diviseur: number) {
+  constructor(parameters: ParametresDeRepartitionnement, diviseur: number) {
     this._parameters = parameters;
     this._diviseur = diviseur;
   }

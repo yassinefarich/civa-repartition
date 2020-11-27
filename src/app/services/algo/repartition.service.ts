@@ -1,9 +1,8 @@
 import {Injectable} from '@angular/core';
-import {Pivot, PivotAlternative, StorageDataTypeKeys} from '../../model/Models';
-import {EvaluationGroups} from '../../model/EvaluationGroups';
-import {NotationGroups} from '../../model/NotationGroups';
+import {Crowder, Pivot, PivotAlternative, StorageDataTypeKeys} from '../../model/Models';
 import {Store} from '../data/store.service';
 import * as _ from 'lodash';
+import {AlgoDeRepartition, ParametresDeRepartitionnement} from './algo-de-repartition';
 
 @Injectable({
   providedIn: 'root'
@@ -13,49 +12,38 @@ export class RepartitionService {
   constructor(private store: Store) {
   }
 
-  public dispatchGroups(propositionParQuest: number, notationsParProposition: number) {
-    let evaluationGroups = new EvaluationGroups(this.makeParameters(propositionParQuest, notationsParProposition))
-      .dispatch()
-      .groupes;
+  public repartitionerPivotsParCrowders(propositionsParPivot: number) {
 
-    this.store.setData(StorageDataTypeKeys.CROWDERS_GROUPS, evaluationGroups);
+    let parametres: ParametresDeRepartitionnement = {
+      crowders: this.store.getFromLocalStorage(StorageDataTypeKeys.CROWDER),
+      pivots: this.store.getFromLocalStorage(StorageDataTypeKeys.PIVOTS),
+      propositionsParPivot: propositionsParPivot
+    };
+
+    let crowdersAvecPivotsDeProposition: Crowder[] = new AlgoDeRepartition(parametres).creePivotsDePropositions();
+    this.store.setData(StorageDataTypeKeys.CROWDER, crowdersAvecPivotsDeProposition);
   }
 
-  public dispatchNotationGroups(propositionParQuest: number, notationsParProposition: number) {
-    let notationGroupes = new NotationGroups(this.makeParameters(propositionParQuest, notationsParProposition))
-      .dispatch()
-      .groupes;
+  public repartitionerNotationsParCrowders(notationsParProposition: number) {
 
-    this.store.setData(StorageDataTypeKeys.CROWDERS_GROUPS, notationGroupes);
+    let parametres: ParametresDeRepartitionnement = {
+      crowders: this.store.getFromLocalStorage(StorageDataTypeKeys.CROWDER),
+      pivots: this.store.getFromLocalStorage(StorageDataTypeKeys.PIVOTS),
+      notationsParProposition: notationsParProposition
+    };
+
+    let resultat: Crowder[] = new AlgoDeRepartition(parametres).creePivotsDeNotation();
+    this.store.setData(StorageDataTypeKeys.CROWDER, resultat);
   }
 
-  public updateAlternative(pivotAlternative: PivotAlternative[]): void {
-
+  public majAlternative(pivotAlternative: PivotAlternative[]): void {
     let alternatives = _.groupBy(pivotAlternative, alternative => alternative.idPivot);
 
     let pivots: Pivot[] = this.store.getFromLocalStorage(StorageDataTypeKeys.PIVOTS)
       .filter(pivot => pivot.id in alternatives);
 
-    // Maj les alternatives
-    pivots.forEach(
-      pivot => pivot.alternatives = alternatives[pivot.id]
-    );
-
-    this.store.setData(StorageDataTypeKeys.PIVOTS, pivots);
-  }
-
-  makeParameters(propositionParQuest: number, notationsParProposition: number) {
-
-    const crowdersBrute = this.store.getFromLocalStorage(StorageDataTypeKeys.CROWDER);
-    const pivotsBrute = this.store.getFromLocalStorage(StorageDataTypeKeys.PIVOTS);
-
-    return {
-      crowders: crowdersBrute,
-      pivots: pivotsBrute,
-      propositionParQuest,
-      notationsParProposition
-    };
-
+    this.store.setData(StorageDataTypeKeys.PIVOTS,
+      _.forEach(pivots, pivot => pivot.alternatives = alternatives[pivot.id]));
   }
 
 }

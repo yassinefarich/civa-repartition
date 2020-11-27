@@ -16,8 +16,8 @@ export class SimulationsService {
           return {
             id: i,
             name: 'Crowder ' + i,
-            alternatives: [],
-            pivotsEvaluation: []
+            notationsDePropositions: [],
+            pivotsDeProposition: []
           };
         }
       );

@@ -1,8 +1,8 @@
-import {CalculParameters} from './Models';
+import {ParametresDeRepartitionnement} from './Models';
 import {CrowdersGroups} from './CrowdersGroups';
 
 export class EvaluationGroups extends CrowdersGroups {
-  constructor(parameters: CalculParameters) {
+  constructor(parameters: ParametresDeRepartitionnement) {
     super(parameters, parameters.propositionParQuest);
   }
 
