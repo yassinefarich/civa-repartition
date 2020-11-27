@@ -10,9 +10,11 @@
       <button pButton type="button" label="Groups" icon="pi pi-users" iconPos="left"
               style="margin-right: 10px;width: 150px" [ngClass]="isData ?  'p-button-outlined' : ''"
               routerLink="/groups"></button>
-      <button pButton type="button" label="Données" icon="pi pi-chart-bar" iconPos="left"
+      <button pButton type="button" label="Données" icon="fa fa-database" iconPos="left"
               style="margin-right: 10px;width: 150px" [ngClass]="!isData ?  'p-button-outlined' : ''"
               routerLink="/donnees"></button>
+      <button pButton type="button" label="Gestion du temps" icon="fa fa-calendar-alt" iconPos="left"
+              style="margin-right: 10px;width: 200px"></button>
     </div>
   </div>
 

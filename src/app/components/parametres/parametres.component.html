@@ -68,30 +68,33 @@
 
       </p-tabPanel>
 
-      <p-tabPanel header="Gestion de temps">
+      <p-tabPanel header="Gestion du temps">
 
         <div class="p-grid">
 
-          <div class="p-col-12">Temps nécessaire en heurs pour :</div>
-          <div class="p-col-8"><label style="width: 100%" for="toto">Proposition de question</label></div>
-          <div class="p-col-4">: <input type="number" id="toto" style="width: 80%"/></div>
+          <div class="p-col-12"><b>Temps nécessaire en heurs pour :</b></div>
+          <div class="p-col-8"><label for="propoDeQuestion">Proposition de question</label></div>
+          <div class="p-col-4">: <input type="number" id="propoDeQuestion" style="width: 80%"/></div>
 
-          <div class="p-col-8"><label style="width: 100%" for="toto">Proposition de réponse</label></div>
-          <div class="p-col-4">: <input type="number" id="toto" style="width: 80%"/></div>
+          <div class="p-col-8"><label for="propoDeReponse">Proposition de réponse</label></div>
+          <div class="p-col-4">: <input type="number" id="propoDeReponse" style="width: 80%"/></div>
 
-          <div class="p-col-8"><label style="width: 100%" for="toto">Notation de question</label></div>
-          <div class="p-col-4">: <input type="number" id="toto" style="width: 80%"/></div>
+          <div class="p-col-8"><label for="notationDeQuestion">Notation de question</label></div>
+          <div class="p-col-4">: <input type="number" id="notationDeQuestion" style="width: 80%"/></div>
 
-          <div class="p-col-8"><label style="width: 100%" for="toto">Notation de réponse</label></div>
-          <div class="p-col-4">: <input type="number" id="toto" style="width: 80%"/></div>
+          <div class="p-col-8"><label for="notationDeReponse">Notation de réponse</label></div>
+          <div class="p-col-4">: <input type="number" id="notationDeReponse" style="width: 80%"/></div>
 
-          <div class="p-col-12"></div>
+          <div class="p-col-12"><b>Sessions :</b></div>
 
-          <div class="p-col-8"><label style="width: 100%" for="toto">Nombre de sessions/semaine</label></div>
-          <div class="p-col-4">: <input type="number" id="toto" style="width: 80%"/></div>
-          <div class="p-col-8"><label style="width: 100%" for="toto">Durée d'une session</label></div>
-          <div class="p-col-4">: <input type="number" id="toto" style="width: 80%"/></div>
+          <div class="p-col-8"><label for="sessionsParSemaine">Nombre de sessions/semaine</label></div>
+          <div class="p-col-4">: <input type="number" id="sessionsParSemaine" style="width: 80%"/></div>
+          <div class="p-col-8"><label for="dureeSession">Durée d'une session</label></div>
+          <div class="p-col-4">: <input type="number" id="dureeSession" style="width: 80%"/></div>
 
+
+          <div class="p-col-7"> <button pButton pRipple label="Générer un planing" class="p-button-info" (click)="onGenerateSamples()"></button></div>
+          <div class="p-col-5"><button pButton pRipple label="Réinitialiser" class="p-button-info" (click)="onGenerateSamples()" ></button></div>
 
         </div>
 
