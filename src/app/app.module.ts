@@ -14,27 +14,27 @@ import {FormsModule} from '@angular/forms';
 import {InputNumberModule} from 'primeng/inputnumber';
 import {ToastModule} from 'primeng/toast';
 import {TableModule} from 'primeng/table';
-import {GroupsTableComponent} from './components/working-sheets/groups-table/groups-table.component';
-import {PropositionsTableComponent} from './components/working-sheets/propositions-table/propositions-table.component';
+import {TableDeCrowdersComponent} from './components/working-sheets/table-de-crowders/table-de-crowders.component';
 import {TooltipModule} from 'primeng/tooltip';
 import {DonneesComponent} from './components/working-sheets/donnees/donnees.component';
 import {RepartitionsComponent} from './components/working-sheets/repartitions/repartitions.component';
 import {WorkingSheetComponent} from './components/working-sheets/working-sheet/working-sheet.component';
 import {AppRoutingModule} from './app-routing.module';
-import {NotationsTableComponent} from './components/working-sheets/notation-table/notations-table.component';
+import {TableDePivots} from './components/working-sheets/table-de-pivots/table-de-pivots.component';
 import {InputTextareaModule} from 'primeng/inputtextarea';
+import {RecapitulatifComponent} from './components/working-sheets/summary/recapitulatif.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FileSelectorComponent,
     ParametresComponent,
-    GroupsTableComponent,
-    PropositionsTableComponent,
+    TableDeCrowdersComponent,
     DonneesComponent,
     RepartitionsComponent,
     WorkingSheetComponent,
-    NotationsTableComponent
+    TableDePivots,
+    RecapitulatifComponent
   ],
   imports: [
     BrowserModule,

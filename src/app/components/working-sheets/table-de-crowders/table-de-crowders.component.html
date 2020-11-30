@@ -1,0 +1,95 @@
+<div *ngIf="crowdersPresentation.length > 0" style="height: 100%">
+  <p-table #dt1 [value]="crowdersPresentation" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+           currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+           [rowsPerPageOptions]="[10,25,50]" styleClass="p-datatable-sm p-datatable-gridlines" dataKey="id"
+           class="dataTable" [globalFilterFields]="['name','id']">
+
+    <ng-template pTemplate="caption">
+      <div class="p-d-flex">
+        <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()"
+                class="p-button-success p-mr-2" pTooltip="XLS" tooltipPosition="bottom"></button>
+
+        <span class="p-input-icon-left p-ml-auto">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="dt1.filterGlobal($event.target.value, 'contains')"
+                           placeholder="Crowder"/>
+                </span>
+
+      </div>
+    </ng-template>
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width: 4rem">
+          ID
+        </th>
+        <th>
+          <div class="p-d-flex p-jc-between p-ai-center">
+            Nom du crowder
+          </div>
+        </th>
+        <th>
+          {{isProposition() ? 'Nombre de pivots' : 'Nombre de propositions à noté'}}
+        </th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-crowder let-expanded="expanded">
+      <tr>
+        <td>
+          {{crowder.id}}
+        </td>
+        <td>
+          <button type="button" pButton pRipple [pRowToggler]="crowder" label="{{crowder.name}}"
+                  class="p-button-text  p-button-rounded p-button-plain"
+                  [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'" style="height: 12px"></button>
+        </td>
+        <td>
+          {{isProposition() ? crowder.pivotsDeProposition.length : crowder.notationsDePropositions.length}}
+        </td>
+      </tr>
+    </ng-template>
+
+    <!-- Start-->
+    <ng-template pTemplate="rowexpansion" let-crowder>
+      <tr>
+        <td colspan="4">
+          <p-table [value]="isProposition() ? crowder.pivotsDeProposition : crowder.notationsDePropositions" dataKey="id">
+
+            <ng-template pTemplate="header">
+              <tr *ngIf="isProposition()">
+                <th style="width: 5rem" pSortableColumn="id">ID Pivot</th>
+                <th>Question</th>
+                <th>Réponse</th>
+              </tr>
+              <tr *ngIf="!isProposition()">
+                <th style="width: 5rem" pSortableColumn="id">ID Pivot</th>
+                <th>Proposition</th>
+              </tr>
+            </ng-template>
+
+    <ng-template pTemplate="body" let-pivot>
+      <tr *ngIf="isProposition()">
+        <td>{{pivot.id}}</td>
+        <td>{{pivot.question}}</td>
+        <td>{{pivot.reponse}}</td>
+      </tr>
+
+      <tr *ngIf="!isProposition()">
+        <td>{{pivot.idPivot}}</td>
+        <td>{{pivot.alternative}} <b>({{pivot.type == 0 ?'Q':'R'}})</b></td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+  </td>
+  </tr>
+  </ng-template>
+
+  </p-table>
+
+</div>
+<div *ngIf="crowdersPresentation.length == 0" style="height: 100%">
+  Merci de cliquer sur génerer des groupes, ou choisir le nombre
+  de <b>{{type == 1 ? 'notation' : 'propositon' }}</b> par pivot
+</div>

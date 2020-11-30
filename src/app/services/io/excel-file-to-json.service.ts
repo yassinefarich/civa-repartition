@@ -24,8 +24,8 @@ export class ExcelFileToJsonService {
     return (XLSX.utils.sheet_to_json(ws, {header: 1})) as DataTable;
   }
 
-  public jsonToExcel(exportData: any[]): void {
-    const worksheet = XLSX.utils.json_to_sheet(exportData);
+  public jsonToExcel(exportData: any): void {
+    const worksheet = XLSX.utils.aoa_to_sheet(exportData);
     const workbook = {Sheets: {'data': worksheet}, SheetNames: ['data']};
     let EXCEL_EXTENSION = '.xlsx';
     XLSX.writeFile(workbook, 'crowders' + '_export_' + new Date().getTime() + EXCEL_EXTENSION);

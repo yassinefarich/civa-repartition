@@ -10,10 +10,10 @@ export interface ParametresDeRepartitionnement {
 
 export class AlgoDeRepartition {
 
-  private nombreDeCrowders: number = 3;
-  private nombreDePivots: number = 10;
-  private nombreDePropositionsParPivots: number = 2;
-  private nombreDeNotationParProposition: number = 3;
+  private readonly nombreDeCrowders: number = 3;
+  private readonly nombreDePivots: number = 10;
+  private readonly nombreDePropositionsParPivots: number = 2;
+  private readonly nombreDeNotationParProposition: number = 3;
 
   // Variables pour le calculer
   private nombreDePropositionsTotal: number = 0;

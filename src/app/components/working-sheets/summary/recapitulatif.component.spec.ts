@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GroupsTableComponent } from './groups-table.component';
+import { RecapitulatifComponent } from './recapitulatif.component';
 
-describe('GroupsTableComponent', () => {
-  let component: GroupsTableComponent;
-  let fixture: ComponentFixture<GroupsTableComponent>;
+describe('SummaryComponent', () => {
+  let component: RecapitulatifComponent;
+  let fixture: ComponentFixture<RecapitulatifComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GroupsTableComponent ]
+      declarations: [ RecapitulatifComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GroupsTableComponent);
+    fixture = TestBed.createComponent(RecapitulatifComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

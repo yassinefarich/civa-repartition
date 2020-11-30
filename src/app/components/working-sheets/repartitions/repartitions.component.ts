@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {GroupsTableType} from '../groups-table/groups-table.component';
+import {TypesDeTable} from '../table-de-crowders/table-de-crowders.component';
 
 @Component({
   selector: 'repartitions',
@@ -8,7 +8,7 @@ import {GroupsTableType} from '../groups-table/groups-table.component';
 })
 export class RepartitionsComponent implements OnInit {
 
-  groupsTableType: typeof GroupsTableType = GroupsTableType;
+  typesDeTable: typeof TypesDeTable = TypesDeTable;
 
   constructor() {
   }

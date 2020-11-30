@@ -1,14 +1,18 @@
 <p-tabView class="p-col tabview">
-<!--  <p-tabPanel header="Groupes de proposition">-->
-<!--    <app-groups-table [type]="groupsTableType.PROPOSITION"></app-groups-table>-->
-<!--  </p-tabPanel>-->
-  <p-tabPanel header="Pivots par crowder">
-    <propositions-table></propositions-table>
+
+  <p-tabPanel header="Crowders de propositions" rightIcon="fa fa-user-edit">
+    <table-de-crowders [typeDeTable]="typesDeTable.PROPOSITIONS"></table-de-crowders>
   </p-tabPanel>
-<!--  <p-tabPanel header="Groupes de notation">-->
-<!--    <app-groups-table [type]="groupsTableType.NOTATION"></app-groups-table>-->
-<!--  </p-tabPanel>-->
-  <p-tabPanel header="Notation par crowder">
-    <notations-table></notations-table>
+
+  <p-tabPanel header="Crowders de notation" rightIcon="fa fa-user-check">
+    <table-de-crowders [typeDeTable]="typesDeTable.NOTATIONS"></table-de-crowders>
+  </p-tabPanel>
+
+  <p-tabPanel header="Pivots par crowder" rightIcon="fa fa-list-alt">
+    <table-de-pivots></table-de-pivots>
+  </p-tabPanel>
+
+  <p-tabPanel header="Propositions par crowder" rightIcon="fa fa-tasks">
+    <table-de-pivots></table-de-pivots>
   </p-tabPanel>
 </p-tabView>

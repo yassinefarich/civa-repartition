@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PropositionsTableComponent } from './propositions-table.component';
+import { TableDeCrowdersComponent } from './table-de-crowders.component';
 
 describe('CrowdersTableComponent', () => {
-  let component: PropositionsTableComponent;
-  let fixture: ComponentFixture<PropositionsTableComponent>;
+  let component: TableDeCrowdersComponent;
+  let fixture: ComponentFixture<TableDeCrowdersComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PropositionsTableComponent ]
+      declarations: [ TableDeCrowdersComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PropositionsTableComponent);
+    fixture = TestBed.createComponent(TableDeCrowdersComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
