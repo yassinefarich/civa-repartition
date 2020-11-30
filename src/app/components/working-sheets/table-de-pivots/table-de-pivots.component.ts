@@ -15,15 +15,15 @@ export interface PivotsParCrowder {
 })
 export class TableDePivots implements OnInit {
 
-  crowdersPresentation: PivotsParCrowder[] = [];
+  pivotsPresentation: PivotsParCrowder[] = [];
 
   constructor(private store: Store) {
   }
 
   ngOnInit(): void {
-    this.store.crowders.subscribe(crowders => this.crowdersPresentation = this.transpose(crowders));
+    this.store.crowders.subscribe(crowders => this.pivotsPresentation = this.transpose(crowders));
 
-    if (this.crowdersPresentation.length <= 0) {
+    if (this.pivotsPresentation.length <= 0) {
       this.store.refreshDataFromStorage();
     }
   }
