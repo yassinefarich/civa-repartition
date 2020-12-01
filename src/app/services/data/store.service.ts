@@ -32,14 +32,6 @@ export class Store {
     return this._dataObservers.get(StorageDataTypeKeys.PROPOSITIONS).asObservable();
   }
 
-  get crowdersGroups(): Observable<Groupe[]> {
-    return this._dataObservers.get(StorageDataTypeKeys.CROWDERS_GROUPS).asObservable();
-  }
-
-  get crowdersNotationGroupsSubject(): Observable<Groupe[]> {
-    return this._dataObservers.get(StorageDataTypeKeys.CROWDERS_NOTATIONS_GROUPS).asObservable();
-  }
-
   public setData(type: StorageDataTypeKeys, values: any[]): void {
     this.$storage.set(type, values);
     this._dataObservers.get(type).next(values);
