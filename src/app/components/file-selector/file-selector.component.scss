@@ -6,3 +6,13 @@
   position: absolute;
   z-index: -1;
 }
+
+.import-dialog {
+  width: 50vw;
+}
+
+@media screen and (max-width: 40em) {
+  .import-dialog {
+    width: 75vw;
+  }
+}

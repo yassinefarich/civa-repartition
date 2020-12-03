@@ -1,3 +1,11 @@
-<button (click)="openFile(nom)" pButton pRipple style="width: 80%" type="button" label="{{nom}}" icon="pi pi-{{icone}}">
-  <input id="{{nom}}_id" class="file-selector" (change)="onFileChange($event,typeDeDonnees)" type="file" />
+<button (click)="openFile(nom)" pButton pRipple style="width: 80%" type="button" label="{{nom}}" icon="pi pi-{{icone}}"
+        class="{{isSucess ? 'p-button-success'  :''}}">
+  <input id="{{nom}}_id" class="file-selector" (change)="onFileChange($event,typeDeDonnees)" type="file"/>
 </button>
+
+<p-dialog header="Import en succès" [(visible)]="afficherMessage" [style]="{width: '50vw'}" [baseZIndex]="10000">
+  {{chargementMessage}}
+  <ng-template pTemplate="footer">
+    <p-button icon="pi pi-check" (click)="afficherMessage=false" label="OK" styleClass="p-button-text"></p-button>
+  </ng-template>
+</p-dialog>

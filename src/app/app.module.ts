@@ -21,8 +21,8 @@ import {RepartitionsComponent} from './components/working-sheets/repartitions/re
 import {WorkingSheetComponent} from './components/working-sheets/working-sheet/working-sheet.component';
 import {AppRoutingModule} from './app-routing.module';
 import {TableDePivots} from './components/working-sheets/table-de-pivots/table-de-pivots.component';
-import {InputTextareaModule} from 'primeng/inputtextarea';
 import {RecapitulatifComponent} from './components/working-sheets/summary/recapitulatif.component';
+import {DialogModule} from 'primeng/dialog';
 
 @NgModule({
   declarations: [
@@ -49,7 +49,7 @@ import {RecapitulatifComponent} from './components/working-sheets/summary/recapi
     ToastModule,
     TableModule,
     TooltipModule,
-    InputTextareaModule,
+    DialogModule,
     AppRoutingModule
   ],
   providers: [],

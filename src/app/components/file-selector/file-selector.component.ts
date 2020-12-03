@@ -3,6 +3,7 @@ import {ExcelFileToJsonService} from '../../services/io/excel-file-to-json.servi
 import {Crowder, DataTable, Pivot, PivotAlternative, PivotType, StorageDataTypeKeys} from '../../model/Models';
 import {RepartitionService} from '../../services/algo/repartition.service';
 import {Store} from '../../services/data/store.service';
+import {AoaToObjects} from './aoa-to-objects';
 
 
 @Component({
@@ -16,6 +17,8 @@ export class FileSelectorComponent implements OnInit {
   @Input() icone: string;
   @Input() typeDeDonnees: StorageDataTypeKeys;
   isSucess = false;
+  chargementMessage: string = '';
+  afficherMessage = false;
 
   constructor(private excelFileToJsonService: ExcelFileToJsonService,
               private dispatcherService: RepartitionService,
@@ -44,45 +47,27 @@ export class FileSelectorComponent implements OnInit {
     document.getElementById(name + '_id').click();
   }
 
-  transformData(donnesBrute: DataTable, typeDeDonnes: StorageDataTypeKeys): any[] {
-    // Suppression des noms des colonnes
-    donnesBrute.shift();
 
-    // Suppression des colonnes vides
-    const dataTable = donnesBrute.filter(d => d.length > 1);
-
-    if (typeDeDonnes === StorageDataTypeKeys.CROWDER) {
-      return dataTable
-        .map(crowder => {
-          return {id: crowder[0], name: crowder[1], pivotsDeProposition: [], notationsDePropositions: []} as Crowder;
-        });
-    }
-
-    if (typeDeDonnes === StorageDataTypeKeys.PIVOTS) {
-      return dataTable
-        .map(pivot => {
-          return {id: pivot[0], question: pivot[1], reponse: pivot[2], alternatives: []} as Pivot;
-        });
-    }
-
-    if (typeDeDonnes === StorageDataTypeKeys.PROPOSITIONS) {
-      return dataTable
-        .map(proposition => {
-          return {
-            idPivot: proposition[0],
-            alternative: proposition[1],
-            type: proposition[2] === 'Q' ? PivotType.QUESTION : PivotType.REPONSE
-          } as PivotAlternative;
-        });
-    }
-    return [];
-  }
 
   private handle(dataType: StorageDataTypeKeys, data: DataTable) {
-    if (dataType == StorageDataTypeKeys.CROWDER || dataType == StorageDataTypeKeys.PIVOTS) {
-      this.store.setData(dataType, this.transformData(data, dataType));
+
+    let mapper = new AoaToObjects();
+
+    if (dataType == StorageDataTypeKeys.CROWDER) {
+      let crowders = mapper.transformData(data, dataType);
+      this.store.setData(dataType, mapper.transformData(data, dataType));
+      this.chargementMessage = `${crowders.length} Crowders importés`;
+      // this.afficherMessage = true;
+      this.isSucess = true;
+
+    } else if (dataType == StorageDataTypeKeys.PIVOTS) {
+      let pivots = mapper.transformData(data, dataType);
+      this.store.setData(dataType, mapper.transformData(data, dataType));
+      this.chargementMessage = `${pivots.length} pivots importés`;
+      // this.afficherMessage = true;
+      this.isSucess = true;
     } else {
-      this.dispatcherService.majAlternative(this.transformData(data, dataType));
+      this.dispatcherService.majAlternative(mapper.transformData(data, dataType));
     }
     this.isSucess = true;
   }
