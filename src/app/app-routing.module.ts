@@ -2,15 +2,20 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {RepartitionsComponent} from './components/working-sheets/repartitions/repartitions.component';
 import {DonneesComponent} from './components/working-sheets/donnees/donnees.component';
+import {GestionTempsComponent} from './components/working-sheet/gestion-temps/gestion-temps.component';
 
 export const appRouteList: Routes = [
   {
-    path: 'groups',
+    path: 'repartitions',
     component: RepartitionsComponent
   },
   {
     path: 'donnees',
     component: DonneesComponent
+  },
+  {
+    path: 'gestionTemps',
+    component: GestionTempsComponent
   },
   {
     path: '**',

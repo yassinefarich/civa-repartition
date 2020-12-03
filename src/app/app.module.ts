@@ -23,6 +23,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {TableDePivots} from './components/working-sheets/table-de-pivots/table-de-pivots.component';
 import {RecapitulatifComponent} from './components/working-sheets/summary/recapitulatif.component';
 import {DialogModule} from 'primeng/dialog';
+import { GestionTempsComponent } from './components/working-sheet/gestion-temps/gestion-temps.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import {DialogModule} from 'primeng/dialog';
     RepartitionsComponent,
     WorkingSheetComponent,
     TableDePivots,
-    RecapitulatifComponent
+    RecapitulatifComponent,
+    GestionTempsComponent
   ],
   imports: [
     BrowserModule,

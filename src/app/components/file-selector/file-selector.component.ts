@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ExcelFileToJsonService} from '../../services/io/excel-file-to-json.service';
-import {Crowder, DataTable, Pivot, PivotAlternative, PivotType, StorageDataTypeKeys} from '../../model/Models';
+import {DataTable, StorageDataTypeKeys} from '../../model/Models';
 import {RepartitionService} from '../../services/algo/repartition.service';
 import {Store} from '../../services/data/store.service';
 import {AoaToObjects} from './aoa-to-objects';
@@ -26,6 +26,13 @@ export class FileSelectorComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.store.onReinit.subscribe(
+      () => {
+        this.isSucess = false;
+        this.chargementMessage = '';
+        this.afficherMessage = false;
+      }
+    );
   }
 
   onFileChange(evt: any, dataType: StorageDataTypeKeys): void {
