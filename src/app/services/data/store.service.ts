@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {ALL_TYPES, Crowder, Groupe, Pivot, StorageDataTypeKeys} from '../../model/Models';
+import {ALL_TYPES, Crowder, Groupe, Pivot, PivotAlternative, StorageDataTypeKeys} from '../../model/Models';
 import {Observable, Subject} from 'rxjs';
 import {LocalStorageService} from './local-storage-service';
 
@@ -28,7 +28,7 @@ export class Store {
     return this._dataObservers.get(StorageDataTypeKeys.PIVOTS).asObservable();
   }
 
-  get propositions(): Observable<any> {
+  get propositions(): Observable<PivotAlternative[]> {
     return this._dataObservers.get(StorageDataTypeKeys.PROPOSITIONS).asObservable();
   }
 

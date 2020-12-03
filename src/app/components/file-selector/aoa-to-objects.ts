@@ -34,7 +34,7 @@ export class AoaToObjects {
           proposeur: proposition[0],
           idPivot: proposition[1],
           alternative: proposition[2],
-          type: proposition[10].contains('REPONSES') ? PivotType.REPONSE : PivotType.QUESTION
+          type: proposition[10].includes('REPONSES') ? PivotType.REPONSE : PivotType.QUESTION
         } as PivotAlternative;
       });
   }

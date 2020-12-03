@@ -42,7 +42,6 @@ export interface Pivot {
   id: number;
   question: string;
   reponse: string;
-  alternatives: PivotAlternative[];
 }
 
 export interface Groupe {

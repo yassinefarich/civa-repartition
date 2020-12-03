@@ -48,27 +48,36 @@ export class FileSelectorComponent implements OnInit {
   }
 
 
-
   private handle(dataType: StorageDataTypeKeys, data: DataTable) {
 
-    let mapper = new AoaToObjects();
-
-    if (dataType == StorageDataTypeKeys.CROWDER) {
-      let crowders = mapper.transformData(data, dataType);
+    try {
+      let mapper = new AoaToObjects();
+      let donnees = mapper.transformData(data, dataType);
       this.store.setData(dataType, mapper.transformData(data, dataType));
-      this.chargementMessage = `${crowders.length} Crowders importés`;
-      // this.afficherMessage = true;
-      this.isSucess = true;
 
-    } else if (dataType == StorageDataTypeKeys.PIVOTS) {
-      let pivots = mapper.transformData(data, dataType);
-      this.store.setData(dataType, mapper.transformData(data, dataType));
-      this.chargementMessage = `${pivots.length} pivots importés`;
-      // this.afficherMessage = true;
-      this.isSucess = true;
-    } else {
-      this.dispatcherService.majAlternative(mapper.transformData(data, dataType));
+      if (dataType == StorageDataTypeKeys.CROWDER) {
+        this.succes(`${donnees.length} Crowders importés`);
+      } else if (dataType == StorageDataTypeKeys.PIVOTS) {
+        this.succes(`${donnees.length} pivots importés`);
+      } else {
+        this.succes(`${donnees.length} propositions chargées`);
+      }
+    } catch (e) {
+      this.echec(JSON.stringify(e));
     }
+
+  }
+
+  private succes(message: string): void {
+    this.chargementMessage = message;
+    this.afficherMessage = true;
     this.isSucess = true;
   }
+
+  private echec(message: string): void {
+    this.chargementMessage = message;
+    this.afficherMessage = true;
+    this.isSucess = true;
+  }
+
 }

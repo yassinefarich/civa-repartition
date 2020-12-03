@@ -81,15 +81,21 @@
             <th>
               Question / Réponse alternative
             </th>
+            <th>
+              Crowder
+            </th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-proposition>
           <tr>
             <td>
-              {{proposition.idPivot}}
+              {{proposition.idPivot}} <b>({{proposition.type == 0 ? 'Q' : 'R'}})</b>
             </td>
             <td>
               {{proposition.alternative}}
+            </td>
+            <td>
+              {{proposition.proposeur}}
             </td>
           </tr>
         </ng-template>

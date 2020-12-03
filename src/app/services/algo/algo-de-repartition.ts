@@ -4,6 +4,7 @@ import * as _ from 'lodash';
 export interface ParametresDeRepartitionnement {
   crowders: Crowder[];
   pivots: Pivot[];
+  pivotsAlternatives: PivotAlternative[],
   propositionsParPivot?: number;
   notationsParProposition?: number;
 }
@@ -93,7 +94,7 @@ export class AlgoDeRepartition {
     let crowders = this.parametres.crowders;
     let pivotsDeBase = this.getPivotsDeBase();
 
-    let propositions = _.concat(pivotsDeBase, _.flatMap(this.parametres.pivots, pivot => pivot.alternatives));
+    let propositions = _.concat(pivotsDeBase, this.parametres.pivotsAlternatives);
     let compteurDeNotations = 0;
 
     for (let currentCrowderIndex = 0; currentCrowderIndex < crowders.length; currentCrowderIndex++) {
@@ -101,7 +102,7 @@ export class AlgoDeRepartition {
         this.nombreDeNotationParCrowder + 1 : this.nombreDeNotationParCrowder;
       let nombreDeNotationProchainPivot = compteurDeNotations + nombreDeNotationPourCeCrowder;
 
-      crowders[currentCrowderIndex].notationsDePropositions = []
+      crowders[currentCrowderIndex].notationsDePropositions = [];
       while (compteurDeNotations < nombreDeNotationProchainPivot) {
         crowders[currentCrowderIndex].notationsDePropositions.push(propositions[compteurDeNotations % propositions.length]);
         compteurDeNotations++;

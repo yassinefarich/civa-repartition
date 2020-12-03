@@ -23,10 +23,11 @@ export class DonneesComponent implements OnInit {
     );
 
     this.store.pivots.subscribe(
-      pivots => {
-        this.pivots = pivots;
-        this.pivotsAlternatives = pivots.flatMap(pivot => pivot.alternatives);
-      }
+      pivots => this.pivots = pivots
+    );
+
+    this.store.propositions.subscribe(
+      proposition => this.pivotsAlternatives = proposition
     );
 
     if (this.crowders.length <= 0) {
