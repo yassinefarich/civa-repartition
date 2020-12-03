@@ -1,4 +1,4 @@
-import {Crowder, Pivot} from '../../model/Models';
+import {Crowder, Pivot, PivotAlternative, PivotsDeProposition, PivotType} from '../../model/Models';
 import * as _ from 'lodash';
 
 export interface ParametresDeRepartitionnement {
@@ -14,6 +14,7 @@ export class AlgoDeRepartition {
   private readonly nombreDePivots: number = 10;
   private readonly nombreDePropositionsParPivots: number = 2;
   private readonly nombreDeNotationParProposition: number = 3;
+  private readonly pivots: PivotsDeProposition[];
 
   // Variables pour le calculer
   private nombreDePropositionsTotal: number = 0;
@@ -26,8 +27,10 @@ export class AlgoDeRepartition {
 
 
   constructor(private parametres: ParametresDeRepartitionnement) {
+    this.pivots = this.transformToPivotDeProposition(this.parametres.pivots);
+
     this.nombreDeCrowders = parametres.crowders.length;
-    this.nombreDePivots = parametres.pivots.length;
+    this.nombreDePivots = this.pivots.length;
     this.nombreDePropositionsParPivots = parametres.propositionsParPivot ?? 0;
     this.nombreDeNotationParProposition = parametres.notationsParProposition ?? 0;
   }
@@ -54,7 +57,7 @@ export class AlgoDeRepartition {
 
   private dispatcherPropositions(): Crowder[] {
     let crowders = this.parametres.crowders;
-    let pivots = this.parametres.pivots;
+    let pivots = this.pivots;
     let compteurDePropositions = 0;
 
     for (let currentCrowderIndex = 0; currentCrowderIndex < crowders.length; currentCrowderIndex++) {
@@ -63,7 +66,7 @@ export class AlgoDeRepartition {
 
       let nombreDePropositionProchainPivot = compteurDePropositions + nombreDesPivotsPourCeCrowder;
 
-      crowders[currentCrowderIndex].pivotsDeProposition = []
+      crowders[currentCrowderIndex].pivotsDeProposition = [];
       while (compteurDePropositions < nombreDePropositionProchainPivot) {
         crowders[currentCrowderIndex].pivotsDeProposition.push(pivots[compteurDePropositions % pivots.length]);
         compteurDePropositions++;
@@ -88,7 +91,9 @@ export class AlgoDeRepartition {
   private dispatcherNotations(): Crowder[] {
 
     let crowders = this.parametres.crowders;
-    let propositions = _.flatMap(this.parametres.pivots, pivot => pivot.alternatives);
+    let pivotsDeBase = this.getPivotsDeBase();
+
+    let propositions = _.concat(pivotsDeBase, _.flatMap(this.parametres.pivots, pivot => pivot.alternatives));
     let compteurDeNotations = 0;
 
     for (let currentCrowderIndex = 0; currentCrowderIndex < crowders.length; currentCrowderIndex++) {
@@ -106,8 +111,43 @@ export class AlgoDeRepartition {
     return crowders;
   }
 
+  private getPivotsDeBase() {
+    return _.map(this.pivots, pivot => {
+      return {
+        idPivot: pivot.idPivot,
+        type: pivot.type,
+        alternative: pivot.text,
+        proposeur: 'Pivot'
+      } as PivotAlternative;
+    });
+  }
+
   log(message: any): void {
     console.log(message);
   }
 
+  private transformToPivotDeProposition(pivots: Pivot[]): PivotsDeProposition[] {
+    let questions = _.map(pivots, pivot => {
+      return {
+        idPivot: pivot.id,
+        text: pivot.question,
+        type: PivotType.QUESTION
+      } as PivotsDeProposition;
+    });
+
+    let reponses = _.map(pivots, pivot => {
+      return {
+        idPivot: pivot.id,
+        text: pivot.reponse,
+        type: PivotType.REPONSE
+      } as PivotsDeProposition;
+    });
+
+    let accumulator = [];
+    for (let i = 0; i < pivots.length; i++) {
+      accumulator.push(questions[i]);
+      accumulator.push(reponses[pivots.length - i - 1]);
+    }
+    return accumulator;
+  }
 }

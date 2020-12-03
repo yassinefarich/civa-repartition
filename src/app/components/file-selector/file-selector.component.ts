@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ExcelFileToJsonService} from '../../services/io/excel-file-to-json.service';
-import {Crowder, DataTable, Pivot, PivotAlternative, PivotAlternativeType, StorageDataTypeKeys} from '../../model/Models';
+import {Crowder, DataTable, Pivot, PivotAlternative, PivotType, StorageDataTypeKeys} from '../../model/Models';
 import {RepartitionService} from '../../services/algo/repartition.service';
 import {Store} from '../../services/data/store.service';
 
@@ -71,7 +71,7 @@ export class FileSelectorComponent implements OnInit {
           return {
             idPivot: proposition[0],
             alternative: proposition[1],
-            type: proposition[2] === 'Q' ? PivotAlternativeType.QUESTION : PivotAlternativeType.REPONSE
+            type: proposition[2] === 'Q' ? PivotType.QUESTION : PivotType.REPONSE
           } as PivotAlternative;
         });
     }

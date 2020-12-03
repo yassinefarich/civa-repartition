@@ -24,11 +24,17 @@ export class ExcelFileToJsonService {
     return (XLSX.utils.sheet_to_json(ws, {header: 1})) as DataTable;
   }
 
-  public jsonToExcel(exportData: any): void {
+  public aoaToExcel(exportData: any, type: string): void {
     const worksheet = XLSX.utils.aoa_to_sheet(exportData);
     const workbook = {Sheets: {'data': worksheet}, SheetNames: ['data']};
-    let EXCEL_EXTENSION = '.xlsx';
-    XLSX.writeFile(workbook, 'crowders' + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
+    let fileName = `crowders_${type}_${new Date().getTime()}.xlsx`;
+    XLSX.writeFile(workbook, fileName, {bookType: 'xlsx'});
   }
 
+  public aoaToCSV(exportData: any, type: string): void {
+    const worksheet = XLSX.utils.aoa_to_sheet(exportData);
+    const workbook = {Sheets: {'data': worksheet}, SheetNames: ['data']};
+    let fileName = `crowders_${type}_${new Date().getTime()}.csv`;
+    XLSX.writeFile(workbook, fileName, {bookType: 'csv'});
+  }
 }

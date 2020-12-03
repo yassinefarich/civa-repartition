@@ -13,7 +13,7 @@ export const ALL_TYPES = [
 ];
 
 
-export enum PivotAlternativeType {
+export enum PivotType {
   QUESTION,
   REPONSE
 }
@@ -21,16 +21,20 @@ export enum PivotAlternativeType {
 export interface PivotAlternative {
   idPivot: number;
   alternative: string;
-  type?: PivotAlternativeType;
+  proposeur?: string
+  type?: PivotType;
 }
 
-export interface ReponseAlternative extends PivotAlternative {
+export interface PivotsDeProposition {
+  idPivot: number;
+  text: string;
+  type?: PivotType;
 }
 
 export interface Crowder {
   id: number
   name: string;
-  pivotsDeProposition: Pivot[];
+  pivotsDeProposition: PivotsDeProposition[];
   notationsDePropositions: PivotAlternative[]
 }
 

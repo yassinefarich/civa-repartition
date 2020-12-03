@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Crowder, Pivot, PivotAlternative, PivotAlternativeType} from '../../model/Models';
+import {Crowder, Pivot, PivotAlternative, PivotType} from '../../model/Models';
 import * as _ from 'lodash';
 
 @Injectable({
@@ -43,12 +43,12 @@ export class SimulationsService {
           {
             idPivot: pivotId,
             alternative: val + ' est une question alternative au pivot ' + pivotId,
-            type: PivotAlternativeType.QUESTION
+            type: PivotType.QUESTION
           },
           {
             idPivot: pivotId,
             alternative: val + ' est une reponse alternative au pivot ' + pivotId,
-            type: PivotAlternativeType.REPONSE
+            type: PivotType.REPONSE
           }
         ];
       }).reduce((a1, a2) => a1.concat(a2), []);

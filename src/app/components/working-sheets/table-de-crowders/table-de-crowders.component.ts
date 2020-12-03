@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Crowder} from '../../../model/Models';
+import {Crowder, PivotType} from '../../../model/Models';
 import {Store} from '../../../services/data/store.service';
 import {ExcelFileToJsonService} from '../../../services/io/excel-file-to-json.service';
 import * as _ from 'lodash';
@@ -25,8 +25,11 @@ export class TableDeCrowdersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-    this.store.crowders.subscribe(crowders => this.crowdersPresentation = crowders);
+    this.store.crowders.subscribe(crowders =>
+      this.crowdersPresentation =
+        this.isProposition() ?
+          crowders.filter(crowders => crowders.pivotsDeProposition.length > 0) :
+          crowders.filter(crowders => crowders.notationsDePropositions.length > 0));
 
     if (this.crowdersPresentation.length <= 0) {
       this.store.refreshDataFromStorage();
@@ -34,16 +37,33 @@ export class TableDeCrowdersComponent implements OnInit {
   }
 
   exportExcel() {
-    this.excelFileToJsonService.jsonToExcel(this.transformToExportableTable(this.crowdersPresentation));
+    if (this.isProposition()) {
+      this.excelFileToJsonService.aoaToExcel(this.transformToExportablePropositionsTable(this.crowdersPresentation), 'propositions');
+    } else {
+      this.excelFileToJsonService.aoaToExcel(this.transformToExportableNotationsTable(this.crowdersPresentation), 'notations');
+    }
   }
 
-  private transformToExportableTable(crowdersPresentation: Crowder[]): any[] {
-    let nombreMaxDesPivots: number = _.max(crowdersPresentation.map(crowder => crowder.pivotsDeProposition.length));
+  exportCSV() {
+    if (this.isProposition()) {
+      this.excelFileToJsonService.aoaToCSV(this.transformToExportablePropositionsTable(this.crowdersPresentation), 'propositions');
+    } else {
+      this.excelFileToJsonService.aoaToCSV(this.transformToExportableNotationsTable(this.crowdersPresentation), 'notations');
+    }
+  }
 
-    let headers = ['Crowder ID', 'Nom du crowder'].concat(_.range(1, nombreMaxDesPivots + 1).map(val => 'ID Pivot ' + val));
-    let data = _.map(crowdersPresentation, crowder => [crowder.id, crowder.name].concat(_.map(crowder.pivotsDeProposition, pivot => pivot.id)));
+  private transformToExportablePropositionsTable(crowdersPresentation: Crowder[]): any[][] {
+    let headers: any[][] = [['Crowder ID', 'Pivot ID', 'Type de proposition(Q : Question, R : Réponse)']];
+    let data: any[][] = _.flatMap(crowdersPresentation, crowder => crowder.pivotsDeProposition.map(prop => [crowder.id, prop.idPivot,
+      prop.type == PivotType.QUESTION ? 'Q' : 'R']));
+    return _.union(headers, data);
+  }
 
-    return _.union([headers], data);
+  private transformToExportableNotationsTable(crowdersPresentation: Crowder[]): any[][] {
+    let headers: any[][] = [['Crowder ID', 'Pivot ID', 'Crowder de proposition', 'Type de notation(Q : Question, R : Réponse)']];
+    let data: any[][] = _.flatMap(crowdersPresentation, crowder => crowder.notationsDePropositions
+      .map(prop => [crowder.id, prop.idPivot, prop.proposeur, prop.type == PivotType.QUESTION ? 'Q' : 'R']));
+    return _.union(headers, data);
   }
 
   isProposition(): boolean {
