@@ -7,7 +7,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GestionTempsComponent implements OnInit {
 
-  constructor() { }
+  data: any;
+  constructor() {
+    this.data = {
+      labels: ['Proposition de questions','Proposition de réponses','Notations de questions','Notations de réponses'],
+      datasets: [
+        {
+          data: [300, 50, 100,60],
+          backgroundColor: [
+            "#087e14",
+            "#36A2EB",
+            "#FFCE56",
+            "#ec0aa2"
+          ],
+          hoverBackgroundColor: [
+            "#087e14",
+            "#36A2EB",
+            "#FFCE56",
+            "#ec0aa2"
+          ]
+        }]
+    };
+
+  }
 
   ngOnInit(): void {
   }

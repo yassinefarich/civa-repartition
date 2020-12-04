@@ -15,12 +15,23 @@ export class ParametresComponent implements OnInit {
 
   public dataType: typeof StorageDataTypeKeys = StorageDataTypeKeys;
 
+  // Paramétre de répartition
   nombreDeCrowders: number = 120;
   nombreDePivots: number = 30;
   nombreDePropositionsParPivot: number = 20;
   nombreDeNotationsParProposition: number = 30;
 
-  constructor(private dispatcherService: RepartitionService,
+  // Paramétres de gestion du temps
+  tempsDePropositonDeQuest: number = 0.06;
+  tempsDePropositonDeRep: number = 0.06;
+  tempsDeNotationDeQue: number = 0.02;
+  tempsDeNotationDeRep: number = 0.02;
+
+  nbrDeSessionsParSemaine: number = 10;
+  dureeDeSession: number = 2.5;
+
+
+  constructor(private repartitionService: RepartitionService,
               private messageService: MessageService,
               private simulations: SimulationsService,
               private store: Store) {
@@ -40,10 +51,27 @@ export class ParametresComponent implements OnInit {
   }
 
   onGenerateGroups(): void {
-    if (this.isValid()) {
-      this.dispatcherService.repartitionerPivotsParCrowders(this.nombreDePropositionsParPivot);
-      this.dispatcherService.repartitionerNotationsParCrowders(this.nombreDeNotationsParProposition);
-    }
+    // if (this.isValid()) {
+    this.repartitionService.repartitionerPivotsParCrowders(this.nombreDePropositionsParPivot);
+    this.repartitionService.repartitionerNotationsParCrowders(this.nombreDeNotationsParProposition);
+    // }
+  }
+
+  generatePlaning(): void {
+    // let crowders = this.simulations.crowders(this.nombreDeCrowders);
+    // let pivots = this.simulations.pivots(this.nombreDePivots);
+    // let propositions = this.simulations.propositions(crowders, pivots, this.nombreDePropositionsParPivot);
+    //
+    // this.store.setData(StorageDataTypeKeys.CROWDER, crowders);
+    // this.store.setData(StorageDataTypeKeys.PIVOTS, pivots);
+    // this.store.setData(StorageDataTypeKeys.PROPOSITIONS, propositions);
+  }
+
+  onReinitPlaning(): void {
+    // if (this.isValid()) {
+    //   this.dispatcherService.repartitionerPivotsParCrowders(this.nombreDePropositionsParPivot);
+    //   this.dispatcherService.repartitionerNotationsParCrowders(this.nombreDeNotationsParProposition);
+    // }
   }
 
   onReinit(): void {

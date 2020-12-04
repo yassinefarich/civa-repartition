@@ -1,1 +1,73 @@
-<p>gestion-temps works!</p>
+<div class="p-grid">
+  <div class="p-col-7">
+    <p-panel header="Répartition du temps">
+      <div class="p-grid">
+        <div class="p-col-5">
+          <h4>Temps nécessaire pour </h4>
+          <table style="width: 100%">
+            <tr>
+              <td>Faire des propositions des questions </td>
+              <td>: 10 h</td>
+            </tr>
+            <tr>
+              <td>Faire des propositions des réponses </td>
+              <td>: 10 h</td>
+            </tr>
+            <tr>
+              <td>Faire des notations des questions </td>
+              <td>: 10 h</td>
+            </tr>
+            <tr>
+              <td>Faire des notations des réponses </td>
+              <td>: 10 h</td>
+            </tr>
+
+          </table>
+
+          <table style="margin-top: 20px">
+            <tr>
+              <td>Nombre de sessions nécessaires :</td>
+              <td><b>5</b></td>
+            </tr>
+            <tr>
+              <td>Nombre de semaines nécessaires :</td>
+              <td><b>12</b></td>
+            </tr>
+          </table>
+
+        </div>
+
+        <div class="p-col-7">
+          <p-chart type="pie" [data]="data"></p-chart>
+        </div>
+      </div>
+
+    </p-panel>
+
+
+  </div>
+  <div class="p-col-5">
+
+    <p-panel header="Récapitulatif">
+      <table>
+        <tr>
+          <td>Nombre de crowders :</td>
+          <td>10</td>
+        </tr>
+        <tr>
+          <td>Nombre de pivots :</td>
+          <td>10</td>
+        </tr>
+        <tr>
+          <td>Nombre de propositons par pivot :</td>
+          <td>10</td>
+        </tr>
+        <tr>
+          <td>Nombre de notations par proposition :</td>
+          <td>10</td>
+        </tr>
+      </table>
+
+    </p-panel>
+  </div>
+</div>

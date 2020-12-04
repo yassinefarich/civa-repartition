@@ -74,27 +74,27 @@
 
           <div class="p-col-12"><b>Temps nécessaire en heurs pour :</b></div>
           <div class="p-col-8"><label for="propoDeQuestion">Proposition de question</label></div>
-          <div class="p-col-4">: <input type="number" id="propoDeQuestion" style="width: 80%"/></div>
+          <div class="p-col-4">: <input [(ngModel)]="tempsDePropositonDeQuest" type="number" id="propoDeQuestion" style="width: 80%"/></div>
 
           <div class="p-col-8"><label for="propoDeReponse">Proposition de réponse</label></div>
-          <div class="p-col-4">: <input type="number" id="propoDeReponse" style="width: 80%"/></div>
+          <div class="p-col-4">: <input [(ngModel)]="tempsDePropositonDeRep" type="number" id="propoDeReponse" style="width: 80%"/></div>
 
           <div class="p-col-8"><label for="notationDeQuestion">Notation de question</label></div>
-          <div class="p-col-4">: <input type="number" id="notationDeQuestion" style="width: 80%"/></div>
+          <div class="p-col-4">: <input [(ngModel)]="tempsDeNotationDeQue" type="number" id="notationDeQuestion" style="width: 80%"/></div>
 
           <div class="p-col-8"><label for="notationDeReponse">Notation de réponse</label></div>
-          <div class="p-col-4">: <input type="number" id="notationDeReponse" style="width: 80%"/></div>
+          <div class="p-col-4">: <input [(ngModel)]="tempsDeNotationDeRep" type="number" id="notationDeReponse" style="width: 80%"/></div>
 
           <div class="p-col-12"><b>Sessions :</b></div>
 
           <div class="p-col-8"><label for="sessionsParSemaine">Nombre de sessions/semaine</label></div>
-          <div class="p-col-4">: <input type="number" id="sessionsParSemaine" style="width: 80%"/></div>
+          <div class="p-col-4">: <input [(ngModel)]="nbrDeSessionsParSemaine" type="number" id="sessionsParSemaine" style="width: 80%"/></div>
           <div class="p-col-8"><label for="dureeSession">Durée d'une session</label></div>
-          <div class="p-col-4">: <input type="number" id="dureeSession" style="width: 80%"/></div>
+          <div class="p-col-4">: <input [(ngModel)]="dureeDeSession" type="number" id="dureeSession" style="width: 80%"/></div>
 
 
-          <div class="p-col-7"> <button pButton pRipple label="Générer un planing" class="p-button-info" (click)="onGenerateSamples()"></button></div>
-          <div class="p-col-5"><button pButton pRipple label="Réinitialiser" class="p-button-info" (click)="onGenerateSamples()" ></button></div>
+          <div class="p-col-7"> <button pButton pRipple label="Générer un planing" class="p-button-info" (click)="generatePlaning()"></button></div>
+          <div class="p-col-5"><button pButton pRipple label="Réinitialiser" class="p-button-info" (click)="onReinitPlaning()" ></button></div>
 
         </div>
 
