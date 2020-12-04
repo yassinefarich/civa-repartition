@@ -12,7 +12,7 @@ export class WorkingSheetComponent implements OnInit {
   nbrDeCrowders: number = 0;
   nbrDePivots: number = 0;
 
-  onglet = '/groups';
+  onglet = '/';
 
   constructor(private store: Store, private router: Router) {}
 

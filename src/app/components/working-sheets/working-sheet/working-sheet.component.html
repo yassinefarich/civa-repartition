@@ -4,18 +4,15 @@
 
 <div class="working-sheet p-grid p-flex-column">
   <div class="p-grid p-col">
-    <div class="p-col-6">Crowders : {{nbrDeCrowders}}</div>
-    <!--    <div class="p-col-6">Proposition par crowder : XX</div>-->
-    <div class="p-col-6">Pivots : {{nbrDePivots}}</div>
-    <!--    <div class="p-col-6">Proposition par pivot : XX</div>-->
     <div class="p-col-12">
+      <button pButton type="button" label="Données" icon="fa fa-database" iconPos="left"
+              style="margin-right: 10px;width: 150px" [ngClass]="onglet === '/donnees' || onglet === '/'
+              ?  'p-button-outlined' : ''" routerLink="/donnees"></button>
+
       <button pButton type="button" label="Répartitions" icon="pi pi-users" iconPos="left"
               style="margin-right: 10px;width: 150px" [ngClass]="onglet === '/repartitions' ?  'p-button-outlined' : ''"
               routerLink="/repartitions"></button>
 
-      <button pButton type="button" label="Données" icon="fa fa-database" iconPos="left"
-              style="margin-right: 10px;width: 150px" [ngClass]="onglet === '/donnees' ?  'p-button-outlined' : ''"
-              routerLink="/donnees"></button>
       <button pButton type="button" label="Gestion du temps" icon="fa fa-clock" iconPos="left"
               [ngClass]="['p-button-help', onglet === '/gestionTemps' ?  'p-button-outlined' : '']"
               style="margin-right: 10px;width: 200px"

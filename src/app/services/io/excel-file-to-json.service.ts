@@ -11,7 +11,6 @@ export class ExcelFileToJsonService {
   }
 
   public async excelToJson(file: any): Promise<DataTable> {
-    console.log(file);
     /* read workbook */
     const bstr: string = file.target.result;
     const wb: XLSX.WorkBook = XLSX.read(bstr, {type: 'binary'});

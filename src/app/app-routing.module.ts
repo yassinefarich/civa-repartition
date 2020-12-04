@@ -19,7 +19,7 @@ export const appRouteList: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'groups'
+    redirectTo: 'donnees'
   }
 ];
 

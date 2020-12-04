@@ -19,6 +19,7 @@ export class FileSelectorComponent implements OnInit {
   isSucess = false;
   chargementMessage: string = '';
   afficherMessage = false;
+  label: string = '';
 
   constructor(private excelFileToJsonService: ExcelFileToJsonService,
               private dispatcherService: RepartitionService,
@@ -26,11 +27,13 @@ export class FileSelectorComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.label = this.nom;
     this.store.onReinit.subscribe(
       () => {
         this.isSucess = false;
         this.chargementMessage = '';
         this.afficherMessage = false;
+        this.label = this.nom;
       }
     );
   }
@@ -64,11 +67,16 @@ export class FileSelectorComponent implements OnInit {
 
       if (dataType == StorageDataTypeKeys.CROWDER) {
         this.succes(`${donnees.length} Crowders importés`);
+        this.label = `(${donnees.length}) crowders importés`;
       } else if (dataType == StorageDataTypeKeys.PIVOTS) {
         this.succes(`${donnees.length} pivots importés`);
+        this.label = `(${donnees.length}) pivots importés`;
       } else {
         this.succes(`${donnees.length} propositions chargées`);
+        this.label = `(${donnees.length}) propositions chargées`;
       }
+
+
     } catch (e) {
       this.echec(JSON.stringify(e));
     }

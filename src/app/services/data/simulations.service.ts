@@ -35,22 +35,25 @@ export class SimulationsService {
       );
   }
 
-  // private propositions(nombreDesPivots: number, nombrePropAlterParPivot: number): PivotAlternative[] {
-  //   return _.range(nombreDesPivots * nombrePropAlterParPivot)
-  //     .map(val => {
-  //       return [
-  //         {
-  //           idPivot: pivotId,
-  //           alternative: val + ' est une question alternative au pivot ' + pivotId,
-  //           type: PivotType.QUESTION
-  //         },
-  //         {
-  //           idPivot: pivotId,
-  //           alternative: val + ' est une reponse alternative au pivot ' + pivotId,
-  //           type: PivotType.REPONSE
-  //         }
-  //       ];
-  //     }).reduce((a1, a2) => a1.concat(a2), []);
-  // }
-
+  propositions(crowders: Crowder[], pivots: Pivot[], propositionParPivot: number): PivotAlternative[] {
+    return pivots.map((pivot, pivotIndex) => {
+      return _.range(0, propositionParPivot)
+        .map(index => {
+          return [
+            {
+              idPivot: pivot.id,
+              alternative: index + ' est une question alternative au pivot ' + pivot.id,
+              type: PivotType.QUESTION,
+              proposeur: crowders[(pivotIndex + index) % crowders.length].name
+            } as PivotAlternative,
+            {
+              idPivot: pivot.id,
+              alternative: index + ' est une reponse alternative au pivot ' + pivot.id,
+              type: PivotType.REPONSE,
+              proposeur: crowders[(pivotIndex + index + 1) % crowders.length].name
+            } as PivotAlternative
+          ];
+        }).reduce((a1, a2) => a1.concat(a2), []);
+    }).reduce((a1, a2) => a1.concat(a2), []);
+  }
 }

@@ -30,9 +30,13 @@ export class ParametresComponent implements OnInit {
   }
 
   onGenerateSamples(): void {
-    this.store.setData(StorageDataTypeKeys.CROWDER, this.simulations.crowders(this.nombreDeCrowders));
-    this.store.setData(StorageDataTypeKeys.PIVOTS, this.simulations.pivots(this.nombreDePivots));
-    // this.store.setData(StorageDataTypeKeys.PROPOSITIONS, this.simulations.propositions(this.nombreDePivots, this.propositionParPivot));
+    let crowders = this.simulations.crowders(this.nombreDeCrowders);
+    let pivots = this.simulations.pivots(this.nombreDePivots);
+    let propositions = this.simulations.propositions(crowders, pivots, this.nombreDePropositionsParPivot);
+
+    this.store.setData(StorageDataTypeKeys.CROWDER, crowders);
+    this.store.setData(StorageDataTypeKeys.PIVOTS, pivots);
+    this.store.setData(StorageDataTypeKeys.PROPOSITIONS, propositions);
   }
 
   onGenerateGroups(): void {
