@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {RepartitionService} from '../../services/algo/repartition.service';
-import {MessageService} from 'primeng/api';
+import {MenuItem, MessageService} from 'primeng/api';
 import {StorageDataTypeKeys} from '../../model/Models';
 import {SimulationsService} from '../../services/data/simulations.service';
 import {Store} from '../../services/data/store.service';
@@ -31,12 +31,26 @@ export class ParametresComponent implements OnInit {
   nbrDeSessionsParSemaine: number = 10;
   dureeDeSession: number = 2.5;
 
+  items: MenuItem[];
 
   constructor(private repartitionService: RepartitionService,
               private messageService: MessageService,
               private simulations: SimulationsService,
               private store: Store,
               private gestionDuTemps : GestionTempsService) {
+
+    this.items = [
+      {
+        label: 'Importer',
+        icon: 'fa fa-file-import',
+        // command: event => alert(event)
+      },
+      {
+        label: 'Exporter',
+        icon: 'fa fa-file-export',
+        // command: event => alert(event)
+      }
+    ];
   }
 
   ngOnInit(): void {

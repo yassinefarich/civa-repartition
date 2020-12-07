@@ -1,10 +1,14 @@
 <div class="parameters-section" role="main">
   <div class="card">
-    <h2>Paramètres</h2>
+    <h2 style="margin-right: 10px">Paramètres</h2>
+    <h2 style="justify-content: right">
+      <button pButton icon="fa fa-list" class="p-button-secondary" style="height: 25px"
+              (click)="menu.toggle($event)"></button>
+    </h2>
   </div>
   <div class="parameters-tab">
     <p-tabView>
-      <p-tabPanel header="Répartitions">
+      <p-tabPanel header="Répartitions" rightIcon="fa fa-users">
 
         <div class="p-grid p-flex-column" style="text-align: center">
           <div class="p-col">
@@ -26,7 +30,8 @@
 
           <div class="p-col">
             <div style="margin-bottom: 5px"><label for="not-par-prop-input">Notation par proposition</label></div>
-            <p-inputNumber min="0" id="not-par-prop-input" [(ngModel)]="nombreDeNotationsParProposition"></p-inputNumber>
+            <p-inputNumber min="0" id="not-par-prop-input"
+                           [(ngModel)]="nombreDeNotationsParProposition"></p-inputNumber>
           </div>
         </div>
 
@@ -68,33 +73,44 @@
 
       </p-tabPanel>
 
-      <p-tabPanel header="Gestion du temps">
+      <p-tabPanel header="Gestion du temps" rightIcon="fa fa-calendar-alt">
 
         <div class="p-grid">
 
           <div class="p-col-12"><b>Temps nécessaire en heurs pour :</b></div>
           <div class="p-col-8"><label for="propoDeQuestion">Proposition de question</label></div>
-          <div class="p-col-4">: <input [(ngModel)]="tempsDePropositonDeQuest" type="number" id="propoDeQuestion" style="width: 80%"/></div>
+          <div class="p-col-4">: <input [(ngModel)]="tempsDePropositonDeQuest" type="number" id="propoDeQuestion"
+                                        style="width: 80%"/></div>
 
           <div class="p-col-8"><label for="propoDeReponse">Proposition de réponse</label></div>
-          <div class="p-col-4">: <input [(ngModel)]="tempsDePropositonDeRep" type="number" id="propoDeReponse" style="width: 80%"/></div>
+          <div class="p-col-4">: <input [(ngModel)]="tempsDePropositonDeRep" type="number" id="propoDeReponse"
+                                        style="width: 80%"/></div>
 
           <div class="p-col-8"><label for="notationDeQuestion">Notation de question</label></div>
-          <div class="p-col-4">: <input [(ngModel)]="tempsDeNotationDeQue" type="number" id="notationDeQuestion" style="width: 80%"/></div>
+          <div class="p-col-4">: <input [(ngModel)]="tempsDeNotationDeQue" type="number" id="notationDeQuestion"
+                                        style="width: 80%"/></div>
 
           <div class="p-col-8"><label for="notationDeReponse">Notation de réponse</label></div>
-          <div class="p-col-4">: <input [(ngModel)]="tempsDeNotationDeRep" type="number" id="notationDeReponse" style="width: 80%"/></div>
+          <div class="p-col-4">: <input [(ngModel)]="tempsDeNotationDeRep" type="number" id="notationDeReponse"
+                                        style="width: 80%"/></div>
 
           <div class="p-col-12"><b>Sessions :</b></div>
 
           <div class="p-col-8"><label for="sessionsParSemaine">Nombre de sessions/semaine</label></div>
-          <div class="p-col-4">: <input [(ngModel)]="nbrDeSessionsParSemaine" type="number" id="sessionsParSemaine" style="width: 80%"/></div>
+          <div class="p-col-4">: <input [(ngModel)]="nbrDeSessionsParSemaine" type="number" id="sessionsParSemaine"
+                                        style="width: 80%"/></div>
           <div class="p-col-8"><label for="dureeSession">Durée d'une session</label></div>
-          <div class="p-col-4">: <input [(ngModel)]="dureeDeSession" type="number" id="dureeSession" style="width: 80%"/></div>
+          <div class="p-col-4">: <input [(ngModel)]="dureeDeSession" type="number" id="dureeSession"
+                                        style="width: 80%"/></div>
 
 
-          <div class="p-col-7"> <button pButton pRipple label="Générer un planing" class="p-button-info" (click)="generatePlaning()"></button></div>
-          <div class="p-col-5"><button pButton pRipple label="Réinitialiser" class="p-button-info" (click)="onReinitPlaning()" ></button></div>
+          <div class="p-col-7">
+            <button pButton pRipple label="Générer un planing" class="p-button-info"
+                    (click)="generatePlaning()"></button>
+          </div>
+          <div class="p-col-5">
+            <button pButton pRipple label="Réinitialiser" class="p-button-info" (click)="onReinitPlaning()"></button>
+          </div>
 
         </div>
 
@@ -103,3 +119,5 @@
     </p-tabView>
   </div>
 </div>
+<p-tieredMenu [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'0ms'" #menu [model]="items"
+              [popup]="true"></p-tieredMenu>

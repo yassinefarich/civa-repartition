@@ -25,6 +25,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {TableDePivots} from './components/working-sheets/table-de-pivots/table-de-pivots.component';
 import {RecapitulatifComponent} from './components/working-sheets/summary/recapitulatif.component';
 import {GestionTempsComponent} from './components/working-sheet/gestion-temps/gestion-temps.component';
+import {TieredMenuModule} from 'primeng/tieredmenu';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import {GestionTempsComponent} from './components/working-sheet/gestion-temps/ge
     TooltipModule,
     DialogModule,
     AppRoutingModule,
-    ChartModule
+    ChartModule,
+    TieredMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]
