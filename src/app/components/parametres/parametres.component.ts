@@ -4,6 +4,7 @@ import {MessageService} from 'primeng/api';
 import {StorageDataTypeKeys} from '../../model/Models';
 import {SimulationsService} from '../../services/data/simulations.service';
 import {Store} from '../../services/data/store.service';
+import {GestionTempsService} from '../../services/algo/gestion-temps.service';
 
 @Component({
   selector: 'app-parametres',
@@ -34,7 +35,8 @@ export class ParametresComponent implements OnInit {
   constructor(private repartitionService: RepartitionService,
               private messageService: MessageService,
               private simulations: SimulationsService,
-              private store: Store) {
+              private store: Store,
+              private gestionDuTemps : GestionTempsService) {
   }
 
   ngOnInit(): void {
@@ -51,20 +53,25 @@ export class ParametresComponent implements OnInit {
   }
 
   onGenerateGroups(): void {
-    // if (this.isValid()) {
     this.repartitionService.repartitionerPivotsParCrowders(this.nombreDePropositionsParPivot);
     this.repartitionService.repartitionerNotationsParCrowders(this.nombreDeNotationsParProposition);
-    // }
   }
 
   generatePlaning(): void {
-    // let crowders = this.simulations.crowders(this.nombreDeCrowders);
-    // let pivots = this.simulations.pivots(this.nombreDePivots);
-    // let propositions = this.simulations.propositions(crowders, pivots, this.nombreDePropositionsParPivot);
-    //
-    // this.store.setData(StorageDataTypeKeys.CROWDER, crowders);
-    // this.store.setData(StorageDataTypeKeys.PIVOTS, pivots);
-    // this.store.setData(StorageDataTypeKeys.PROPOSITIONS, propositions);
+    this.gestionDuTemps.calculerTemps(
+      {
+        nombreDeCrowders: this.nombreDeCrowders,
+        nombreDePivots: this.nombreDePivots,
+        nombreDePropositionsParPivots: this.nombreDePropositionsParPivot,
+        nombreDeNotationParProposition: this.nombreDeNotationsParProposition,
+        tempsDePropositonDeQuest: this.tempsDePropositonDeQuest,
+        tempsDePropositonDeRep: this.tempsDePropositonDeRep,
+        tempsDeNotationDeQue: this.tempsDeNotationDeQue,
+        tempsDeNotationDeRep: this.tempsDeNotationDeRep,
+        nbrDeSessionsParSemaine: this.nbrDeSessionsParSemaine,
+        dureeDeSession: this.dureeDeSession
+      }
+    );
   }
 
   onReinitPlaning(): void {

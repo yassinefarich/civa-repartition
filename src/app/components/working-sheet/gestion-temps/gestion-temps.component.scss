@@ -1,0 +1,20 @@
+//.result-table{
+//  width: 100%;
+//  text-align:left;
+//  border-collapse: collapse;
+//}
+
+.result-table {
+  border:1px dotted #C0C0C0;
+  border-collapse:collapse;
+  padding:5px;
+}
+.result-table th {
+  border:1px dotted #C0C0C0;
+  padding:5px;
+  background:#F0F0F0;
+}
+.result-table td {
+  border:1px dotted #C0C0C0;
+  padding:5px;
+}

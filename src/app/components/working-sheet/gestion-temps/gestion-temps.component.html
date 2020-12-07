@@ -1,43 +1,69 @@
-<div class="p-grid">
-  <div class="p-col-7">
+<div class="p-grid" *ngIf="resultat != null">
+  <div class="p-col-9">
     <p-panel header="Répartition du temps">
       <div class="p-grid">
-        <div class="p-col-5">
-          <h4>Temps nécessaire pour </h4>
-          <table style="width: 100%">
+        <div class="p-col-6">
+          <table class="result-table">
+            <thead>
             <tr>
-              <td>Faire des propositions des questions </td>
-              <td>: 10 h</td>
+              <th scope="col">Temps nécessaire pour</th>
+              <th scope="col">(1) Crowder</th>
+              <th scope="col">({{resultat.parametres.nombreDeCrowders}}) crowders</th>
             </tr>
-            <tr>
-              <td>Faire des propositions des réponses </td>
-              <td>: 10 h</td>
-            </tr>
-            <tr>
-              <td>Faire des notations des questions </td>
-              <td>: 10 h</td>
-            </tr>
-            <tr>
-              <td>Faire des notations des réponses </td>
-              <td>: 10 h</td>
-            </tr>
+            </thead>
 
+            <tr>
+              <td>Propositions des questions</td>
+              <td>{{resultat.tempsTotalPourPropositionsDeQuest}} h</td>
+              <td>{{tempsPourTousLesCrowders(resultat.tempsTotalPourPropositionsDeQuest)}} h</td>
+            </tr>
+            <tr>
+              <td>Propositions des réponses</td>
+              <td>{{resultat.tempsTotalPourPropositionsDeRep}} h</td>
+              <td>{{tempsPourTousLesCrowders(resultat.tempsTotalPourPropositionsDeRep)}} h</td>
+            </tr>
+            <tr>
+              <td>Notations des questions</td>
+              <td>{{resultat.tempsTotalPourNotationDeQuest}} h</td>
+              <td>{{tempsPourTousLesCrowders(resultat.tempsTotalPourNotationDeQuest)}} h</td>
+            </tr>
+            <tr>
+              <td>Notations des réponses</td>
+              <td>{{resultat.tempsTotalPourNotationDeRep}} h</td>
+              <td>{{tempsPourTousLesCrowders(resultat.tempsTotalPourNotationDeRep)}} h</td>
+            </tr>
+            <tr>
+              <td><b>Total</b></td>
+              <td><b>{{calculerTempsTotal()}} h</b></td>
+              <td><b>{{tempsPourTousLesCrowders(calculerTempsTotal())}} h</b></td>
+            </tr>
           </table>
+
+          <h4>Temps total nécessaire</h4>
 
           <table style="margin-top: 20px">
             <tr>
-              <td>Nombre de sessions nécessaires :</td>
-              <td><b>5</b></td>
+              <td><b>{{resultat.nombreDeSemainesNecessaires}}</b> semaines
+                de {{resultat.parametres.nbrDeSessionsParSemaine}} séance
+              </td>
             </tr>
             <tr>
-              <td>Nombre de semaines nécessaires :</td>
-              <td><b>12</b></td>
+              <td>plus <b>{{resultat.nombreDeSessionsNecessaire}}</b> sessions de {{resultat.parametres.dureeDeSession}}
+                heurs
+              </td>
+            </tr>
+            <tr>
+              <td>plus <b>{{resultat.nombreDheurs}}</b> heurs</td>
             </tr>
           </table>
 
+          <div class="p-col-12">
+            <button pButton label="Exporter" (click)="exporterResultatJson()" style="margin-top: 10px"></button>
+          </div>
+
         </div>
 
-        <div class="p-col-7">
+        <div class="p-col-6">
           <p-chart type="pie" [data]="data"></p-chart>
         </div>
       </div>
@@ -46,28 +72,39 @@
 
 
   </div>
-  <div class="p-col-5">
+  <div class="p-col-3">
 
     <p-panel header="Récapitulatif">
+      <b>Nombre de</b>
+
       <table>
         <tr>
-          <td>Nombre de crowders :</td>
-          <td>10</td>
+          <td>Crowders</td>
+          <td>: {{resultat.parametres.nombreDeCrowders}}</td>
         </tr>
         <tr>
-          <td>Nombre de pivots :</td>
-          <td>10</td>
+          <td>Pivots</td>
+          <td>: {{resultat.parametres.nombreDePivots}}</td>
         </tr>
         <tr>
-          <td>Nombre de propositons par pivot :</td>
-          <td>10</td>
+          <td>Propositons/pivot</td>
+          <td>: {{resultat.parametres.nombreDePropositionsParPivots}}</td>
         </tr>
         <tr>
-          <td>Nombre de notations par proposition :</td>
-          <td>10</td>
+          <td>Notations/proposition</td>
+          <td>: {{resultat.parametres.nombreDeNotationParProposition}}</td>
         </tr>
       </table>
 
+    </p-panel>
+  </div>
+</div>
+
+<div class="p-grid" *ngIf="resultat == null">
+  <div class="p-col-8">
+    <p-panel header="Répartition du temps">
+      <p>Merci de définir les paramétres de répartition du temps et cliquer sur <b>génerer un planing</b>&nbsp;<i
+        class="far fa-calendar-alt"></i></p>
     </p-panel>
   </div>
 </div>
