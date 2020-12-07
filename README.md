@@ -1,9 +1,8 @@
 # Civa répartition front
+[![Netlify Status](https://api.netlify.com/api/v1/badges/4427d51f-033f-485a-b725-3e755770ba14/deploy-status)](https://app.netlify.com/sites/talan-civa-repartition/deploys)
 
 Projcet public URL : https://talan-civa-repartition.netlify.app/
 
-## Netlify deploy
-[![Netlify Status](https://api.netlify.com/api/v1/badges/4427d51f-033f-485a-b725-3e755770ba14/deploy-status)](https://app.netlify.com/sites/talan-civa-repartition/deploys)
 
 ## Development server
 
