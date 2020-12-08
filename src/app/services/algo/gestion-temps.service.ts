@@ -1,5 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
+import {Store} from '../data/store.service';
+import {StorageDataTypeKeys} from '../../model/Models';
 
 export interface ParametresGestionDuTemps {
   nombreDeCrowders: number;
@@ -35,14 +37,7 @@ export interface RepartitionTempsResultat {
 })
 export class GestionTempsService {
 
-
-  private _gestionDeTemps: Subject<RepartitionTempsResultat> = new Subject<RepartitionTempsResultat>();
-
-  constructor() {
-  }
-
-  get gestionDeTemps(): Observable<RepartitionTempsResultat> {
-    return this._gestionDeTemps.asObservable();
+  constructor(private store: Store) {
   }
 
   calculerTemps(parametres: ParametresGestionDuTemps): void {
@@ -84,7 +79,7 @@ export class GestionTempsService {
 
     console.log(result)
 
-    this._gestionDeTemps.next(result);
+    this.store.setData(StorageDataTypeKeys.GESTION_DU_TEMPS, [result])
   }
 
 }

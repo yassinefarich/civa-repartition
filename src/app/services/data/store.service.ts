@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {ALL_TYPES, Crowder, Groupe, Pivot, PivotAlternative, StorageDataTypeKeys} from '../../model/Models';
 import {Observable, Subject} from 'rxjs';
 import {LocalStorageService} from './local-storage-service';
+import {RepartitionTempsResultat} from '../algo/gestion-temps.service';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +34,10 @@ export class Store {
     return this._dataObservers.get(StorageDataTypeKeys.PROPOSITIONS).asObservable();
   }
 
+  get gestionDeTemps(): Observable<RepartitionTempsResultat[]> {
+    return this._dataObservers.get(StorageDataTypeKeys.GESTION_DU_TEMPS).asObservable();
+  }
+
   get onReinit(): Observable<any> {
     return this._onReinit.asObservable();
   }
@@ -42,10 +47,14 @@ export class Store {
     this._dataObservers.get(type).next(values);
   }
 
-  public refreshDataFromStorage(): void {
-    ALL_TYPES.forEach(
-      type => this.notifyDataConsumers(type, this._dataObservers.get(type))
-    );
+  public refreshDataFromStorage(dataType: StorageDataTypeKeys = null): void {
+    if (!dataType) {
+      ALL_TYPES.forEach(
+        type => this.notifyDataConsumers(type, this._dataObservers.get(type))
+      );
+    } else {
+      this.notifyDataConsumers(dataType, this._dataObservers.get(dataType));
+    }
   }
 
   public clearAll(): void {

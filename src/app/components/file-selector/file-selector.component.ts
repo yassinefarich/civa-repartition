@@ -16,7 +16,7 @@ export class FileSelectorComponent implements OnInit {
   @Input() nom: string;
   @Input() icone: string;
   @Input() typeDeDonnees: StorageDataTypeKeys;
-  isSucess = false;
+  isGreen = false;
   chargementMessage: string = '';
   afficherMessage = false;
   label: string = '';
@@ -30,12 +30,43 @@ export class FileSelectorComponent implements OnInit {
     this.label = this.nom;
     this.store.onReinit.subscribe(
       () => {
-        this.isSucess = false;
+        this.isGreen = false;
         this.chargementMessage = '';
         this.afficherMessage = false;
         this.label = this.nom;
       }
     );
+    this.refreshColors();
+
+  }
+
+  private refreshColors() {
+    if (this.typeDeDonnees == StorageDataTypeKeys.CROWDER) {
+      this.store.crowders
+        .subscribe(donnees => {
+          if (donnees.length > 0) {
+            this.isGreen = true;
+            this.label = `(${donnees.length}) crowders importés`;
+          }
+        });
+
+    } else if (this.typeDeDonnees == StorageDataTypeKeys.PIVOTS) {
+      this.store.pivots
+        .subscribe(donnees => {
+          if (donnees.length > 0) {
+            this.isGreen = true;
+            this.label = `(${donnees.length}) pivots importés`;
+          }
+        });
+    } else {
+      this.store.propositions
+        .subscribe(donnees => {
+          if (donnees.length > 0) {
+            this.isGreen = true;
+            this.label = `(${donnees.length}) propositions chargées`;
+          }
+        });
+    }
   }
 
   onFileChange(evt: any, dataType: StorageDataTypeKeys): void {
@@ -67,15 +98,11 @@ export class FileSelectorComponent implements OnInit {
 
       if (dataType == StorageDataTypeKeys.CROWDER) {
         this.succes(`${donnees.length} Crowders importés`);
-        this.label = `(${donnees.length}) crowders importés`;
       } else if (dataType == StorageDataTypeKeys.PIVOTS) {
         this.succes(`${donnees.length} pivots importés`);
-        this.label = `(${donnees.length}) pivots importés`;
       } else {
         this.succes(`${donnees.length} propositions chargées`);
-        this.label = `(${donnees.length}) propositions chargées`;
       }
-
 
     } catch (e) {
       this.echec(JSON.stringify(e));
@@ -86,13 +113,11 @@ export class FileSelectorComponent implements OnInit {
   private succes(message: string): void {
     this.chargementMessage = message;
     this.afficherMessage = true;
-    this.isSucess = true;
   }
 
   private echec(message: string): void {
     this.chargementMessage = message;
     this.afficherMessage = true;
-    this.isSucess = true;
   }
 
 }

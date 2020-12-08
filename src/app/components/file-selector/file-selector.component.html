@@ -1,5 +1,5 @@
 <button (click)="openFile(nom)" pButton pRipple style="width: 80%" type="button" label="{{label}}" icon="pi pi-{{icone}}"
-        [ngClass]="isSucess ? 'p-button-success'  :''">
+        [ngClass]="isGreen ? 'p-button-success'  :''">
   <input id="{{nom}}_id" class="file-selector" (change)="onFileChange($event,typeDeDonnees)" type="file"/>
 </button>
 

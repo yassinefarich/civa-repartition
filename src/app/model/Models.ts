@@ -5,6 +5,7 @@ export enum StorageDataTypeKeys {
   PIVOTS = '_pivots',
   PROPOSITIONS = '_propositions',
   PARAMETRES = '_parametres',
+  GESTION_DU_TEMPS = '_gestion_du_temps',
 }
 
 export const ALL_TYPES = [
@@ -12,6 +13,7 @@ export const ALL_TYPES = [
   StorageDataTypeKeys.PIVOTS,
   StorageDataTypeKeys.CROWDER,
   StorageDataTypeKeys.PARAMETRES,
+  StorageDataTypeKeys.GESTION_DU_TEMPS,
 ];
 
 
