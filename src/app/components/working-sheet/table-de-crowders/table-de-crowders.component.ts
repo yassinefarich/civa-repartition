@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Crowder, PivotType} from '../../../model/Models';
 import {Store} from '../../../services/data/store.service';
-import {ExcelFileToJsonService} from '../../../services/io/excel-file-to-json.service';
+import {ImportExportService} from '../../../services/io/import-export.service';
 import * as _ from 'lodash';
 
 export enum TypesDeTable {
@@ -21,7 +21,7 @@ export class TableDeCrowdersComponent implements OnInit {
   crowdersPresentation: Crowder[] = [];
 
   constructor(private store: Store,
-              private excelFileToJsonService: ExcelFileToJsonService) {
+              private excelFileToJsonService: ImportExportService) {
   }
 
   ngOnInit(): void {

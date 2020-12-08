@@ -25,13 +25,13 @@
           </div>
           <div class="p-col">
             <div style="margin-bottom: 5px"><label style="text-align: center">Proposition par pivot</label></div>
-            <p-inputNumber min="0" id="propo-par-piv-input" [(ngModel)]="nombreDePropositionsParPivot"></p-inputNumber>
+            <p-inputNumber min="0" id="propo-par-piv-input" [(ngModel)]="parametres.nombreDePropositionsParPivot"></p-inputNumber>
           </div>
 
           <div class="p-col">
             <div style="margin-bottom: 5px"><label for="not-par-prop-input">Notation par proposition</label></div>
             <p-inputNumber min="0" id="not-par-prop-input"
-                           [(ngModel)]="nombreDeNotationsParProposition"></p-inputNumber>
+                           [(ngModel)]="parametres.nombreDeNotationsParProposition"></p-inputNumber>
           </div>
         </div>
 
@@ -52,14 +52,14 @@
             <div class="p-grid  p-flex-column">
               <div class="p-col" style="margin-top: 4%">
                <span class="p-float-label">
-                <p-inputNumber min="0" id="crowders-input" [(ngModel)]="nombreDeCrowders"></p-inputNumber>
+                <p-inputNumber min="0" id="crowders-input" [(ngModel)]="parametres.nombreDeCrowders"></p-inputNumber>
                 <label for="crowders-input">Nombre de crowders</label>
               </span>
               </div>
 
               <div class="p-mt-4 p-col">
                <span class="p-float-label">
-                 <p-inputNumber min="0" id="pivots-input" [(ngModel)]="nombreDePivots"></p-inputNumber>
+                 <p-inputNumber min="0" id="pivots-input" [(ngModel)]="parametres.nombreDePivots"></p-inputNumber>
                 <label for="pivots-input">Nombre de pivots</label>
               </span>
               </div>
@@ -79,28 +79,28 @@
 
           <div class="p-col-12"><b>Temps nécessaire en heurs pour :</b></div>
           <div class="p-col-8"><label for="propoDeQuestion">Proposition de question</label></div>
-          <div class="p-col-4">: <input [(ngModel)]="tempsDePropositonDeQuest" type="number" id="propoDeQuestion"
+          <div class="p-col-4">: <input [(ngModel)]="parametres.tempsDePropositonDeQuest" type="number" id="propoDeQuestion"
                                         style="width: 80%"/></div>
 
           <div class="p-col-8"><label for="propoDeReponse">Proposition de réponse</label></div>
-          <div class="p-col-4">: <input [(ngModel)]="tempsDePropositonDeRep" type="number" id="propoDeReponse"
+          <div class="p-col-4">: <input [(ngModel)]="parametres.tempsDePropositonDeRep" type="number" id="propoDeReponse"
                                         style="width: 80%"/></div>
 
           <div class="p-col-8"><label for="notationDeQuestion">Notation de question</label></div>
-          <div class="p-col-4">: <input [(ngModel)]="tempsDeNotationDeQue" type="number" id="notationDeQuestion"
+          <div class="p-col-4">: <input [(ngModel)]="parametres.tempsDeNotationDeQue" type="number" id="notationDeQuestion"
                                         style="width: 80%"/></div>
 
           <div class="p-col-8"><label for="notationDeReponse">Notation de réponse</label></div>
-          <div class="p-col-4">: <input [(ngModel)]="tempsDeNotationDeRep" type="number" id="notationDeReponse"
+          <div class="p-col-4">: <input [(ngModel)]="parametres.tempsDeNotationDeRep" type="number" id="notationDeReponse"
                                         style="width: 80%"/></div>
 
           <div class="p-col-12"><b>Sessions :</b></div>
 
           <div class="p-col-8"><label for="sessionsParSemaine">Nombre de sessions/semaine</label></div>
-          <div class="p-col-4">: <input [(ngModel)]="nbrDeSessionsParSemaine" type="number" id="sessionsParSemaine"
+          <div class="p-col-4">: <input [(ngModel)]="parametres.nbrDeSessionsParSemaine" type="number" id="sessionsParSemaine"
                                         style="width: 80%"/></div>
           <div class="p-col-8"><label for="dureeSession">Durée d'une session</label></div>
-          <div class="p-col-4">: <input [(ngModel)]="dureeDeSession" type="number" id="dureeSession"
+          <div class="p-col-4">: <input [(ngModel)]="parametres.dureeDeSession" type="number" id="dureeSession"
                                         style="width: 80%"/></div>
 
 
@@ -121,3 +121,5 @@
 </div>
 <p-tieredMenu [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'0ms'" #menu [model]="items"
               [popup]="true"></p-tieredMenu>
+<input id="importFileSelector" style="width: 0.1px;height: 0.1px;opacity: 0;overflow: hidden;position: absolute;z-index: -1;"
+       (change)="onParamFileChange($event)" type="file"/>

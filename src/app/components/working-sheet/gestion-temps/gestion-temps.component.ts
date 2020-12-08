@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {GestionTempsService, RepartitionTempsResultat} from '../../../services/algo/gestion-temps.service';
+import {ImportExportService} from '../../../services/io/import-export.service';
 
 @Component({
   selector: 'app-gestion-temps',
@@ -13,13 +14,8 @@ export class GestionTempsComponent implements OnInit {
 
   data: any = null;
 
-  private setting = {
-    element: {
-      dynamicDownload: null as HTMLElement
-    }
-  };
-
-  constructor(private gestionTempsService: GestionTempsService) {
+  constructor(private gestionTempsService: GestionTempsService,
+              private importExportService: ImportExportService) {
   }
 
   ngOnInit(): void {
@@ -57,21 +53,8 @@ export class GestionTempsComponent implements OnInit {
   }
 
   exporterResultatJson() {
-
-    this.dyanmicDownloadByHtmlTag('result.json', JSON.stringify(this.resultat, null, 2));
-
-  }
-
-  private dyanmicDownloadByHtmlTag(fileName: string, text: string) {
-
-    if (!this.setting.element.dynamicDownload) {
-      this.setting.element.dynamicDownload = document.createElement('a');
-    }
-    const element = this.setting.element.dynamicDownload;
-    element.setAttribute('href', `data:text/json;charset=utf-8,${encodeURIComponent(text)}`);
-    element.setAttribute('download', fileName);
-    const event = new MouseEvent('click');
-    element.dispatchEvent(event);
+    this.importExportService
+      .exportJsonFile(`gestion_du_temps_${new Date()}.json`, JSON.stringify(this.resultat, null, 2))
   }
 
   calculerTempsTotal(): number {

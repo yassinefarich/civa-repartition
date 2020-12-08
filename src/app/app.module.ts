@@ -17,13 +17,12 @@ import {TableModule} from 'primeng/table';
 import {DialogModule} from 'primeng/dialog';
 import {ChartModule} from 'primeng/chart';
 import {TooltipModule} from 'primeng/tooltip';
-import {TableDeCrowdersComponent} from './components/working-sheets/table-de-crowders/table-de-crowders.component';
-import {DonneesComponent} from './components/working-sheets/donnees/donnees.component';
-import {RepartitionsComponent} from './components/working-sheets/repartitions/repartitions.component';
-import {WorkingSheetComponent} from './components/working-sheets/working-sheet/working-sheet.component';
+import {TableDeCrowdersComponent} from './components/working-sheet/table-de-crowders/table-de-crowders.component';
+import {DonneesComponent} from './components/working-sheet/donnees/donnees.component';
+import {RepartitionsComponent} from './components/working-sheet/repartitions/repartitions.component';
+import {WorkingSheetComponent} from './components/working-sheet/working-sheet/working-sheet.component';
 import {AppRoutingModule} from './app-routing.module';
-import {TableDePivots} from './components/working-sheets/table-de-pivots/table-de-pivots.component';
-import {RecapitulatifComponent} from './components/working-sheets/summary/recapitulatif.component';
+import {TableDePivots} from './components/working-sheet/table-de-pivots/table-de-pivots.component';
 import {GestionTempsComponent} from './components/working-sheet/gestion-temps/gestion-temps.component';
 import {TieredMenuModule} from 'primeng/tieredmenu';
 
@@ -37,7 +36,6 @@ import {TieredMenuModule} from 'primeng/tieredmenu';
     RepartitionsComponent,
     WorkingSheetComponent,
     TableDePivots,
-    RecapitulatifComponent,
     GestionTempsComponent
   ],
   imports: [

@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { ExcelFileToJsonService } from './excel-file-to-json.service';
+import { ImportExportService } from './import-export.service';
 
 describe('ExcelFileToJsonService', () => {
-  let service: ExcelFileToJsonService;
+  let service: ImportExportService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(ExcelFileToJsonService);
+    service = TestBed.inject(ImportExportService);
   });
 
   it('should be created', () => {

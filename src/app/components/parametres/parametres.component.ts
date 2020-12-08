@@ -5,6 +5,25 @@ import {StorageDataTypeKeys} from '../../model/Models';
 import {SimulationsService} from '../../services/data/simulations.service';
 import {Store} from '../../services/data/store.service';
 import {GestionTempsService} from '../../services/algo/gestion-temps.service';
+import {ImportExportService} from '../../services/io/import-export.service';
+
+
+export interface ParametresGlobales {
+  // Paramétre de répartition
+  nombreDeCrowders: number
+  nombreDePivots: number
+  nombreDePropositionsParPivot: number
+  nombreDeNotationsParProposition: number
+
+  // Paramétres de gestion du temps
+  tempsDePropositonDeQuest: number;
+  tempsDePropositonDeRep: number;
+  tempsDeNotationDeQue: number;
+  tempsDeNotationDeRep: number;
+  nbrDeSessionsParSemaine: number;
+  dureeDeSession: number
+
+}
 
 @Component({
   selector: 'app-parametres',
@@ -16,20 +35,20 @@ export class ParametresComponent implements OnInit {
 
   public dataType: typeof StorageDataTypeKeys = StorageDataTypeKeys;
 
-  // Paramétre de répartition
-  nombreDeCrowders: number = 120;
-  nombreDePivots: number = 30;
-  nombreDePropositionsParPivot: number = 20;
-  nombreDeNotationsParProposition: number = 30;
-
-  // Paramétres de gestion du temps
-  tempsDePropositonDeQuest: number = 0.06;
-  tempsDePropositonDeRep: number = 0.06;
-  tempsDeNotationDeQue: number = 0.02;
-  tempsDeNotationDeRep: number = 0.02;
-
-  nbrDeSessionsParSemaine: number = 10;
-  dureeDeSession: number = 2.5;
+  parametres: ParametresGlobales = {
+    // Paramétre de répartition
+    nombreDeCrowders: 120,
+    nombreDePivots: 30,
+    nombreDePropositionsParPivot: 20,
+    nombreDeNotationsParProposition: 30,
+    // Paramétres de gestion du temps
+    tempsDePropositonDeQuest: 0.06,
+    tempsDePropositonDeRep: 0.06,
+    tempsDeNotationDeQue: 0.02,
+    tempsDeNotationDeRep: 0.02,
+    nbrDeSessionsParSemaine: 10,
+    dureeDeSession: 2.5,
+  };
 
   items: MenuItem[];
 
@@ -37,29 +56,34 @@ export class ParametresComponent implements OnInit {
               private messageService: MessageService,
               private simulations: SimulationsService,
               private store: Store,
-              private gestionDuTemps : GestionTempsService) {
+              private gestionDuTemps: GestionTempsService,
+              private importExportService: ImportExportService) {
 
     this.items = [
       {
         label: 'Importer',
         icon: 'fa fa-file-import',
-        // command: event => alert(event)
+        command: event => this.importParametres(event)
       },
       {
         label: 'Exporter',
         icon: 'fa fa-file-export',
-        // command: event => alert(event)
+        command: event => this.exportParametres(event)
       }
     ];
   }
 
   ngOnInit(): void {
+    let paramsFromLocalStorage = this.store.getFromLocalStorage(StorageDataTypeKeys.PARAMETRES)[0];
+    if (paramsFromLocalStorage !== undefined) {
+      this.parametres = paramsFromLocalStorage;
+    }
   }
 
   onGenerateSamples(): void {
-    let crowders = this.simulations.crowders(this.nombreDeCrowders);
-    let pivots = this.simulations.pivots(this.nombreDePivots);
-    let propositions = this.simulations.propositions(crowders, pivots, this.nombreDePropositionsParPivot);
+    let crowders = this.simulations.crowders(this.parametres.nombreDeCrowders);
+    let pivots = this.simulations.pivots(this.parametres.nombreDePivots);
+    let propositions = this.simulations.propositions(crowders, pivots, this.parametres.nombreDePropositionsParPivot);
 
     this.store.setData(StorageDataTypeKeys.CROWDER, crowders);
     this.store.setData(StorageDataTypeKeys.PIVOTS, pivots);
@@ -67,23 +91,25 @@ export class ParametresComponent implements OnInit {
   }
 
   onGenerateGroups(): void {
-    this.repartitionService.repartitionerPivotsParCrowders(this.nombreDePropositionsParPivot);
-    this.repartitionService.repartitionerNotationsParCrowders(this.nombreDeNotationsParProposition);
+    this.saveParameters();
+    this.repartitionService.repartitionerPivotsParCrowders(this.parametres.nombreDePropositionsParPivot);
+    this.repartitionService.repartitionerNotationsParCrowders(this.parametres.nombreDeNotationsParProposition);
   }
 
   generatePlaning(): void {
+    this.saveParameters();
     this.gestionDuTemps.calculerTemps(
       {
-        nombreDeCrowders: this.nombreDeCrowders,
-        nombreDePivots: this.nombreDePivots,
-        nombreDePropositionsParPivots: this.nombreDePropositionsParPivot,
-        nombreDeNotationParProposition: this.nombreDeNotationsParProposition,
-        tempsDePropositonDeQuest: this.tempsDePropositonDeQuest,
-        tempsDePropositonDeRep: this.tempsDePropositonDeRep,
-        tempsDeNotationDeQue: this.tempsDeNotationDeQue,
-        tempsDeNotationDeRep: this.tempsDeNotationDeRep,
-        nbrDeSessionsParSemaine: this.nbrDeSessionsParSemaine,
-        dureeDeSession: this.dureeDeSession
+        nombreDeCrowders: this.parametres.nombreDeCrowders,
+        nombreDePivots: this.parametres.nombreDePivots,
+        nombreDePropositionsParPivots: this.parametres.nombreDePropositionsParPivot,
+        nombreDeNotationParProposition: this.parametres.nombreDeNotationsParProposition,
+        tempsDePropositonDeQuest: this.parametres.tempsDePropositonDeQuest,
+        tempsDePropositonDeRep: this.parametres.tempsDePropositonDeRep,
+        tempsDeNotationDeQue: this.parametres.tempsDeNotationDeQue,
+        tempsDeNotationDeRep: this.parametres.tempsDeNotationDeRep,
+        nbrDeSessionsParSemaine: this.parametres.nbrDeSessionsParSemaine,
+        dureeDeSession: this.parametres.dureeDeSession
       }
     );
   }
@@ -100,16 +126,34 @@ export class ParametresComponent implements OnInit {
   }
 
   isValid(): boolean {
-
-    if (this.nombreDePropositionsParPivot === undefined) {
-
-    }
-
-    if (this.nombreDeNotationsParProposition != undefined) {
-
-    }
-
     return true;
   }
 
+  private importParametres(event: any) {
+    document.getElementById('importFileSelector').click();
+  }
+
+  private exportParametres(event: any) {
+    this.importExportService
+      .exportJsonFile(`parametres_${new Date().getTime()}.json`, JSON.stringify(this.parametres, null, 2));
+  }
+
+  onParamFileChange(evt): void {
+
+    const target: DataTransfer = (evt.target) as DataTransfer;
+    const reader: FileReader = new FileReader();
+
+    reader.onload = event => {
+      this.parametres = JSON.parse(event.target.result.toString());
+      this.saveParameters();
+    };
+
+    reader.readAsBinaryString(target.files[0]);
+    evt.target.value = '';
+
+  }
+
+  private saveParameters() {
+    this.store.setData(StorageDataTypeKeys.PARAMETRES, [this.parametres]);
+  }
 }

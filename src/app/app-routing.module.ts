@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {RepartitionsComponent} from './components/working-sheets/repartitions/repartitions.component';
-import {DonneesComponent} from './components/working-sheets/donnees/donnees.component';
+import {RepartitionsComponent} from './components/working-sheet/repartitions/repartitions.component';
+import {DonneesComponent} from './components/working-sheet/donnees/donnees.component';
 import {GestionTempsComponent} from './components/working-sheet/gestion-temps/gestion-temps.component';
 
 export const appRouteList: Routes = [

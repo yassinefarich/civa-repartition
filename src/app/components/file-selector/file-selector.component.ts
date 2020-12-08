@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ExcelFileToJsonService} from '../../services/io/excel-file-to-json.service';
+import {ImportExportService} from '../../services/io/import-export.service';
 import {DataTable, StorageDataTypeKeys} from '../../model/Models';
 import {RepartitionService} from '../../services/algo/repartition.service';
 import {Store} from '../../services/data/store.service';
@@ -21,7 +21,7 @@ export class FileSelectorComponent implements OnInit {
   afficherMessage = false;
   label: string = '';
 
-  constructor(private excelFileToJsonService: ExcelFileToJsonService,
+  constructor(private excelFileToJsonService: ImportExportService,
               private dispatcherService: RepartitionService,
               private store: Store) {
   }

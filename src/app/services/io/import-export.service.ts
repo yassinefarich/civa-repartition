@@ -5,7 +5,10 @@ import {DataTable} from '../../model/Models';
 @Injectable({
   providedIn: 'root'
 })
-export class ExcelFileToJsonService {
+export class ImportExportService {
+
+  private dynamicDownload: HTMLElement = null;
+  private dynamicImport: HTMLElement = null;
 
   constructor() {
   }
@@ -36,4 +39,16 @@ export class ExcelFileToJsonService {
     let fileName = `crowders_${type}_${new Date().getTime()}.csv`;
     XLSX.writeFile(workbook, fileName, {bookType: 'csv'});
   }
+
+  public exportJsonFile(fileName: string, jsonString: string) {
+    if (!this.dynamicDownload) {
+      this.dynamicDownload = document.createElement('a');
+    }
+    const element = this.dynamicDownload;
+    element.setAttribute('href', `data:text/json;charset=utf-8,${encodeURIComponent(jsonString)}`);
+    element.setAttribute('download', fileName);
+    const event = new MouseEvent('click');
+    element.dispatchEvent(event);
+  }
+
 }
