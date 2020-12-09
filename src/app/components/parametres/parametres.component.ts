@@ -6,6 +6,7 @@ import {SimulationsService} from '../../services/data/simulations.service';
 import {Store} from '../../services/data/store.service';
 import {GestionTempsService} from '../../services/algo/gestion-temps.service';
 import {ImportExportService} from '../../services/io/import-export.service';
+import {Router} from '@angular/router';
 
 
 export interface ParametresGlobales {
@@ -57,7 +58,8 @@ export class ParametresComponent implements OnInit {
               private simulations: SimulationsService,
               private store: Store,
               private gestionDuTemps: GestionTempsService,
-              private importExportService: ImportExportService) {
+              private importExportService: ImportExportService,
+              private router: Router) {
 
     this.items = [
       {
@@ -94,6 +96,7 @@ export class ParametresComponent implements OnInit {
     this.saveParameters();
     this.repartitionService.repartitionerPivotsParCrowders(this.parametres.nombreDePropositionsParPivot);
     this.repartitionService.repartitionerNotationsParCrowders(this.parametres.nombreDeNotationsParProposition);
+    this.router.navigate(['repartitions']);
   }
 
   generatePlaning(): void {
@@ -112,13 +115,10 @@ export class ParametresComponent implements OnInit {
         dureeDeSession: this.parametres.dureeDeSession
       }
     );
+    this.router.navigate(['gestionTemps']);
   }
 
   onReinitPlaning(): void {
-    // if (this.isValid()) {
-    //   this.dispatcherService.repartitionerPivotsParCrowders(this.nombreDePropositionsParPivot);
-    //   this.dispatcherService.repartitionerNotationsParCrowders(this.nombreDeNotationsParProposition);
-    // }
   }
 
   onReinit(): void {

@@ -14,22 +14,22 @@
 
             <tr>
               <td>Propositions des questions</td>
-              <td>{{resultat.tempsTotalPourPropositionsDeQuest}} h</td>
+              <td>{{round(resultat.tempsTotalPourPropositionsDeQuest)}} h</td>
               <td>{{tempsPourTousLesCrowders(resultat.tempsTotalPourPropositionsDeQuest)}} h</td>
             </tr>
             <tr>
               <td>Propositions des réponses</td>
-              <td>{{resultat.tempsTotalPourPropositionsDeRep}} h</td>
+              <td>{{round(resultat.tempsTotalPourPropositionsDeRep)}} h</td>
               <td>{{tempsPourTousLesCrowders(resultat.tempsTotalPourPropositionsDeRep)}} h</td>
             </tr>
             <tr>
               <td>Notations des questions</td>
-              <td>{{resultat.tempsTotalPourNotationDeQuest}} h</td>
+              <td>{{round(resultat.tempsTotalPourNotationDeQuest)}} h</td>
               <td>{{tempsPourTousLesCrowders(resultat.tempsTotalPourNotationDeQuest)}} h</td>
             </tr>
             <tr>
               <td>Notations des réponses</td>
-              <td>{{resultat.tempsTotalPourNotationDeRep}} h</td>
+              <td>{{round(resultat.tempsTotalPourNotationDeRep)}} h</td>
               <td>{{tempsPourTousLesCrowders(resultat.tempsTotalPourNotationDeRep)}} h</td>
             </tr>
             <tr>
@@ -42,18 +42,20 @@
           <h4>Temps total nécessaire</h4>
 
           <table style="margin-top: 20px">
-            <tr>
+            <tr *ngIf="resultat.nombreDeSemainesNecessaires > 0">
               <td><b>{{resultat.nombreDeSemainesNecessaires}}</b> semaines
-                de {{resultat.parametres.nbrDeSessionsParSemaine}} séance
+                de {{resultat.parametres.nbrDeSessionsParSemaine}} sessions.
               </td>
             </tr>
-            <tr>
-              <td>plus <b>{{resultat.nombreDeSessionsNecessaire}}</b> sessions de {{resultat.parametres.dureeDeSession}}
-                heurs
+            <tr *ngIf="resultat.nombreDeSessionsNecessaire > 0">
+              <td>{{resultat.nombreDeSemainesNecessaires > 0 ? 'plus' : ''}}
+                <b>{{resultat.nombreDeSessionsNecessaire}}</b> sessions de {{resultat.parametres.dureeDeSession}} h
               </td>
             </tr>
-            <tr>
-              <td>plus <b>{{resultat.nombreDheurs}}</b> heurs</td>
+            <tr *ngIf="resultat.nombreDheurs > 0">
+              <td>{{resultat.nombreDeSessionsNecessaire > 0 || resultat.nombreDeSemainesNecessaires > 0 ? 'plus' : ''}}
+                <b>{{resultat.nombreDheurs}}</b> h
+              </td>
             </tr>
           </table>
 

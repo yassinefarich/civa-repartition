@@ -24,40 +24,44 @@ export class GestionTempsComponent implements OnInit {
 
     this.store.gestionDeTemps
       .subscribe(resultat => {
-        console.log(resultat);
-
         if (resultat[0] !== undefined) {
-          this.resultat = resultat[0];
-
-          this.data = {
-            labels: ['Proposition de questions', 'Proposition de réponses', 'Notations de questions', 'Notations de réponses'],
-            datasets: [
-              {
-                data: [this.resultat.tempsTotalPourPropositionsDeQuest, this.resultat.tempsTotalPourPropositionsDeRep,
-                  this.resultat.tempsTotalPourNotationDeQuest, this.resultat.tempsTotalPourNotationDeRep],
-                backgroundColor: [
-                  '#003f5c',
-                  '#58508d',
-                  '#bc5090',
-                  '#ff6361',
-                ],
-                hoverBackgroundColor: [
-                  '#003f5c',
-                  '#58508d',
-                  '#bc5090',
-                  '#ff6361'
-                ]
-              }]
-          };
-
+          this.setResultat(resultat);
+        } else {
+          this.resultat = null;
+          this.data = {};
         }
       });
 
     this.store.refreshDataFromStorage(StorageDataTypeKeys.GESTION_DU_TEMPS);
   }
 
+  private setResultat(resultat: RepartitionTempsResultat[]) {
+    this.resultat = resultat[0];
+
+    this.data = {
+      labels: ['Proposition de questions', 'Proposition de réponses', 'Notations de questions', 'Notations de réponses'],
+      datasets: [
+        {
+          data: [this.resultat.tempsTotalPourPropositionsDeQuest, this.resultat.tempsTotalPourPropositionsDeRep,
+            this.resultat.tempsTotalPourNotationDeQuest, this.resultat.tempsTotalPourNotationDeRep],
+          backgroundColor: [
+            '#003f5c',
+            '#58508d',
+            '#bc5090',
+            '#ff6361',
+          ],
+          hoverBackgroundColor: [
+            '#003f5c',
+            '#58508d',
+            '#bc5090',
+            '#ff6361'
+          ]
+        }]
+    };
+  }
+
   tempsPourTousLesCrowders(tempsTotalPourPropositionsDeQuest: number): number {
-    return Math.round((tempsTotalPourPropositionsDeQuest / this.resultat.parametres.nombreDeCrowders) * 100) / 100;
+    return this.round(tempsTotalPourPropositionsDeQuest / this.resultat.parametres.nombreDeCrowders);
   }
 
   exporterResultatJson() {
@@ -66,8 +70,12 @@ export class GestionTempsComponent implements OnInit {
   }
 
   calculerTempsTotal(): number {
-    return this.resultat.tempsTotalPourNotationDeRep + this.resultat.tempsTotalPourNotationDeQuest
-      + this.resultat.tempsTotalPourPropositionsDeRep + this.resultat.tempsTotalPourPropositionsDeQuest;
+    return this.round(this.resultat.tempsTotalPourNotationDeRep + this.resultat.tempsTotalPourNotationDeQuest
+      + this.resultat.tempsTotalPourPropositionsDeRep + this.resultat.tempsTotalPourPropositionsDeQuest);
+  }
+
+  round(valeur: number): number {
+    return Math.round(valeur * 100) / 100;
   }
 }
 

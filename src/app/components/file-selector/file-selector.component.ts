@@ -4,6 +4,7 @@ import {DataTable, StorageDataTypeKeys} from '../../model/Models';
 import {RepartitionService} from '../../services/algo/repartition.service';
 import {Store} from '../../services/data/store.service';
 import {AoaToObjects} from './aoa-to-objects';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -23,7 +24,8 @@ export class FileSelectorComponent implements OnInit {
 
   constructor(private excelFileToJsonService: ImportExportService,
               private dispatcherService: RepartitionService,
-              private store: Store) {
+              private store: Store,
+              private router: Router){
   }
 
   ngOnInit(): void {
@@ -88,7 +90,6 @@ export class FileSelectorComponent implements OnInit {
     document.getElementById(name + '_id').click();
   }
 
-
   private handle(dataType: StorageDataTypeKeys, data: DataTable) {
 
     try {
@@ -113,6 +114,7 @@ export class FileSelectorComponent implements OnInit {
   private succes(message: string): void {
     this.chargementMessage = message;
     this.afficherMessage = true;
+    this.router.navigate(['donnees']);
   }
 
   private echec(message: string): void {
