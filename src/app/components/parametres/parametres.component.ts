@@ -80,6 +80,15 @@ export class ParametresComponent implements OnInit {
     if (paramsFromLocalStorage !== undefined) {
       this.parametres = paramsFromLocalStorage;
     }
+
+    this.store.crowders
+      .subscribe(data => this.parametres.nombreDeCrowders = data.length)
+
+    this.store.pivots
+      .subscribe(data => this.parametres.nombreDePivots = data.length)
+
+    this.store.refreshDataFromStorage()
+
   }
 
   onGenerateSamples(): void {
@@ -119,6 +128,7 @@ export class ParametresComponent implements OnInit {
   }
 
   onReinitPlaning(): void {
+    this.store.clear(StorageDataTypeKeys.GESTION_DU_TEMPS)
   }
 
   onReinit(): void {

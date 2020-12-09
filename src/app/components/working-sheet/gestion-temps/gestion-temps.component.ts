@@ -32,7 +32,7 @@ export class GestionTempsComponent implements OnInit {
         }
       });
 
-    this.store.refreshDataFromStorage(StorageDataTypeKeys.GESTION_DU_TEMPS);
+    this.store.refreshDataFromStorage();
   }
 
   private setResultat(resultat: RepartitionTempsResultat[]) {

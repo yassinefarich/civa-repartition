@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {ALL_TYPES, Crowder, Groupe, Pivot, PivotAlternative, StorageDataTypeKeys} from '../../model/Models';
+import {ALL_TYPES, Crowder, Pivot, PivotAlternative, StorageDataTypeKeys} from '../../model/Models';
 import {Observable, Subject} from 'rxjs';
 import {LocalStorageService} from './local-storage-service';
 import {RepartitionTempsResultat} from '../algo/gestion-temps.service';
@@ -63,6 +63,11 @@ export class Store {
     );
     this.refreshDataFromStorage();
     this._onReinit.next();
+  }
+
+  clear(type: StorageDataTypeKeys) {
+    this.$storage.remove(type)
+    this.refreshDataFromStorage();
   }
 
   private notifyDataConsumers(dataKey: StorageDataTypeKeys, dataSubject: Subject<any[]>): void {
