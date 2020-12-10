@@ -65,12 +65,17 @@ export class ParametresComponent implements OnInit {
       {
         label: 'Importer',
         icon: 'fa fa-file-import',
-        command: event => this.importParametres(event)
+        command: () => this.importParametres()
       },
       {
         label: 'Exporter',
         icon: 'fa fa-file-export',
-        command: event => this.exportParametres(event)
+        command: () => this.exportParametres()
+      },
+      {
+        label: 'Exporter tout',
+        icon: 'fa fa-download',
+        command: () => this.exportTout()
       }
     ];
   }
@@ -139,11 +144,11 @@ export class ParametresComponent implements OnInit {
     return true;
   }
 
-  private importParametres(event: any) {
+  private importParametres() {
     document.getElementById('importFileSelector').click();
   }
 
-  private exportParametres(event: any) {
+  private exportParametres() {
     this.importExportService
       .exportJsonFile(`parametres_${new Date().getTime()}.json`, JSON.stringify(this.parametres, null, 2));
   }
@@ -165,5 +170,19 @@ export class ParametresComponent implements OnInit {
 
   private saveParameters() {
     this.store.setData(StorageDataTypeKeys.PARAMETRES, [this.parametres]);
+  }
+
+  private exportTout() {
+
+    let allData = {
+      crowders: this.store.getFromLocalStorage(StorageDataTypeKeys.CROWDER),
+      pivots: this.store.getFromLocalStorage(StorageDataTypeKeys.PIVOTS),
+      propositons: this.store.getFromLocalStorage(StorageDataTypeKeys.PROPOSITIONS),
+      parametres: this.store.getFromLocalStorage(StorageDataTypeKeys.PARAMETRES),
+      gestionDuTemps: this.store.getFromLocalStorage(StorageDataTypeKeys.GESTION_DU_TEMPS),
+    };
+
+    this.importExportService
+      .exportJsonFile(`donnees_${new Date().getTime()}.json`, JSON.stringify(allData, null, 2));
   }
 }
