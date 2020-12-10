@@ -95,7 +95,7 @@ export class FileSelectorComponent implements OnInit {
     try {
       let mapper = new AoaToObjects();
       let donnees = mapper.transformData(data, dataType);
-      this.store.setData(dataType, mapper.transformData(data, dataType));
+      this.store.setData(dataType, donnees);
 
       if (dataType == StorageDataTypeKeys.CROWDER) {
         this.succes(`${donnees.length} Crowders importés`);
@@ -115,6 +115,7 @@ export class FileSelectorComponent implements OnInit {
     this.chargementMessage = message;
     this.afficherMessage = true;
     this.router.navigate(['donnees']);
+    this.isGreen = true
   }
 
   private echec(message: string): void {
