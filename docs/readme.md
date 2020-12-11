@@ -123,7 +123,7 @@ L'export  du résultat en CSV ou Excel est comme ci-dessous
 
 Cette section permette d'afficher l'estimation du temps nécessaire pour effectuer le crowding après avoir cliquer sur le bouton `Générer un planning` dans la section paramètres.
 
-![image-20201211150913354](C:\Users\yassine.farich\AppData\Roaming\Typora\typora-user-images\image-20201211150913354.png)
+![Gestion du temps](images/image-20201211150913354.png)
 
 
 
