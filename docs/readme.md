@@ -36,7 +36,7 @@ La section paramètres permet à l'utilisateur de définir les paramètres pour 
 - Paramètres de répartitions :
 
 
-![Paramètres de répartitions](images\image-20201211131612404.png)
+![Paramètres de répartitions](images/image-20201211131612404.png)
 
 Les boutons d'import (crowders/pivots/propositions)  : permet d’importer une liste Excel de crowders, pivots ou propositions
 
@@ -45,12 +45,12 @@ Exemple de fichiers : [crowders.xlsx](./exemples/CRODERS.XLSX), [pivots.xlsx](./
 - Paramètres de gestion du temps :
 
 
-![Paramètres de Gestion du temps](images\image-20201211132402473.png)
+![Paramètres de Gestion du temps](images/image-20201211132402473.png)
 
 - Import export des paramètres :
 
 
-![Import/export des paramètres](images\image-20201211134916481.png)
+![Import/export des paramètres](images/image-20201211134916481.png)
 
 
 
@@ -79,21 +79,21 @@ exemple de fichier JSON d'import/export :
 
 La section données permet l'affichage des données chargées (liste de crowders/pivots et propositions)
 
-![image-20201211135506340](images\image-20201211135506340.png)
+![image-20201211135506340](images/image-20201211135506340.png)
 
 Cette section contienne trois onglets :
 
 - Crowders : Liste des crowders chargées
 
-![image-20201211135624763](images\image-20201211135624763.png)
+![image-20201211135624763](images/image-20201211135624763.png)
 
 - Pivots : Liste des pivots chargées
 
-![Pivots](images\image-20201211140815736.png)
+![Pivots](images/image-20201211140815736.png)
 
 - Propositions : Liste des propositions chargées
 
-![image-20201211140645733](images\image-20201211140645733.png)
+![image-20201211140645733](images/image-20201211140645733.png)
 
 ### 3. Répartitions
 
@@ -101,21 +101,21 @@ Après avoir cliquer sur le bouton `Repartitionner` dans la section paramètres,
 
 - Crowders de propositions : cet onglet présente pour chaque crowder la liste des pivots pour lequel il doit donner une proposition alternative   
 
-![Crowdres de propositions](images\image-20201211143242412.png)
+![Crowdres de propositions](images/image-20201211143242412.png)
 
-![Liste des Q/R](images\image-20201211143351733.png)
+![Liste des Q/R](images/image-20201211143351733.png)
 
 L'export  du résultat en CSV ou Excel est comme ci-dessous  
 
-![Export propositions](images\image-20201211145122446.png)
+![Export propositions](images/image-20201211145122446.png)
 
 - Crowders de notation : cet onglet présente pour chaque crowder la liste des propositions pour lequel il doit donner une notation
 
-![Liste de notations](images\image-20201211144124131.png)
+![Liste de notations](images/image-20201211144124131.png)
 
 L'export  du résultat en CSV ou Excel est comme ci-dessous  
 
-![Export notations](images\image-20201211145004374.png)
+![Export notations](images/image-20201211145004374.png)
 
 
 
