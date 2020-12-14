@@ -73,8 +73,6 @@ exemple de fichier JSON d'import/export :
 }
 ```
 
-
-
 ### 2. Données 
 
 La section données permet l'affichage des données chargées (liste de crowders/pivots et propositions)
@@ -121,11 +119,53 @@ L'export  du résultat en CSV ou Excel est comme ci-dessous
 
 ### 4. Gestion du temps
 
-Cette section permette d'afficher l'estimation du temps nécessaire pour effectuer le crowding après avoir cliquer sur le bouton `Générer un planning` dans la section paramètres.
+Cette section permette d'afficher l'estimation du temps nécessaire pour effectuer le crowding.
+
+Après avoir cliquer sur le bouton `Générer un planning` dans la section paramètres écran ci-dessous est affiché 
 
 ![Gestion du temps](images/image-20201211150913354.png)
 
 
 
+![Répartition du temps](C:\Users\yassine.farich\Desktop\sources\crowders-dispatcher\docs\images\image-20201213150014808.png)
+
 ## III. Présentation technique et dev
 
+### 1. Outils
+
+Les principaux outils utilisé dans le dev sont comme dessous :
+
+- angular 10 : Framework javascript, https://angular.io/
+- primeng 10 : Biblithéque UI javascript, https://primefaces.org/primeng/
+- sheetjs : Permet la lecture des fichier xslx, https://github.com/SheetJS/sheetjs
+- npm : outil de build, voir https://www.npmjs.com/
+
+L'application actuel n'a pas de backend, tout les données sont stockées dans le [LocalStorage](https://fr.wikipedia.org/wiki/Stockage_web_local) du navigateur WEB 
+
+![image-20201213152609676](C:\Users\yassine.farich\AppData\Roaming\Typora\typora-user-images\image-20201213152609676.png)
+
+
+
+### 2. Build
+
+Afin de builder le projet c'est recommandé de suivre les étapes ci-dessous :
+
+```sh
+# 1. Cloner le repo git
+git clone https://github.com/yassinefarich/civa-repartition.git
+# 2. Installer les dépendences
+cd civa-repartition
+npm install
+# 3. Pour lancer l'appli en mode dev (url : http://localhost:4200/)
+npm start
+# 4. Pour builder en mode prod
+npm run build-prod
+```
+
+Pour déployer l'appli il suffit de déployer le contenu du dossier `dist/` généré suite au build prod
+
+### 3. Configuration de l'appli sur [netlify](https://app.netlify.com/)
+
+Ci-dessous la configuration utilisé actuellement pour déployer l'appli sur le service [netlify](https://app.netlify.com/) 
+
+![Netlify](C:\Users\yassine.farich\Desktop\sources\crowders-dispatcher\docs\images\image-20201213152039776.png)
