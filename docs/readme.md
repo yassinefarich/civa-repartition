@@ -127,7 +127,7 @@ Après avoir cliquer sur le bouton `Générer un planning` dans la section param
 
 
 
-![Répartition du temps](C:\Users\yassine.farich\Desktop\sources\crowders-dispatcher\docs\images\image-20201213150014808.png)
+![Répartition du temps](images/image-20201213150014808.png)
 
 ## III. Présentation technique et dev
 
@@ -142,8 +142,7 @@ Les principaux outils utilisé dans le dev sont comme dessous :
 
 L'application actuel n'a pas de backend, tout les données sont stockées dans le [LocalStorage](https://fr.wikipedia.org/wiki/Stockage_web_local) du navigateur WEB 
 
-![image-20201213152609676](C:\Users\yassine.farich\AppData\Roaming\Typora\typora-user-images\image-20201213152609676.png)
-
+![dev tools](images/image-20201213152609676.png)
 
 
 ### 2. Build
@@ -168,4 +167,4 @@ Pour déployer l'appli il suffit de déployer le contenu du dossier `dist/` gén
 
 Ci-dessous la configuration utilisé actuellement pour déployer l'appli sur le service [netlify](https://app.netlify.com/) 
 
-![Netlify](C:\Users\yassine.farich\Desktop\sources\crowders-dispatcher\docs\images\image-20201213152039776.png)
+![Netlify](images/image-20201213152039776.png)
