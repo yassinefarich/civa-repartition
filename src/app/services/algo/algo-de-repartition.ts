@@ -32,6 +32,8 @@ export class AlgoDeRepartition {
 
     this.nombreDeCrowders = parametres.crowders.length;
     this.nombreDePivots = this.pivots.length;
+    this.nombreDePropositionsTotal = parametres.pivotsAlternatives.length
+
     this.nombreDePropositionsParPivots = parametres.propositionsParPivot ?? 0;
     this.nombreDeNotationParProposition = parametres.notationsParProposition ?? 0;
   }

@@ -16,17 +16,151 @@ Le but de l'application est de permettre à l'utilisateur de faire une répartit
 
 ## I. Calcules
 
- ### Répartition des propositions/notations 
-Le repartitionnement des question/réponses des pivot se fait de la manière ci-dessous **A Compléter....**
+ ### 1. Répartition des propositions
+Le repartitionnement des pivot de propositions par crowder se fait de la manière ci-dessous
 
-1.   Calcule du nombre total des propositions
+1. Calcule du nombre total des propositions
+
+   ```bash
+   Nombre de propositions = Nombre de pivots * Nombre de propositions par pivot * 2
+   ```
 
 
 2. Distribution de ces propositions par nombre de crowders
 
+   ````
+   Nombre de question/réponse par crowder = Nombre total de propositions / Nombre de crowders
+   ````
+   
+3. Répartition des questions/réponses par crowder
+
+   La répartition des questions/réponses se fait par rotation, voir exemple ci-dessous
+
+Exemple 
+
+   ````bash
+   # Paramétres
+   Crowders : C1, C2, C3
+   Pivots : P1(Q1/R1), P2(Q2/R2)
+   Propositions par pivot : 3
+   # Calcules
+   Nombre de propositions = 3 * 2 * 2 => 12
+   Nombre de question/réponse par crowder = 12 / 3 => 4 
+   # Répartitions
+   Questions/réponses total = Q1, R1, Q2, R2 (Q1 : Question 1, R1: Réponse 1)
+   Répartition en rotation
+       C1 : Q1, R1, Q2, R2
+       C2 : Q1, R1, Q2, R2
+       C3 : Q1, R1, Q2, R2
+   ````
+
+
+
+### 2 Répartition des notations
+
+   La répartition des notations se fait de la même manière que la répartition des propositions 
+
+1. Calcule du nombre total de notations
+   ```bash
+   Nombre de propositions = Nombre de pivots * Nombre de propositions par pivot * 2
+   Nombre total de notations  = (Nombre de propositions + Nombre de pivots * 2 ) * Nombre de notation par proposition
+   ```
+   
+2. Nombre des notations par crowder
+
+   ```
+   Nombre de notations par crowder = Nombre total de notations / nombre de crowders
+   ```
+
+3. Répartition des questions/réponses par crowder
+
+   La répartition des propositions se fait par rotation, voir exemple ci-dessous
+
+Exemple 
+
+   ```bash
+   # Paramétres
+   Crowders : C1, C2, C3
+   Pivots : P1(Q1/R1), P2(Q2/R2)
+   Propositions par pivot : 2
+   Notations par propositions : 2
+   # Calcules
+   Nombre de propositions = 2 * 2 * 2 => 8
+   Nombre total de notations = ( 8 + 2 * 2 ) * 2 => 24
+   Nombre de notations par crowder = 24 / 3 => 8
+   Propositions :  P1R, P1Q, P2R, P2Q, PRQ1, PRQ1, PRQ2, PRQ2, PRR1, PRR1, PRR2, PRR2
+   (PRQ1 : Proposition de question pivot 1, PRR1 : Proposition de réponse pivot 1, P1R : Pivot 1 réponse, P1Q : Pivot 1 question)
+   # Répartitions
+   Questions/réponses total = Q1, R1, Q2, R2 
+   Répartition en rotation
+       C1 : P1R, P1Q, P2R, P2Q, PRQ1, PRQ1, PRQ2, PRQ2
+       C2 : PRR1, PRR1, PRR2, PRR2, P1R, P1Q, P2R, P2Q
+       C3 : PRQ1, PRQ1, PRQ2, PRQ2, PRR1, PRR1, PRR2, PRR2
+   ```
+
+
+
 
 ### Gestion du temps
-Le calcule du temps nécessaire se fait de la manière ci-dessous **A Compléter....**
+Le calcule du temps nécessaire se fait de la manière ci-dessous :
+
+1. Calcule du temps total de propositions 
+
+   ```bash
+   Temps nécessaire pour propositions de questions = nombre total de pivots * nombre de propositions par pivot * temps de proposition de question
+   Temps nécessaire pour propositions de réponses = nombre total de pivots * nombre de propositions par pivot * temps de proposition de réponse
+   
+   ```
+
+Temps total nécessaire pour propositions = Temps nécessaire pour propositions de questions + Temps nécessaire pour propositions de réponses
+
+   Temps total nécessaire pour propositions pour tous les crowder = Temps total nécessaire pour propositions pour un seul crowder / nombre de crowders
+   ```
+   
+
+Exemple :
+
+​````bash
+# Paramétres
+Nombre de pivots = 3
+Nombre de crowder = 3
+Propositions par pivot : 2
+Temps de proposition de question = 0.02 h
+Temps de proposition de réponse = 0.01 h
+----------------------------
+Temps nécessaire pour propositions de questions = 3 * 2 * 0.02 => 0.12 h
+Temps nécessaire pour propositions de réponse = 3 * 2 * 0.01 => 0.06 h
+Temps total nécessaire pour propositions = 0.12 + 0.06 => 0.18 h
+Temps total nécessaire pour propositions pour tous les crowder = 0.18 / 3 => 0.06 h
+````
+
+2. Calcule de temps total de notations
+
+````
+Temps nécessaire pour notation de questions = ( nombre total de notations de question + nombre de pivots ) * temps de notation de question
+Temps nécessaire pour notation de réponse = ( nombre total de notations de réponses + nombre de pivots ) * temps de notation de réponse
+Temps total de notations = temps nécessaire pour notation de questions + temps nécessaire pour notation de réponse 
+Temps total de notations pour tous les crowders = Temps total de notations / nombre de crowders
+````
+
+Exemple :
+
+````bash
+# Paramétres
+Nombre total de notations de questions = 20
+Nombre total de notations de réponses = 20
+Nombre de pivots = 4
+Nombre de crowder = 3
+Temps de notation de question = 0.02 h
+Temps de notation de réponse = 0.01 h
+------------------------------------------------
+Temps nécessaire pour notation de questions = ( 20 + 4 ) * 0.02 => 0.48h
+Temps nécessaire pour notation de réponses = ( 20 + 4 ) * 0.02 => 0.24h
+Temps total de notations = 0.48 + 0.24 => 072 h
+Temps nécessaire pour notation de questions = 0.72 / 3 => 0.24h
+````
+
+
 
 
 ## II. Présentation de l'application
@@ -40,12 +174,18 @@ La section paramètres permet à l'utilisateur de définir les paramètres pour 
 
 Les boutons d'import (crowders/pivots/propositions)  : permet d’importer une liste Excel de crowders, pivots ou propositions
 
-Exemple de fichiers : [crowders.xlsx](./exemples/CRODERS.XLSX), [pivots.xlsx](./exemples/PIVOTS.xlsx) ou [propositions.xlsx](./exemples/PROPOSITIONS.XLSX) 
+Exemple de fichiers : 
+
+````
+- Crowders : https://github.com/yassinefarich/civa-repartition/blob/master/examples/CIVA_CROWDERS.xlsx
+- Pivots : https://github.com/yassinefarich/civa-repartition/blob/master/examples/CIVA_QUESTIONS_PILOTE.xlsx
+- Propositions : https://github.com/yassinefarich/civa-repartition/blob/master/examples/CIVA_REPONSES_PILOTE.xlsx
+````
 
 - Paramètres de gestion du temps :
 
 
-![Paramètres de Gestion du temps](images/image-20201211132402473.png)
+![Gestion du temps](images/image-20201214174941226.png)
 
 - Import export des paramètres :
 
@@ -101,6 +241,8 @@ Après avoir cliquer sur le bouton `Repartitionner` dans la section paramètres,
 
 ![Crowdres de propositions](images/image-20201211143242412.png)
 
+Après avoir choisir un crowder la liste des question/réponses apparait en dessous 
+
 ![Liste des Q/R](images/image-20201211143351733.png)
 
 L'export  du résultat en CSV ou Excel est comme ci-dessous  
@@ -150,6 +292,7 @@ L'application actuel n'a pas de backend, tout les données sont stockées dans l
 Afin de builder le projet c'est recommandé de suivre les étapes ci-dessous :
 
 ```sh
+# 0. Intaller NodeJS, voir url (https://nodejs.org/en/download/)
 # 1. Cloner le repo git
 git clone https://github.com/yassinefarich/civa-repartition.git
 # 2. Installer les dépendences
