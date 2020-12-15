@@ -2,22 +2,30 @@
 
 
 
-[TOC]
-
-
-
 ## Introduction
 
-Le but de l'application est de permettre à l'utilisateur de faire une répartition des questions/réponses des pivots* par crowder** afin d'avoir une distribution correcte et équilibré, elle permet aussi d'estimer le temps nécessaire pour le crowding.
+Le but de l'application est de permettre au utilisateurs de faire une répartition des pivots par crowders afin d'avoir une distribution correcte et équilibré, elle permet aussi d'estimer le temps nécessaire pour le crowding.
 
-*Pivots : Pair (question, réponse)
-**Crowder : Personne qui aura pour tâche de donner ou à noter un équivalent à une question ou réponse d'un pivot
-    
+- Pivots : une pair de question-réponse d'un FAQ
+
+- Crowder : Personne qui aura pour tâche de donner un équivalent ou une notation à une question ou réponse d'un pivot
+
+- Proposition : Une question/réponse équivalente à celle d'un pivot
+
+- Notations : C'est une note en nombre d'étoiles donnée à une proposition afin d'évaluer la qualité de cette dernière. 
+
+
+Liens :
+
+- Dépôt git :  https://github.com/yassinefarich/civa-repartition
+- Url public : https://talan-civa-repartition.netlify.app/
 
 ## I. Calcules
 
  ### 1. Répartition des propositions
-Le repartitionnement des pivot de propositions par crowder se fait de la manière ci-dessous
+La répartition des questions/réponses est la tâche principale de l'application, elle consiste à dire pour chaque crowder quels sont les questions/réponses des pivots pour lesquels il doit donner une proposition.
+
+Ce repartitionnement se fait de la manière ci-dessous
 
 1. Calcule du nombre total des propositions
 
@@ -26,7 +34,7 @@ Le repartitionnement des pivot de propositions par crowder se fait de la manièr
    ```
 
 
-2. Distribution de ces propositions par nombre de crowders
+2. Calcule du Nombre de question/réponse par crowder
 
    ````
    Nombre de question/réponse par crowder = Nombre total de propositions / Nombre de crowders
@@ -34,7 +42,7 @@ Le repartitionnement des pivot de propositions par crowder se fait de la manièr
    
 3. Répartition des questions/réponses par crowder
 
-   La répartition des questions/réponses se fait par rotation, voir exemple ci-dessous
+   La répartition des questions/réponses se fait en rotation, voir exemple ci-dessous
 
 Exemple 
 
@@ -58,7 +66,8 @@ Exemple
 
 ### 2 Répartition des notations
 
-   La répartition des notations se fait de la même manière que la répartition des propositions 
+La répartition des notations consiste à définit pour chaque crowder les propositions pour lesquels il doit donner une notation.   
+Cette répartition se fait de la même manière que celle des propositions en respectant les étapes ci-dessous 
 
 1. Calcule du nombre total de notations
    ```bash
@@ -66,15 +75,15 @@ Exemple
    Nombre total de notations  = (Nombre de propositions + Nombre de pivots * 2 ) * Nombre de notation par proposition
    ```
    
-2. Nombre des notations par crowder
+2. Calcule du nombre des notations par crowder
 
    ```
    Nombre de notations par crowder = Nombre total de notations / nombre de crowders
    ```
 
-3. Répartition des questions/réponses par crowder
+3. Répartition des propositions par crowder
 
-   La répartition des propositions se fait par rotation, voir exemple ci-dessous
+   La répartition des propositions se fait en rotation, voir exemple ci-dessous
 
 Exemple 
 
@@ -98,29 +107,27 @@ Exemple
        C3 : PRQ1, PRQ1, PRQ2, PRQ2, PRR1, PRR1, PRR2, PRR2
    ```
 
-
-
-
-### Gestion du temps
-Le calcule du temps nécessaire se fait de la manière ci-dessous :
+### 3. Calcule du temps nécessaire au crowding
+Cette fonctionnalité permet d'avoir une estimation du temps nécessaire pour chaque étape du crowding, les calcules se font de la manière ci-dessous :
 
 1. Calcule du temps total de propositions 
 
    ```bash
    Temps nécessaire pour propositions de questions = nombre total de pivots * nombre de propositions par pivot * temps de proposition de question
-   Temps nécessaire pour propositions de réponses = nombre total de pivots * nombre de propositions par pivot * temps de proposition de réponse
    
+   Temps nécessaire pour propositions de réponses = nombre total de pivots * nombre de propositions par pivot * temps de proposition de réponse
    ```
 
+   ```bash
 Temps total nécessaire pour propositions = Temps nécessaire pour propositions de questions + Temps nécessaire pour propositions de réponses
-
+   
    Temps total nécessaire pour propositions pour tous les crowder = Temps total nécessaire pour propositions pour un seul crowder / nombre de crowders
    ```
-   
+
 
 Exemple :
 
-​````bash
+```bash
 # Paramétres
 Nombre de pivots = 3
 Nombre de crowder = 3
@@ -132,14 +139,17 @@ Temps nécessaire pour propositions de questions = 3 * 2 * 0.02 => 0.12 h
 Temps nécessaire pour propositions de réponse = 3 * 2 * 0.01 => 0.06 h
 Temps total nécessaire pour propositions = 0.12 + 0.06 => 0.18 h
 Temps total nécessaire pour propositions pour tous les crowder = 0.18 / 3 => 0.06 h
-````
+```
 
 2. Calcule de temps total de notations
 
 ````
 Temps nécessaire pour notation de questions = ( nombre total de notations de question + nombre de pivots ) * temps de notation de question
+
 Temps nécessaire pour notation de réponse = ( nombre total de notations de réponses + nombre de pivots ) * temps de notation de réponse
+
 Temps total de notations = temps nécessaire pour notation de questions + temps nécessaire pour notation de réponse 
+
 Temps total de notations pour tous les crowders = Temps total de notations / nombre de crowders
 ````
 
@@ -311,3 +321,7 @@ Pour déployer l'appli il suffit de déployer le contenu du dossier `dist/` gén
 Ci-dessous la configuration utilisé actuellement pour déployer l'appli sur le service [netlify](https://app.netlify.com/) 
 
 ![Netlify](images/image-20201213152039776.png)
+
+```
+
+```
