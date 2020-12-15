@@ -7,7 +7,7 @@ Versions [PDF](./readme.pdf), [HTML](./readme.html)
 Introduction
 ------------------
 
-Le but de l'application est de permettre au utilisateurs de faire une répartition des pivots par crowders afin d'avoir une distribution correcte et équilibré, elle permet aussi d'estimer le temps nécessaire pour le crowding.
+Le but de l'application est de permettre aux utilisateurs de faire une répartition des pivots par crowders afin d'avoir une distribution correcte et équilibré, elle permet aussi d'estimer le temps nécessaire pour le crowding.
 
 - Pivots : une pair de question-réponse d'un FAQ
 
