@@ -147,7 +147,7 @@ Cette fonctionnalité permet d'avoir une estimation du temps nécessaire pour ch
    ```
 
    ```bash
-Temps total nécessaire pour propositions = Temps nécessaire pour propositions de questions + Temps nécessaire pour propositions de réponses
+   Temps total nécessaire pour propositions = Temps nécessaire pour propositions de questions + Temps nécessaire pour propositions de réponses
    
    Temps total nécessaire pour propositions pour tous les crowder = Temps total nécessaire pour propositions pour un seul crowder / nombre de crowders
    ```
