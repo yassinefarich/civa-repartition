@@ -47,7 +47,7 @@ Sommaire
 
 ------
 
-I. Calcules
+I. Calcul
 ---------------
 
  ### 1. Répartition des propositions
@@ -94,7 +94,7 @@ Exemple
 
 ### 2 Répartition des notations
 
-La répartition des notations consiste à définit pour chaque crowder les propositions pour lesquels il doit donner une notation.   
+La répartition des notations consiste à définir pour chaque crowder les propositions pour lesquels il doit donner une notation.   
 Cette répartition se fait de la même manière que celle des propositions en respectant les étapes ci-dessous 
 
 1. Calcule du nombre total de notations
@@ -135,7 +135,7 @@ Exemple
        C3 : PRQ1, PRQ1, PRQ2, PRQ2, PRR1, PRR1, PRR2, PRR2
    ```
 
-### 3. Calcule du temps nécessaire au crowding
+### 3. Calcul du temps nécessaire au crowding
 Cette fonctionnalité permet d'avoir une estimation du temps nécessaire pour chaque étape du crowding, les calcules se font de la manière ci-dessous :
 
 1. Calcule du temps total de propositions 
