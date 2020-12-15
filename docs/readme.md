@@ -1,11 +1,11 @@
 Présentation de l'application CrowderDispatcher
 =================
 
-Version PDF
+[Version PDF](./readme.pdf)
 
-------
 
-## Introduction
+Introduction
+------------------
 
 Le but de l'application est de permettre au utilisateurs de faire une répartition des pivots par crowders afin d'avoir une distribution correcte et équilibré, elle permet aussi d'estimer le temps nécessaire pour le crowding.
 
@@ -24,24 +24,22 @@ Liens :
 - Url public : https://talan-civa-repartition.netlify.app/
 
 
-
-
 Sommaire
 -----------------
 
-   * [Présentation de l'application CrowderDispatcher](#pr\xC3\xA9sentation-de-lapplication-crowderdispatcher)
+   * [Présentation de l'application CrowderDispatcher](#présentation-de-lapplication-crowderdispatcher)
       * [Introduction](#introduction)
       * [Sommaire](#sommaire)
       * [I. Calcules](#i-calcules)
-         * [1. Répartition des propositions](#1-r\xC3\xA9partition-des-propositions)
-         * [2 Répartition des notations](#2-r\xC3\xA9partition-des-notations)
-         * [3. Calcule du temps nécessaire au crowding](#3-calcule-du-temps-n\xC3\xA9cessaire-au-crowding)
-      * [II. Présentation de l'application](#ii-pr\xC3\xA9sentation-de-lapplication)
-         * [1. Paramètres](#1-param\xC3\xA8tres)
-         * [2. Données](#2-donn\xC3\xA9es)
-         * [3. Répartitions](#3-r\xC3\xA9partitions)
+         * [1. Répartition des propositions](#1-répartition-des-propositions)
+         * [2 Répartition des notations](#2-répartition-des-notations)
+         * [3. Calcule du temps nécessaire au crowding](#3-calcule-du-temps-nécessaire-au-crowding)
+      * [II. Présentation de l'application](#ii-présentation-de-lapplication)
+         * [1. Paramètres](#1-paramètres)
+         * [2. Données](#2-données)
+         * [3. Répartitions](#3-répartitions)
          * [4. Gestion du temps](#4-gestion-du-temps)
-      * [III. Présentation technique et dev](#iii-pr\xC3\xA9sentation-technique-et-dev)
+      * [III. Présentation technique et dev](#iii-présentation-technique-et-dev)
          * [1. Outils](#1-outils)
          * [2. Build](#2-build)
          * [3. Configuration de l'appli sur <a href="https://app.netlify.com/" rel="nofollow">netlify</a>](#3-configuration-de-lappli-sur-netlify)
@@ -49,7 +47,8 @@ Sommaire
 
 ------
 
-## I. Calcules
+I. Calcules
+---------------
 
  ### 1. Répartition des propositions
 La répartition des questions/réponses est la tâche principale de l'application, elle consiste à dire pour chaque crowder quels sont les questions/réponses des pivots pour lesquels il doit donner une proposition.
@@ -65,9 +64,9 @@ Ce repartitionnement se fait de la manière ci-dessous
 
 2. Calcule du Nombre de question/réponse par crowder
 
-   ````
+   ```
    Nombre de question/réponse par crowder = Nombre total de propositions / Nombre de crowders
-   ````
+   ```
    
 3. Répartition des questions/réponses par crowder
 
@@ -75,7 +74,7 @@ Ce repartitionnement se fait de la manière ci-dessous
 
 Exemple 
 
-   ````bash
+   ```bash
    # Paramétres
    Crowders : C1, C2, C3
    Pivots : P1(Q1/R1), P2(Q2/R2)
@@ -89,7 +88,7 @@ Exemple
        C1 : Q1, R1, Q2, R2
        C2 : Q1, R1, Q2, R2
        C3 : Q1, R1, Q2, R2
-   ````
+   ```
 
 
 
@@ -172,7 +171,7 @@ Temps total nécessaire pour propositions pour tous les crowder = 0.18 / 3 => 0.
 
 2. Calcule de temps total de notations
 
-````
+```
 Temps nécessaire pour notation de questions = ( nombre total de notations de question + nombre de pivots ) * temps de notation de question
 
 Temps nécessaire pour notation de réponse = ( nombre total de notations de réponses + nombre de pivots ) * temps de notation de réponse
@@ -180,11 +179,11 @@ Temps nécessaire pour notation de réponse = ( nombre total de notations de ré
 Temps total de notations = temps nécessaire pour notation de questions + temps nécessaire pour notation de réponse 
 
 Temps total de notations pour tous les crowders = Temps total de notations / nombre de crowders
-````
+```
 
 Exemple :
 
-````bash
+```bash
 # Paramétres
 Nombre total de notations de questions = 20
 Nombre total de notations de réponses = 20
@@ -197,12 +196,13 @@ Temps nécessaire pour notation de questions = ( 20 + 4 ) * 0.02 => 0.48h
 Temps nécessaire pour notation de réponses = ( 20 + 4 ) * 0.02 => 0.24h
 Temps total de notations = 0.48 + 0.24 => 072 h
 Temps nécessaire pour notation de questions = 0.72 / 3 => 0.24h
-````
+```
 
 
 
+II. Présentation de l'application
+-----------------------------------
 
-## II. Présentation de l'application
 ### 1. Paramètres 
 La section paramètres permet à l'utilisateur de définir les paramètres pour la répartition et la gestion du temps
 
@@ -310,7 +310,8 @@ Après avoir cliquer sur le bouton `Générer un planning` dans la section param
 
 ![Répartition du temps](images/image-20201213150014808.png)
 
-## III. Présentation technique et dev
+III. Présentation technique et dev
+----------------------------------
 
 ### 1. Outils
 
