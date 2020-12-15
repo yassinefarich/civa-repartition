@@ -1,6 +1,9 @@
-# Présentation de l'application CrowderDispatcher
+Présentation de l'application CrowderDispatcher
+=================
 
+Version PDF
 
+------
 
 ## Introduction
 
@@ -19,6 +22,32 @@ Liens :
 
 - Dépôt git :  https://github.com/yassinefarich/civa-repartition
 - Url public : https://talan-civa-repartition.netlify.app/
+
+
+
+
+Sommaire
+-----------------
+
+   * [Présentation de l'application CrowderDispatcher](#pr\xC3\xA9sentation-de-lapplication-crowderdispatcher)
+      * [Introduction](#introduction)
+      * [Sommaire](#sommaire)
+      * [I. Calcules](#i-calcules)
+         * [1. Répartition des propositions](#1-r\xC3\xA9partition-des-propositions)
+         * [2 Répartition des notations](#2-r\xC3\xA9partition-des-notations)
+         * [3. Calcule du temps nécessaire au crowding](#3-calcule-du-temps-n\xC3\xA9cessaire-au-crowding)
+      * [II. Présentation de l'application](#ii-pr\xC3\xA9sentation-de-lapplication)
+         * [1. Paramètres](#1-param\xC3\xA8tres)
+         * [2. Données](#2-donn\xC3\xA9es)
+         * [3. Répartitions](#3-r\xC3\xA9partitions)
+         * [4. Gestion du temps](#4-gestion-du-temps)
+      * [III. Présentation technique et dev](#iii-pr\xC3\xA9sentation-technique-et-dev)
+         * [1. Outils](#1-outils)
+         * [2. Build](#2-build)
+         * [3. Configuration de l'appli sur <a href="https://app.netlify.com/" rel="nofollow">netlify</a>](#3-configuration-de-lappli-sur-netlify)
+
+
+------
 
 ## I. Calcules
 
