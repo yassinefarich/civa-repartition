@@ -30,7 +30,7 @@ Sommaire
    * [Présentation de l'application CrowderDispatcher](#présentation-de-lapplication-crowderdispatcher)
       * [Introduction](#introduction)
       * [Sommaire](#sommaire)
-      * [I. Calcules](#i-calcules)
+      * [I. Calcule](#i-calcule)
          * [1. Répartition des propositions](#1-répartition-des-propositions)
          * [2 Répartition des notations](#2-répartition-des-notations)
          * [3. Calcule du temps nécessaire au crowding](#3-calcule-du-temps-nécessaire-au-crowding)
