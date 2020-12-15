@@ -1,7 +1,7 @@
 Présentation de l'application CrowderDispatcher
 =================
 
-[Version PDF](./readme.pdf)
+Versions [PDF](./readme.pdf), [HTML](./readme.html)
 
 
 Introduction
