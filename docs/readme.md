@@ -333,6 +333,8 @@ Afin de builder le projet c'est recommandé de suivre les étapes ci-dessous :
 
 ```sh
 # 0. Intaller NodeJS, voir url (https://nodejs.org/en/download/)
+# 0. Intaller GIT, voir url (https://git-scm.com/downloads)
+
 # 1. Cloner le repo git
 git clone https://github.com/yassinefarich/civa-repartition.git
 # 2. Installer les dépendences
