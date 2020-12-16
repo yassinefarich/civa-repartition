@@ -173,12 +173,12 @@ Temps nécessaire pour donner les propositions de réponse avec tous les crowder
 
 2. Calcul de temps total de notations
 
-```
-Temps nécessaire pour notation de questions = ( nombre total de notations de question + nombre de pivots ) * temps de notation de question
-Temps nécessaire pour notation de questions avec tous les crowders en parallèle = Temps nécessaire pour notation de questions / Nombre de crowders
-Temps nécessaire pour notation de réponse = ( nombre total de notations de réponses + nombre de pivots ) * temps de notation de réponse
-Temps nécessaire pour notation de réponse avec tous les crowders en parallèle = Temps nécessaire pour notation de réponse / Nombre de crowders
-```
+   ```
+   Temps nécessaire pour notation de questions = ( nombre total de notations de question + nombre de pivots ) * temps de notation de question
+   Temps nécessaire pour notation de questions avec tous les crowders en parallèle = Temps nécessaire pour notation de questions / Nombre de crowders
+   Temps nécessaire pour notation de réponse = ( nombre total de notations de réponses + nombre de pivots ) * temps de notation de réponse
+   Temps nécessaire pour notation de réponse avec tous les crowders en parallèle = Temps nécessaire pour notation de réponse / Nombre de crowders
+   ```
 
 Exemple :
 
@@ -214,9 +214,9 @@ Les boutons d'import (crowders/pivots/propositions)  : permet d’importer une l
 Exemple de fichiers : 
 
 ````
-- Crowders : https://github.com/yassinefarich/civa-repartition/blob/master/examples/CIVA_CROWDERS.xlsx
-- Pivots : https://github.com/yassinefarich/civa-repartition/blob/master/examples/CIVA_QUESTIONS_PILOTE.xlsx
-- Propositions : https://github.com/yassinefarich/civa-repartition/blob/master/examples/CIVA_REPONSES_PILOTE.xlsx
+- Crowders : Voir CIVA_CROWDERS.xlsx
+- Pivots : Voir CIVA_QUESTIONS_PILOTE.xlsx
+- Propositions : Voir CIVA_REPONSES_PILOTE.xlsx
 ````
 
 - Paramètres de gestion du temps :
