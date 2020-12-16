@@ -33,7 +33,7 @@ Sommaire
       * [I. Calcul](#i-calcul)
          * [1. Répartition des propositions](#1-répartition-des-propositions)
          * [2 Répartition des notations](#2-répartition-des-notations)
-         * [3. Calcule du temps nécessaire au crowding](#3-calcule-du-temps-nécessaire-au-crowding)
+         * [3. Calcul du temps nécessaire au crowding](#3-calcul-du-temps-nécessaire-au-crowding)
       * [II. Présentation de l'application](#ii-présentation-de-lapplication)
          * [1. Paramètres](#1-paramètres)
          * [2. Données](#2-données)
@@ -79,7 +79,7 @@ Exemple
    Crowders : C1, C2, C3
    Pivots : P1(Q1/R1), P2(Q2/R2)
    Propositions par pivot : 3
-   # Calcules
+   # Calcul
    Nombre de propositions = 3 * 2 * 2 => 12
    Nombre de question/réponse par crowder = 12 / 3 => 4 
    # Répartitions
@@ -97,13 +97,13 @@ Exemple
 La répartition des notations consiste à définir pour chaque crowder les propositions pour lesquels il doit donner une notation.   
 Cette répartition se fait de la même manière que celle des propositions en respectant les étapes ci-dessous 
 
-1. Calcule du nombre total de notations
+1. Calcul du nombre total de notations
    ```bash
    Nombre de propositions = Nombre de pivots * Nombre de propositions par pivot * 2
    Nombre total de notations  = (Nombre de propositions + Nombre de pivots * 2 ) * Nombre de notation par proposition
    ```
    
-2. Calcule du nombre des notations par crowder
+2. Calcul du nombre des notations par crowder
 
    ```
    Nombre de notations par crowder = Nombre total de notations / nombre de crowders
@@ -121,7 +121,7 @@ Exemple
    Pivots : P1(Q1/R1), P2(Q2/R2)
    Propositions par pivot : 2
    Notations par propositions : 2
-   # Calcules
+   # Calcul
    Nombre de propositions = 2 * 2 * 2 => 8
    Nombre total de notations = ( 8 + 2 * 2 ) * 2 => 24
    Nombre de notations par crowder = 24 / 3 => 8
@@ -136,9 +136,9 @@ Exemple
    ```
 
 ### 3. Calcul du temps nécessaire au crowding
-Cette fonctionnalité permet d'avoir une estimation du temps nécessaire pour chaque étape du crowding, les calcules se font de la manière ci-dessous :
+Cette fonctionnalité permet d'avoir une estimation du temps nécessaire pour chaque étape du crowding, les calcul se font de la manière ci-dessous :
 
-1. Calcule du temps total de propositions 
+1. Calcul du temps total de propositions 
 
    ```bash
    Temps nécessaire pour propositions de questions = nombre total de pivots * nombre de propositions par pivot * temps de proposition de question
@@ -169,7 +169,7 @@ Temps total nécessaire pour propositions = 0.12 + 0.06 => 0.18 h
 Temps total nécessaire pour propositions pour tous les crowder = 0.18 / 3 => 0.06 h
 ```
 
-2. Calcule de temps total de notations
+2. Calcul de temps total de notations
 
 ```
 Temps nécessaire pour notation de questions = ( nombre total de notations de question + nombre de pivots ) * temps de notation de question
