@@ -62,10 +62,10 @@ Ce repartitionnement se fait de la manière ci-dessous
    ```
 
 
-2. Calcule du Nombre de question/réponse par crowder
+2. Calcule du Nombre de question et réponse par crowder
 
    ```
-   Nombre de question/réponse par crowder = Nombre total de propositions / Nombre de crowders
+   Nombre de question et réponse par crowder = Nombre total de propositions / Nombre de crowders
    ```
    
 3. Répartition des questions/réponses par crowder
@@ -81,7 +81,7 @@ Exemple
    Propositions par pivot : 3
    # Calcul
    Nombre de propositions = 3 * 2 * 2 => 12
-   Nombre de question/réponse par crowder = 12 / 3 => 4 
+   Nombre de question et réponse par crowder = 12 / 3 => 4 
    # Répartitions
    Questions/réponses total = Q1, R1, Q2, R2 (Q1 : Question 1, R1: Réponse 1)
    Répartition en rotation
