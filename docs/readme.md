@@ -58,7 +58,9 @@ Ce repartitionnement se fait de la manière ci-dessous
 1. Calcule du nombre total des propositions
 
    ```bash
-   Nombre de propositions = Nombre de pivots * Nombre de propositions par pivot * 2
+   Nombre de propositions de questions = Nombre de pivots * Nombre de propositions par pivot
+   Nombre de propositions de réponses = Nombre de pivots * Nombre de propositions par pivot
+   Nombre de propositions = Nombre de propositions de questions + Nombre de propositions de réponses
    ```
 
 
@@ -80,8 +82,9 @@ Exemple
    Pivots : P1(Q1/R1), P2(Q2/R2)
    Propositions par pivot : 3
    # Calcul
-   Nombre de propositions = 3 * 2 * 2 => 12
-   Nombre de question et réponse par crowder = 12 / 3 => 4 
+   Nombre de propositions de questions = 3 * 2 => 6
+   Nombre de propositions de réponse = 3 * 2 => 6
+   Nombre de question et réponse par crowder = (6 + 6) / 3 => 4 
    # Répartitions
    Questions/réponses total = Q1, R1, Q2, R2 (Q1 : Question 1, R1: Réponse 1)
    Répartition en rotation
@@ -99,8 +102,10 @@ Cette répartition se fait de la même manière que celle des propositions en re
 
 1. Calcul du nombre total de notations
    ```bash
-   Nombre de propositions = Nombre de pivots * Nombre de propositions par pivot * 2
-   Nombre total de notations  = (Nombre de propositions + Nombre de pivots * 2 ) * Nombre de notation par proposition
+   Nombre de propositions de questions = Nombre de pivots * Nombre de propositions par pivot
+   Nombre de propositions de réponses = Nombre de pivots * Nombre de propositions par pivot
+   
+   Nombre total de notations  = (Nombre de propositions de questions + Nombre de propositions de réponses + Nombre de pivots * 2 ) * Nombre de notation par proposition
    ```
    
 2. Calcul du nombre des notations par crowder
@@ -122,8 +127,9 @@ Exemple
    Propositions par pivot : 2
    Notations par propositions : 2
    # Calcul
-   Nombre de propositions = 2 * 2 * 2 => 8
-   Nombre total de notations = ( 8 + 2 * 2 ) * 2 => 24
+   Nombre de propositions de questions = 2 * 2 => 4
+   Nombre de propositions de réponses = 2 * 2 => 4
+   Nombre total de notations = ( 4 + 4 + 2 * 2 ) * 2 => 24
    Nombre de notations par crowder = 24 / 3 => 8
    Propositions :  P1R, P1Q, P2R, P2Q, PRQ1, PRQ1, PRQ2, PRQ2, PRR1, PRR1, PRR2, PRR2
    (PRQ1 : Proposition de question pivot 1, PRR1 : Proposition de réponse pivot 1, P1R : Pivot 1 réponse, P1Q : Pivot 1 question)
@@ -141,17 +147,10 @@ Cette fonctionnalité permet d'avoir une estimation du temps nécessaire pour ch
 1. Calcul du temps total de propositions 
 
    ```bash
-   Temps nécessaire pour propositions de questions = nombre total de pivots * nombre de propositions par pivot * temps de proposition de question
+   Temps nécessaire pour donner les propositions de questions = nombre total de pivots * nombre de propositions par pivot * temps de proposition de question
    
-   Temps nécessaire pour propositions de réponses = nombre total de pivots * nombre de propositions par pivot * temps de proposition de réponse
+   Temps nécessaire pour donner les propositions de réponses = nombre total de pivots * nombre de propositions par pivot * temps de proposition de réponse
    ```
-
-   ```bash
-   Temps total nécessaire pour propositions = Temps nécessaire pour propositions de questions + Temps nécessaire pour propositions de réponses
-   
-   Temps total nécessaire pour propositions pour tous les crowder = Temps total nécessaire pour propositions pour un seul crowder / nombre de crowders
-   ```
-
 
 Exemple :
 
