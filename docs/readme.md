@@ -50,7 +50,8 @@ Sommaire
 I. Calcul
 ---------------
 
- ### 1. Répartition des propositions
+### 1. Répartition des propositions
+
 La répartition des questions/réponses est la tâche principale de l'application, elle consiste à dire pour chaque crowder quels sont les questions/réponses des pivots pour lesquels il doit donner une proposition.
 
 Ce repartitionnement se fait de la manière ci-dessous
@@ -148,8 +149,10 @@ Cette fonctionnalité permet d'avoir une estimation du temps nécessaire pour ch
 
    ```bash
    Temps nécessaire pour donner les propositions de questions = nombre total de pivots * nombre de propositions par pivot * temps de proposition de question
+   Temps nécessaire pour donner les propositions de questions avec tous les crowders en parallèle  = Temps nécessaire pour donner les propositions de questions / nombre de crowders
    
    Temps nécessaire pour donner les propositions de réponses = nombre total de pivots * nombre de propositions par pivot * temps de proposition de réponse
+   Temps nécessaire pour donner les propositions de réponses avec tous les crowders en parallèle = Temps nécessaire pour donner les propositions de réponses / nombre de crowders
    ```
 
 Exemple :
@@ -163,21 +166,18 @@ Temps de proposition de question = 0.02 h
 Temps de proposition de réponse = 0.01 h
 ----------------------------
 Temps nécessaire pour propositions de questions = 3 * 2 * 0.02 => 0.12 h
+Temps nécessaire pour donner les propositions de questions avec tous les crowders en parallèle = 0.12 / 3 => 0.04
 Temps nécessaire pour propositions de réponse = 3 * 2 * 0.01 => 0.06 h
-Temps total nécessaire pour propositions = 0.12 + 0.06 => 0.18 h
-Temps total nécessaire pour propositions pour tous les crowder = 0.18 / 3 => 0.06 h
+Temps nécessaire pour donner les propositions de réponse avec tous les crowders en parallèle = 0.06 / 3 => 0.02
 ```
 
 2. Calcul de temps total de notations
 
 ```
 Temps nécessaire pour notation de questions = ( nombre total de notations de question + nombre de pivots ) * temps de notation de question
-
+Temps nécessaire pour notation de questions avec tous les crowders en parallèle = Temps nécessaire pour notation de questions / Nombre de crowders
 Temps nécessaire pour notation de réponse = ( nombre total de notations de réponses + nombre de pivots ) * temps de notation de réponse
-
-Temps total de notations = temps nécessaire pour notation de questions + temps nécessaire pour notation de réponse 
-
-Temps total de notations pour tous les crowders = Temps total de notations / nombre de crowders
+Temps nécessaire pour notation de réponse avec tous les crowders en parallèle = Temps nécessaire pour notation de réponse / Nombre de crowders
 ```
 
 Exemple :
@@ -192,12 +192,11 @@ Temps de notation de question = 0.02 h
 Temps de notation de réponse = 0.01 h
 ------------------------------------------------
 Temps nécessaire pour notation de questions = ( 20 + 4 ) * 0.02 => 0.48h
+Temps nécessaire pour notation de questions avec tous les crowders en parallèle = 0.48 / 3 => 0.16 h
+
 Temps nécessaire pour notation de réponses = ( 20 + 4 ) * 0.02 => 0.24h
-Temps total de notations = 0.48 + 0.24 => 072 h
-Temps nécessaire pour notation de questions = 0.72 / 3 => 0.24h
+Temps nécessaire pour notation de réponse avec tous les crowders en parallèle = 0.24 / 3 => 0.08 h
 ```
-
-
 
 II. Présentation de l'application
 -----------------------------------
