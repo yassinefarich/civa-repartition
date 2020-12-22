@@ -18,6 +18,8 @@ Le but de l'application est de permettre aux utilisateurs de faire une répartit
 - Notations : C'est une note en nombre d'étoiles donnée à une proposition afin d'évaluer la qualité de cette dernière. 
 
 
+
+
 Liens :
 
 - Dépôt git :  https://github.com/yassinefarich/civa-repartition
